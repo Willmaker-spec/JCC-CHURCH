@@ -1,16 +1,37 @@
-# React + Vite
+# The Light Community Church
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Vite + React single-page application. Page navigation is handled by React Router; the existing page modules live under `app/` and are explicitly registered in `src/App.jsx`.
 
-Currently, two official plugins are available:
+## Run locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```sh
+npm install
+npm run dev
+```
 
-## React Compiler
+Build and preview the production app with:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```sh
+npm run build
+npm run preview
+```
 
-## Expanding the ESLint configuration
+## Routes
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- `/` — Home
+- `/about`, `/contact`, `/admin`
+- `/devotionals` and `/devotionals/:slug`
+- `/events` and the individual event pages under `/events/`
+- `/give`, `/map`, `/ministries`, `/quick-links`, `/sermons`
+
+Vite serves `index.html` for nested routes so direct links and browser refreshes work.
+
+## Optional integrations
+
+Copy `.env.example` to `.env.local` and add the public keys/settings used by the client:
+
+- Supabase URL and anon key load devotional records.
+- YouTube API key and channel ID load sermon videos.
+- EmailJS public keys enable event registration forms.
+
+The app remains navigable if an integration is not configured; the relevant page reports the missing integration instead of crashing. Never put private/service-role keys in `VITE_` variables because Vite exposes them to browsers.

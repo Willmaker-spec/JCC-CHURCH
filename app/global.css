@@ -1,0 +1,153 @@
+/* Ensure list markers are visible and styled in preview */
+.editor-preview .prose ul,
+.editor-preview .prose ol {
+  padding-left: 2rem;
+  margin-bottom: 1.25rem;
+}
+.editor-preview .prose ul {
+  list-style-type: disc;
+}
+.editor-preview .prose ol {
+  list-style-type: decimal;
+}
+.editor-preview .prose li {
+  margin-bottom: 0.05rem;
+  position: relative;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-inter: "Inter", system-ui, sans-serif;
+    --font-playfair: "Playfair Display", Georgia, serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-tlcc-navy antialiased;
+  }
+}
+
+@layer components {
+  /* Editor preview heading sizes */
+  .editor-preview h1 {
+    @apply text-6xl font-extrabold leading-tight;
+  }
+
+  /* reduced heading sizes per request */
+  .editor-preview h2 {
+    @apply text-3xl font-bold leading-snug;
+  }
+
+  .editor-preview h3 {
+    @apply text-2xl font-semibold leading-snug;
+  }
+
+  .editor-preview p {
+    @apply text-xl leading-relaxed;
+  }
+  /* Preserve whitespace, tabs and single-line breaks to match editor input */
+  .editor-preview .prose {
+    white-space: pre-wrap;
+    white-space: break-spaces;
+  }
+  /* Blockquote styling: left vertical bar and lighter text color */
+  .editor-preview .prose blockquote {
+    border-left: 4px solid rgba(0, 0, 0, 0.08);
+    padding-left: 1rem;
+    margin: 1rem 0;
+    color: #4b5563; /* tailwind gray-600 */
+  }
+  .editor-preview .prose blockquote p {
+    margin: 0;
+    color: inherit;
+  }
+  /* Make preview take full width and not be constrained by prose/containers */
+  .editor-preview {
+    @apply w-full max-w-full;
+  }
+  /* Ensure prose classes behave even without the typography plugin */
+  .prose {
+    @apply text-lg leading-relaxed;
+    /* Preserve whitespace and tabs inside rendered markdown so editor spacing is respected */
+    white-space: pre-wrap;
+    white-space: break-spaces;
+  }
+
+  /* Smaller preview typography for list excerpts */
+  .prose-preview {
+    @apply text-sm leading-relaxed;
+  }
+  .prose-preview p {
+    @apply text-sm leading-relaxed;
+  }
+  .prose-preview h1 {
+    @apply text-2xl md:text-3xl font-extrabold leading-tight;
+  }
+  .prose-preview h2 {
+    @apply text-lg md:text-xl font-bold leading-snug;
+  }
+  .prose-preview h3 {
+    @apply text-base md:text-lg font-semibold leading-snug;
+  }
+  .prose p {
+    @apply text-lg leading-relaxed;
+  }
+  .prose h1 {
+    @apply text-5xl md:text-6xl font-extrabold leading-tight;
+  }
+  .prose h2 {
+    @apply text-3xl md:text-4xl font-bold leading-snug;
+  }
+  .prose h3 {
+    @apply text-2xl md:text-3xl font-semibold leading-snug;
+  }
+  /* Larger variant */
+  .prose-xl {
+    @apply text-xl;
+  }
+  /* Component styles can be added here */
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .animate-gradient-x {
+    animation: gradient-x 4s ease infinite;
+    background-size: 200% 200%;
+  }
+
+  @keyframes gradient-x {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-in;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
