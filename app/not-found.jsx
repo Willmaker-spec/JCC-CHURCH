@@ -99,7 +99,7 @@ export default function NotFound() {
         </div>
       </div>
 
-      {/* Give to The Light Community Church Section */}
+      {/* Give to Jubilee Christian Centre Church Section */}
       <section className="relative py-20 bg-gradient-to-br from-tlcc-navy via-tlcc-navy to-black overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-5">
@@ -119,7 +119,7 @@ export default function NotFound() {
               {/* Left Content */}
               <div className="p-8 md:p-12 lg:p-16">
                 <h2 className="font-anton text-4xl md:text-5xl lg:text-6xl text-black mb-6 leading-none uppercase">
-                  Give to The Light Community Church
+                  Give to Jubilee Christian Centre Church
                 </h2>
                 <p className="text-lg text-gray-700 mb-8">
                   Your generosity keeps blessing lives, thank you for giving.
@@ -183,7 +183,7 @@ export default function NotFound() {
             <div className="bg-tlcc-gold text-center py-6 px-6">
               <p className="text-sm text-tlcc-navy font-medium">
                 We promise not to spam you, but send you edifying and amazing
-                content regularly from The Light Community Church International.
+                content regularly from Jubilee Christian Centre Church International.
               </p>
             </div>
           </div>

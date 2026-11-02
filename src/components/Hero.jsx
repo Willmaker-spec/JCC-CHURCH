@@ -1,43 +1,23 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Circle, Play } from "lucide-react";
 // ...existing code...
 import { motion } from "framer-motion";
-import { getLatestYouTubeVideo } from "@/lib/youtube";
 import { useLanguage } from "@/components/providers/LanguageProvider";
+import heroVideo from "../assets/Herovid.mp4";
 
 export default function Hero() {
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  const [videoId, setVideoId] = useState("3MWdPbaBLxg"); // Default fallback video
+  const [delayComplete, setDelayComplete] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
+  const showVideo = delayComplete && videoReady;
   const { messages } = useLanguage();
   const heroLineOpacities = ["lg:opacity-90", "lg:opacity-85", "lg:opacity-90"];
 
   useEffect(() => {
-    // Fetch latest video ID
-    async function fetchLatestVideoId() {
-      const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
-      const channelId = import.meta.env.VITE_YOUTUBE_CHANNEL_ID;
-      if (apiKey && channelId) {
-        try {
-          const latestVideo = await getLatestYouTubeVideo(channelId, apiKey);
-          if (latestVideo) {
-            setVideoId(latestVideo.id);
-          }
-        } catch (error) {
-          console.error('Unable to load the latest YouTube video:', error);
-        }
-      }
-    }
-
-    fetchLatestVideoId();
-
-    // Preload video after component mounts
-    const timer = setTimeout(() => {
-      setVideoLoaded(true);
-    }, 100);
+    const timer = setTimeout(() => setDelayComplete(true), 3000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -48,36 +28,25 @@ export default function Hero() {
         {/* Fallback Image - Shows while video loads */}
         <div className="absolute inset-0">
           <Image
-            src="/images/hero-fallback.jpg"
+            src="/images/hero.jpg"
             alt="Hero Background"
             fill
-            className="object-cover"
+            className={`object-cover transition-opacity duration-[2500ms] ${showVideo ? "opacity-0" : "opacity-100"}`}
             priority
           />
         </div>
 
-        {/* YouTube Video Background - Loads after page with latest video */}
-        {videoLoaded && (
-          <div className="absolute inset-0 overflow-hidden">
-            <iframe
-              className="absolute pointer-events-none"
-              src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1`}
-              title="Hero Background Video"
-              allow="autoplay; encrypted-media"
-              loading="lazy"
-              style={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                width: "100vw",
-                height: "56.25vw", // 16:9 aspect ratio
-                minHeight: "100vh",
-                minWidth: "177.77vh", // 16:9 aspect ratio
-                transform: "translate(-50%, -50%)",
-              }}
-            />
-          </div>
-        )}
+        <video
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[2500ms] ${showVideo ? "opacity-100" : "opacity-0"}`}
+          src={heroVideo}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          onCanPlay={() => setVideoReady(true)}
+          aria-hidden="true"
+        />
         {/* Dark gradient overlay for text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/75 to-black/80" />
       </div>

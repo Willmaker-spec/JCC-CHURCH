@@ -24,22 +24,22 @@ export default function Footer() {
   const socialLinks = [
     {
       label: footer.social.youtube,
-      href: "https://youtube.com/@TheLightCommunity",
+      href: "https://youtube.com/@jccchurch",
       icon: Youtube,
     },
     {
       label: footer.social.instagram,
-      href: "https://instagram.com/thelight_community",
+      href: "https://instagram.com/jcc",
       icon: Instagram,
     },
     {
       label: footer.social.whatsapp,
-      href: "https://chat.whatsapp.com/G395zowpEcAFfYWrmFlyGI",
+      href: "https://chat.whatsapp.com/",
       icon: MessageCircle,
     },
     {
       label: footer.social.tiktok,
-      href: "https://www.tiktok.com/@the.lightcommunity?_r=1&_t=ZS-917gOMTaYuC",
+      href: "https://www.tiktok.com/@jcc",
       icon: TikTokIcon,
     },
   ];
@@ -52,11 +52,11 @@ export default function Footer() {
           {/* Logo and Description */}
           <div className="lg:col-span-1">
             <Image
-              src="/images/tlcc-logo.png"
-              alt="The Light Community Church"
+              src="/images/jcc-logo.png"
+              alt="Jubilee Christian Centre Church"
               width={160}
-              height={60}
-              className="h-12 w-auto mb-4 brightness-0 invert"
+              height={160}
+              className="h-12 w-12 mb-4"
             />
             <p className="text-gray-300 text-sm leading-relaxed mb-4">
               {footer.tagline}

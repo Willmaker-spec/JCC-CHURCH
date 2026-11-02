@@ -51,8 +51,8 @@ export default function WebinarRegistrationForm() {
           event_date: 'Saturday, February 7th, 2026',
           event_time: '10:00 AM WAT',
           meet_link: 'https://meet.google.com/nex-hpqd-wbi',
-          from_name: 'The Light Community Church',
-          host_name: 'Peter Nelson-Isaiah, Leader of The Light Community Church'
+          from_name: 'Jubilee Christian Centre Church',
+          host_name: 'Peter Nelson-Isaiah, Leader of Jubilee Christian Centre Church'
         }, emailJsPublicKey);
 
         // Send admin notification with registration details

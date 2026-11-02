@@ -139,7 +139,7 @@ export default function AudioPlayer({
       if (!ms) return; // Some TypeScript environments don't expose MediaMetadata/setPositionState typing fully,
       ms.metadata = new window.MediaMetadata({
         title: title || 'Sermon',
-        artist: 'The Light Community Church'
+        artist: 'Jubilee Christian Centre Church'
       });
       ms.setActionHandler('play', () => {
         if (playerRef.current) playerRef.current.playVideo();

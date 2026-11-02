@@ -225,7 +225,7 @@ export default function NationTakersClient() {
 
                   <div>
                     <p className="font-anton text-4xl md:text-5xl uppercase mb-3 leading-none">Peter <br />Nelson-Isaiah</p>
-                    <p className="text-slate-400 font-medium">Visionary, The Light Community Church</p>
+                    <p className="text-slate-400 font-medium">Visionary, Jubilee Christian Centre Church</p>
                     <p className="text-blue-300 font-medium mt-1">Alongside Industry Expert Speakers</p>
                   </div>
                 </div>

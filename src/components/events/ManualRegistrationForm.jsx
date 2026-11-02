@@ -51,8 +51,8 @@ export default function ManualRegistrationForm() {
           event_date: 'Saturday, March 7th, 2026',
           event_time: '10:00 AM WAT',
           meet_link: 'The Light House, Opp 43B, Babaponmile Street, Mangoro, Ikeja',
-          from_name: 'The Light Community Church',
-          host_name: 'Peter Nelson-Isaiah, Leader of The Light Community Church'
+          from_name: 'Jubilee Christian Centre Church',
+          host_name: 'Peter Nelson-Isaiah, Leader of Jubilee Christian Centre Church'
         }, emailJsPublicKey);
 
         // Send admin notification with registration details

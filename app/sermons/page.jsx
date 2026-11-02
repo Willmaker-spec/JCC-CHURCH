@@ -179,7 +179,7 @@ export default function SermonsPage() {
   return <div className="min-h-screen bg-[#0a0a0a] text-gray-200 selection:bg-tlcc-gold selection:text-[#0a0a0a]">
       {/* Hero Image Section */}
       <section className="relative h-[80vh] md:h-[90vh] lg:h-[95vh] overflow-hidden">
-        <Image src="/images/preach.jpg" alt="Preaching at The Light Community Church" fill className="object-cover object-top opacity-60" priority />
+        <Image src="/images/preach.jpg" alt="Preaching at Jubilee Christian Centre Church" fill className="object-cover object-top opacity-60" priority />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/40 via-[#0a0a0a]/60 to-[#0a0a0a]"></div>
         
         <div className="absolute inset-0 flex items-center justify-center pt-20">

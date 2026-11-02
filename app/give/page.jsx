@@ -138,7 +138,7 @@ export default function GivePage() {
 
                     <div className="mb-12">
                       <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-2">Account Name</p>
-                      <p className="text-xl font-light text-gray-800">Nelson Concept Studios - The Light Community Church Projects</p>
+                      <p className="text-xl font-light text-gray-800">Nelson Concept Studios - Jubilee Christian Centre Church Projects</p>
                     </div>
 
                     <div>

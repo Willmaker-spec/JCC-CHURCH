@@ -1,20 +1,20 @@
 import { MapPin, Clock, Phone } from 'lucide-react';
 export const metadata = {
-  title: 'Map - Rooted Monthly Meeting | The Light Community Church',
+  title: 'Map - Rooted Monthly Meeting | Jubilee Christian Centre Church',
   description: 'Find us at our monthly Rooted gathering - every first Saturday at The Light House, Mangoro, Ikeja, Lagos.',
   openGraph: {
-    title: 'Rooted - The Light Community Church',
+    title: 'Rooted - Jubilee Christian Centre Church',
     description: 'Find us at our monthly Rooted gathering - every first Saturday at The Light House.',
     images: [{
-      url: 'https://tlcc.ng/images/hero-fallback.jpg',
-      alt: 'The Light Community Church - Rooted Location',
+      url: '/images/hero.jpg',
+      alt: 'Jubilee Christian Centre Church - Rooted Location',
       width: 1200,
       height: 630
     }]
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['https://tlcc.ng/images/hero-fallback.jpg']
+    images: ['/images/hero.jpg']
   }
 };
 export default function MapPage() {
@@ -95,7 +95,7 @@ export default function MapPage() {
         <div className="bg-tlcc-navy text-white p-8 rounded-lg shadow-lg mb-12">
           <h2 className="text-2xl md:text-3xl font-anton mb-4 uppercase">What is Rooted?</h2>
           <p className="text-lg leading-relaxed">
-            Rooted is our monthly physical gathering that brings The Light Community Church together every first Saturday 
+            Rooted is our monthly physical gathering that brings Jubilee Christian Centre Church together every first Saturday
             of the month at The Light House. It&apos;s a time of fellowship, worship, and deep connection as we 
             grow together in faith and community. Come experience the warmth of gathering in person!
           </p>

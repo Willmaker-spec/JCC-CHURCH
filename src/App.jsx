@@ -65,7 +65,7 @@ function AppRoutes() {
     }
 
     const title = titles[pathname] || (pathname.startsWith('/devotionals/') ? 'Devotional' : 'Page Not Found')
-    document.title = `${title} | The Light Community Church`
+    document.title = `${title} | Jubilee Christian Centre Church`
   }, [pathname])
 
   return (

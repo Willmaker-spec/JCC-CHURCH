@@ -7,21 +7,21 @@ import Ministries from '@/components/Ministries';
 import Give from '@/components/Give';
 import Newsletter from '@/components/Newsletter';
 export const metadata = {
-  title: 'Home | The Light Community Church',
-  description: 'The Light Community Church — Souls Saved. Men Trained. Nations Taken. Join us for powerful teaching, worship, and community.',
+  title: 'Home | Jubilee Christian Centre Church',
+  description: 'Jubilee Christian Centre Church — Souls Saved. Men Trained. Nations Taken. Join us for powerful teaching, worship, and community.',
   openGraph: {
-    title: 'The Light Community Church',
-    description: 'The Light Community Church — Souls Saved. Men Trained. Nations Taken.',
+    title: 'Jubilee Christian Centre Church',
+    description: 'Jubilee Christian Centre Church — Souls Saved. Men Trained. Nations Taken.',
     images: [{
-      url: 'https://tlcc.ng/images/tlcc-logo.png',
-      alt: 'The Light Community Church Logo',
+      url: '/images/jcc-logo.png',
+      alt: 'Jubilee Christian Centre Church Logo',
       width: 800,
       height: 600
     }]
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['https://tlcc.ng/images/tlcc-logo.png']
+    images: ['/images/jcc-logo.png']
   }
 };
 export default function Home() {

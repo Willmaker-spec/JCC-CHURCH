@@ -17,7 +17,7 @@ export default function QuickLinksPage() {
     {
       title: "Get Connected",
       description:
-        "Whether you're new or ready to make TLCC your home, start your journey here.",
+        "Whether you're new or ready to make JCC your home, start your journey here.",
       icon: UserPlus,
       links: [
         {
@@ -29,7 +29,7 @@ export default function QuickLinksPage() {
         {
           title: "New Here?",
           description:
-            "Learn about TLCC, our vision, and how you can be part of our community.",
+            "Learn about JCC, our vision, and how you can be part of our community.",
           url: "/about",
         },
         {
@@ -42,7 +42,7 @@ export default function QuickLinksPage() {
           title: "Watch Online",
           description:
             "Join our live services every Tuesday and Saturday at 8:30 PM.",
-          url: "https://youtube.com/@TheLightCommunity",
+          url: "https://youtube.com/jccchurch",
         },
       ],
     },
@@ -52,40 +52,40 @@ export default function QuickLinksPage() {
       icon: Users,
       links: [
         {
-          title: "TLCC Online ministry",
+          title: "JCC Online ministry",
           description:
             "Lead and support our online services, community, and virtual care.",
-          url: "/ministries#tlcc-online",
+          url: "/ministries#jcc-online",
         },
         {
-          title: "TLCC Firestorm",
+          title: "JCC Firestorm",
           description:
             "Choir department — lead worship and choral ministry for services and events.",
-          url: "/ministries#firestorm",
+          url: "/ministries#jcc-firestorm",
         },
         {
-          title: "TLCC Follow up",
+          title: "JCC Follow up",
           description:
             "Care for new converts and provide follow-up support and discipleship.",
-          url: "/ministries#follow-up",
+          url: "/ministries#jcc-follow-up",
         },
         {
-          title: "TLCC Prayer team",
+          title: "JCC Prayer team",
           description:
             "Intercede and stand in prayer for the needs of our community.",
-          url: "/ministries#prayer-team",
+          url: "/ministries#jcc-prayer-team",
         },
         {
-          title: "TLCC Media & visibility",
+          title: "JCC Media & visibility",
           description:
             "Handle media production, live stream, and public visibility efforts.",
-          url: "/ministries#media-visibility",
+          url: "/ministries#jcc-media-visibility",
         },
         {
-          title: "Growth initiatives",
+          title: "JCC Growth initiatives",
           description:
             "Drive strategic growth projects and organisational development.",
-          url: "/ministries#growth-initiatives",
+          url: "/ministries#jcc-growth-initiatives",
         },
       ],
     },
@@ -173,20 +173,20 @@ export default function QuickLinksPage() {
     },
     {
       title: "Stay Connected",
-      description: "Follow our services and stay updated with TLCC events.",
+      description: "Follow our services and stay updated with JCC events.",
       icon: Video,
       links: [
         {
           title: "YouTube Channel",
           description:
             "Subscribe to watch live services and past sermons anytime.",
-          url: "https://youtube.com/@TheLightCommunity",
+          url: "https://youtube.com/@jccchurch",
         },
         {
           title: "WhatsApp Community",
           description:
             "Join our WhatsApp groups for updates, prayers, and fellowship.",
-          url: "https://chat.whatsapp.com/G395zowpEcAFfYWrmFlyGI",
+          url: "https://chat.whatsapp.com/",
         },
         {
           title: "Social Media",
@@ -211,7 +211,7 @@ export default function QuickLinksPage() {
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/quick.JPG"
+            src="public\images\quick-link.jpg"
             alt="Quick Links"
             fill
             className="object-cover"
@@ -231,7 +231,9 @@ export default function QuickLinksPage() {
           <h1 className="font-anton text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 uppercase leading-tight">
             Welcome to
             <br />
-            <span className="text-tlcc-orange">The Light Community Church</span>
+            <span className="text-tlcc-orange">
+              Jubilee Christian Centre Church
+            </span>
           </h1>
 
           <h2 className="text-xl md:text-2xl text-white/90 font-semibold mb-4">

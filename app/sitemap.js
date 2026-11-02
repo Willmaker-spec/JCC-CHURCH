@@ -1,5 +1,10 @@
 export default function sitemap() {
-  const baseUrl = 'https://tlcc.ng';
+  const configuredSiteUrl =
+    import.meta.env?.VITE_SITE_URL ??
+    globalThis.process?.env?.VITE_SITE_URL;
+  const baseUrl = configuredSiteUrl?.replace(/\/+$/, '');
+  if (!baseUrl) return [];
+
   return [{
     url: baseUrl,
     lastModified: new Date(),

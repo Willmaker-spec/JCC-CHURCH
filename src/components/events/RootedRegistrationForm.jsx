@@ -83,7 +83,7 @@ export default function RootedRegistrationForm() {
           </div>
           <div>
             <label className="text-sm font-semibold text-tlcc-navy block mb-2 uppercase tracking-wide">Email</label>
-            <input type="email" value={form.email} onChange={event => updateField('email', event.target.value)} required placeholder="example@tlcc.ng" className="w-full border-2 border-tlcc-cream rounded-xl px-4 py-3 focus:outline-none focus:border-tlcc-orange text-tlcc-navy" />
+            <input type="email" value={form.email} onChange={event => updateField('email', event.target.value)} required placeholder="example@example.com" className="w-full border-2 border-tlcc-cream rounded-xl px-4 py-3 focus:outline-none focus:border-tlcc-orange text-tlcc-navy" />
           </div>
         </div>
         <div>

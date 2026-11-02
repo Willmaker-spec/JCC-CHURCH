@@ -58,7 +58,7 @@ export default function UnderstandingSalvationRegistrationForm() {
         event_date: eventDate,
         event_time: eventTime,
         meet_link: venue,
-        from_name: 'The Light Community Church',
+        from_name: 'Jubilee Christian Centre Church',
         host_name: 'Apostle Isaiah Peter Nelson',
         registrant_email: formData.email,
         registrant_phone: formData.phone,
@@ -164,7 +164,7 @@ export default function UnderstandingSalvationRegistrationForm() {
         </button>
 
         <p className="text-center text-[10px] font-bold uppercase tracking-widest text-slate-300">
-          Cohort 1.0 • April 2026 • TLCC
+          Cohort 1.0 • April 2026 • JCC
         </p>
       </form>
     </div>;

@@ -1,4 +1,4 @@
-# The Light Community Church
+# Jubilee Christian Centre Church
 
 Vite + React single-page application. Page navigation is handled by React Router; the existing page modules live under `app/` and are explicitly registered in `src/App.jsx`.
 
@@ -25,6 +25,8 @@ npm run preview
 - `/give`, `/map`, `/ministries`, `/quick-links`, `/sermons`
 
 Vite serves `index.html` for nested routes so direct links and browser refreshes work.
+
+Set `VITE_SITE_URL` to the canonical public URL when the church domain is purchased. The sitemap remains empty until this value is configured.
 
 ## Optional integrations
 
