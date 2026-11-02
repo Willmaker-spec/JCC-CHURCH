@@ -288,8 +288,8 @@ export default function AboutPage() {
             {/* Pastor Photo */}
             <div className="grid-item md:col-span-5 relative h-[60vh] md:h-[80vh] w-full -mt-20 md:mt-0 md:-ml-20 z-10 filter grayscale contrast-125 border-8 border-white">
               <Image
-                src="/images/pastor.JPG"
-                alt="Apostle Nelson Isaiah"
+                src="public/images/pastor.JPG"
+                alt="Rev. Pastor Udoka O. Ukah"
                 fill
                 className="object-cover object-top"
                 unoptimized
@@ -353,9 +353,7 @@ export default function AboutPage() {
                   <p className="font-black uppercase tracking-widest">
                     {card.author}
                   </p>
-                  <p className="text-sm text-jcc-gold font-bold">
-                    {card.meta}
-                  </p>
+                  <p className="text-sm text-jcc-gold font-bold">{card.meta}</p>
                 </div>
               </div>
             ))}

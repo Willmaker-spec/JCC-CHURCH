@@ -11,12 +11,12 @@ const englishMessages = {
   },
   general: { languageLabel: "Language" },
   hero: {
-    visionBadge: "Souls Saved. Men Trained. Nations Taken.",
+    visionBadge: "Our Mission.",
     lines: [
-      { prefix: "The Jubilee ", highlight: "Christian Centre", suffix: "" },
+      { prefix: "Jubilee", highlight: "Christian Centre", suffix: "" },
       {
         prefix: "A place where everyone ",
-        highlight: "is someone in christ",
+        highlight: "is somebody in christ",
         suffix: "",
       },
     ],
@@ -50,7 +50,7 @@ const englishMessages = {
           imageAlt: "Church gathering",
           eyebrow: "Gather with us",
           title: "Events",
-          cta: "See events",
+          cta: "See upcoming events",
         },
       ],
     },
@@ -61,7 +61,7 @@ const englishMessages = {
         titleLine1: "A Church Without",
         titleLine2: "Borders",
         paragraphs: [
-          "We are a community of believers committed to sharing the Gospel and raising disciples.",
+          "We are a community of believers committed to sharing the Gospel and converting souls for GOD.",
         ],
         quote: "Souls saved. Men trained. Nations taken.",
         highlights: [
@@ -101,7 +101,7 @@ const englishMessages = {
       heading: "Featured Sermon",
       fallbackDate: "Recent message",
       fallbackDuration: "Watch now",
-      fallbackTitle: "Watch a message from The Jubilee Christian Centre",
+      fallbackTitle: "Watch a message from Jubilee Christian Centre",
       fallbackDescription: "Explore sermons and teachings from our church.",
       watchCta: "Watch Sermon",
       viewAll: "All Sermons",
@@ -133,7 +133,7 @@ const englishMessages = {
       ],
       ctaCard: {
         heading: "Get Involved",
-        description: "There is a place for you in our community.",
+        description: "There is a place for you in our church.",
         button: "Explore ministries",
       },
       bottomCta: {
@@ -184,7 +184,7 @@ const englishMessages = {
       subtitle: "Jubilee Christian Centre Church",
       headingLead: "Jubilee Christian",
       headingHighlight: "Centre Church",
-      description: "Souls saved. Men trained. Nations taken.",
+      description: "A place where everyone is somebody in christ.",
     },
     missionVision: {
       missionLabel: "Our Mission",
@@ -201,7 +201,7 @@ const englishMessages = {
     story: {
       heading: "Our Story",
       paragraphs: [
-        "Jubilee Christian Centre Church is a community of believers committed to sharing the Gospel and raising disciples.",
+        "Jubilee Christian Centre Church is a community of believers committed to sharing the Gospel and converting souls.",
         "We gather to worship, learn from Scripture, serve one another, and take the message of Christ into our communities and nations.",
       ],
     },
@@ -210,22 +210,26 @@ const englishMessages = {
       items: [
         {
           title: "The Bible",
-          content: "The Bible is God's Word and the foundation for our faith and life.",
+          content:
+            "The Bible is God's Word and the foundation for our faith and life.",
           verse: "2 Timothy 3:16",
         },
         {
           title: "Jesus Christ",
-          content: "Jesus Christ is Lord and the hope of salvation for all who believe.",
+          content:
+            "Jesus Christ is Lord and the hope of salvation for all who believe.",
           verse: "John 3:16",
         },
         {
           title: "The Gospel",
-          content: "Through the death and resurrection of Jesus, people can be reconciled to God.",
+          content:
+            "Through the death and resurrection of Jesus, people can be reconciled to God.",
           verse: "1 Corinthians 15:3-4",
         },
         {
           title: "The Church",
-          content: "The Church is called to worship God, make disciples, and serve the world.",
+          content:
+            "The Church is called to worship God, make disciples, and serve the world.",
           verse: "Matthew 28:19-20",
         },
       ],
@@ -233,18 +237,33 @@ const englishMessages = {
     coreValues: {
       heading: "Our Core Values",
       items: [
-        { title: "The Word", description: "We build our lives on the truth of Scripture." },
-        { title: "Discipleship", description: "We help people grow and become mature in Christ." },
-        { title: "Love", description: "We welcome and serve people with the love of Christ." },
+        {
+          title: "The Word",
+          description: "We build our lives on the truth of Scripture.",
+        },
+        {
+          title: "Discipleship",
+          description: "We help people grow and become mature in Christ.",
+        },
+        {
+          title: "Love",
+          description: "We welcome and serve people with the love of Christ.",
+        },
         { title: "Faith", description: "We trust God and follow His leading." },
-        { title: "Excellence", description: "We serve faithfully and give our best." },
-        { title: "Mission", description: "We share the Gospel and serve our communities." },
+        {
+          title: "Excellence",
+          description: "We serve faithfully and give our best.",
+        },
+        {
+          title: "Mission",
+          description: "We share the Gospel and serve our communities.",
+        },
       ],
     },
     leadership: {
       heading: "Our Leadership",
-      name: "Apostle Nelson Isaiah",
-      role: "Lead Pastor",
+      name: "Rev. Pastor Udoka O. Ukah",
+      role: "Head Pastor",
       paragraphs: [
         "Our leadership is committed to teaching God's Word and equipping believers for a life of faith and service.",
       ],
@@ -309,11 +328,11 @@ const englishMessages = {
     },
     contact: {
       heading: "Contact",
-      people: [{ name: "Church Office", phone: "+2347030966545" }],
+      people: [{ name: "Church Office", phone: "+234 70 309 665 45" }],
     },
     services: {
-      heading: "Gather with us",
-      lines: ["Sunday Service", "Rooted Prayers", "Friday 6:00PM TILL DAWN "],
+      heading: "Worship with us",
+      lines: ["Sunday Service", "Bible Study's", "Friday Night Vigil "],
     },
     copyright: "Jubilee Christian Centre Church. All rights reserved.",
   },
