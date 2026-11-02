@@ -147,9 +147,9 @@ export default function ClientOnlyEditorInner({
           <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><path d="M8 14l2.5-3 2.5 3 3.5-4.5" /></svg>
         </label>
 
-        {uploading && <div className="text-xs font-bold uppercase tracking-widest text-tlcc-navy ml-auto px-2 flex items-center gap-2"><div className="w-1.5 h-1.5 bg-tlcc-gold rounded-full animate-pulse" />Uploading...</div>}
+        {uploading && <div className="text-xs font-bold uppercase tracking-widest text-jcc-navy ml-auto px-2 flex items-center gap-2"><div className="w-1.5 h-1.5 bg-jcc-gold rounded-full animate-pulse" />Uploading...</div>}
       </div>
 
-      <textarea ref={textareaRef} className="w-full flex-1 min-h-[500px] bg-white border border-gray-200 rounded-xl px-6 py-6 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-tlcc-navy/20 focus:border-tlcc-navy transition-all resize-y font-mono text-sm leading-relaxed" value={content} onChange={e => setContent(e.target.value)} onKeyDown={handleKeyDown} placeholder="Write your devotional in Markdown..." title="Devotional Markdown Editor" />
+      <textarea ref={textareaRef} className="w-full flex-1 min-h-[500px] bg-white border border-gray-200 rounded-xl px-6 py-6 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-jcc-navy/20 focus:border-jcc-navy transition-all resize-y font-mono text-sm leading-relaxed" value={content} onChange={e => setContent(e.target.value)} onKeyDown={handleKeyDown} placeholder="Write your devotional in Markdown..." title="Devotional Markdown Editor" />
     </div>;
 }

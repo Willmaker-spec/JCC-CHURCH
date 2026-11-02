@@ -3,7 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { DEFAULT_LANGUAGE, getMessages } from '@/lib/i18n';
 const LanguageContext = createContext(undefined);
-const STORAGE_KEY = 'tlcc-language';
+const STORAGE_KEY = 'jcc-language';
 const isLanguage = value => {
   return value === 'en' || value === 'fr' || value === 'es';
 };

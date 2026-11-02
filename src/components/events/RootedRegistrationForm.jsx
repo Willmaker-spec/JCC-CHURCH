@@ -74,21 +74,21 @@ export default function RootedRegistrationForm() {
       setMessage(error instanceof Error ? error.message : 'Something went wrong. Please try again.');
     }
   };
-  return <div className="bg-white rounded-[32px] shadow-2xl border border-tlcc-cream p-8 md:p-10 scroll-mt-48" id="register">
+  return <div className="bg-white rounded-[32px] shadow-2xl border border-jcc-cream p-8 md:p-10 scroll-mt-48" id="register">
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid md:grid-cols-2 gap-5">
           <div>
-            <label className="text-sm font-semibold text-tlcc-navy block mb-2 uppercase tracking-wide">Full Name</label>
-            <input type="text" value={form.fullName} onChange={event => updateField('fullName', event.target.value)} required placeholder="Surname & first name" className="w-full border-2 border-tlcc-cream rounded-xl px-4 py-3 focus:outline-none focus:border-tlcc-orange text-tlcc-navy" />
+            <label className="text-sm font-semibold text-jcc-navy block mb-2 uppercase tracking-wide">Full Name</label>
+            <input type="text" value={form.fullName} onChange={event => updateField('fullName', event.target.value)} required placeholder="Surname & first name" className="w-full border-2 border-jcc-cream rounded-xl px-4 py-3 focus:outline-none focus:border-jcc-orange text-jcc-navy" />
           </div>
           <div>
-            <label className="text-sm font-semibold text-tlcc-navy block mb-2 uppercase tracking-wide">Email</label>
-            <input type="email" value={form.email} onChange={event => updateField('email', event.target.value)} required placeholder="example@example.com" className="w-full border-2 border-tlcc-cream rounded-xl px-4 py-3 focus:outline-none focus:border-tlcc-orange text-tlcc-navy" />
+            <label className="text-sm font-semibold text-jcc-navy block mb-2 uppercase tracking-wide">Email</label>
+            <input type="email" value={form.email} onChange={event => updateField('email', event.target.value)} required placeholder="example@example.com" className="w-full border-2 border-jcc-cream rounded-xl px-4 py-3 focus:outline-none focus:border-jcc-orange text-jcc-navy" />
           </div>
         </div>
         <div>
-          <label className="text-sm font-semibold text-tlcc-navy block mb-2 uppercase tracking-wide">Phone Number</label>
-          <input type="tel" value={form.phone} onChange={event => updateField('phone', event.target.value)} required placeholder="WhatsApp-enabled phone" className="w-full border-2 border-tlcc-cream rounded-xl px-4 py-3 focus:outline-none focus:border-tlcc-orange text-tlcc-navy" />
+          <label className="text-sm font-semibold text-jcc-navy block mb-2 uppercase tracking-wide">Phone Number</label>
+          <input type="tel" value={form.phone} onChange={event => updateField('phone', event.target.value)} required placeholder="WhatsApp-enabled phone" className="w-full border-2 border-jcc-cream rounded-xl px-4 py-3 focus:outline-none focus:border-jcc-orange text-jcc-navy" />
           <p className="text-xs text-gray-500 mt-2">One form = one seat. Register again if you&apos;re bringing someone.</p>
         </div>
 
@@ -102,7 +102,7 @@ export default function RootedRegistrationForm() {
             <p className="text-sm font-semibold">{message}</p>
           </div>}
 
-        <button type="submit" disabled={status === 'loading'} className="w-full inline-flex items-center justify-center gap-3 bg-gradient-to-r from-tlcc-orange to-tlcc-gold text-white font-bold uppercase tracking-wide rounded-full py-4 shadow-xl hover:shadow-2xl transition disabled:opacity-60">
+        <button type="submit" disabled={status === 'loading'} className="w-full inline-flex items-center justify-center gap-3 bg-gradient-to-r from-jcc-orange to-jcc-gold text-white font-bold uppercase tracking-wide rounded-full py-4 shadow-xl hover:shadow-2xl transition disabled:opacity-60">
           {status === 'loading' ? <>
               <Loader2 className="h-5 w-5 animate-spin" />
               Saving your seat...

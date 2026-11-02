@@ -24,9 +24,9 @@ export default function LanguageSwitcher({
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-  const labelClass = variant === 'dark' ? 'text-white/80' : 'text-tlcc-navy';
-  const pillClass = variant === 'dark' ? 'bg-white/10 border border-white/30 text-white hover:border-white/60' : 'bg-white border border-tlcc-cream text-tlcc-navy shadow-sm';
-  const optionClass = variant === 'dark' ? 'text-white hover:bg-white/10' : 'text-tlcc-navy hover:bg-tlcc-cream/60';
+  const labelClass = variant === 'dark' ? 'text-white/80' : 'text-jcc-navy';
+  const pillClass = variant === 'dark' ? 'bg-white/10 border border-white/30 text-white hover:border-white/60' : 'bg-white border border-jcc-cream text-jcc-navy shadow-sm';
+  const optionClass = variant === 'dark' ? 'text-white hover:bg-white/10' : 'text-jcc-navy hover:bg-jcc-cream/60';
   return <div ref={containerRef} className={`relative flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] font-semibold ${labelClass} ${className}`}>
       <span className={showLabelOnMobile ? 'inline' : 'hidden sm:inline'}>{messages.general.languageLabel}</span>
       <button type="button" aria-label={messages.general.languageLabel} aria-expanded={isOpen} onClick={() => setIsOpen(open => !open)} className={`relative flex items-center gap-2 rounded-full px-4 py-1.5 transition-colors ${pillClass}`}>
@@ -35,7 +35,7 @@ export default function LanguageSwitcher({
         transform: `rotate(${isOpen ? 225 : 45}deg)`
       }} />
       </button>
-      {isOpen && <ul className={`absolute right-0 top-full mt-2 w-40 rounded-2xl border p-2 shadow-xl text-[11px] tracking-[0.2em] ${variant === 'dark' ? 'border-white/20 bg-black/70 backdrop-blur' : 'border-tlcc-cream bg-white'}`}>
+      {isOpen && <ul className={`absolute right-0 top-full mt-2 w-40 rounded-2xl border p-2 shadow-xl text-[11px] tracking-[0.2em] ${variant === 'dark' ? 'border-white/20 bg-black/70 backdrop-blur' : 'border-jcc-cream bg-white'}`}>
           {LANGUAGE_OPTIONS.map(option => <li key={option.value}>
               <button type="button" onClick={() => {
           setLanguage(option.value);

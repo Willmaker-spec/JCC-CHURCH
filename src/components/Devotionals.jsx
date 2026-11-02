@@ -16,13 +16,13 @@ export default function Devotionals() {
   });
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-tlcc-cream to-tlcc-cream-dark">
+    <section className="py-16 md:py-24 bg-gradient-to-br from-jcc-cream to-jcc-cream-dark">
       <div className="container-custom">
         <div className="text-center mb-12">
-          <p className="text-tlcc-gold font-bold text-sm tracking-wider uppercase mb-3">
+          <p className="text-jcc-gold font-bold text-sm tracking-wider uppercase mb-3">
             {devotionals.badge}
           </p>
-          <h2 className="text-3xl md:text-5xl font-bold text-tlcc-navy font-serif">
+          <h2 className="text-3xl md:text-5xl font-bold text-jcc-navy font-serif">
             {devotionals.heading}
           </h2>
         </div>
@@ -32,35 +32,35 @@ export default function Devotionals() {
             {/* Today's Devotional Card */}
             <div className="bg-white rounded-2xl shadow-xl p-8">
               <div className="flex items-center space-x-3 mb-4">
-                <div className="p-3 bg-tlcc-gold/10 rounded-lg">
-                  <BookOpen className="h-6 w-6 text-tlcc-gold" />
+                <div className="p-3 bg-jcc-gold/10 rounded-lg">
+                  <BookOpen className="h-6 w-6 text-jcc-gold" />
                 </div>
                 <div>
-                  <p className="text-xs text-tlcc-navy-light uppercase tracking-wide">
+                  <p className="text-xs text-jcc-navy-light uppercase tracking-wide">
                     {devotionals.cardSubtitle}
                   </p>
-                  <div className="flex items-center text-sm text-tlcc-navy-light">
+                  <div className="flex items-center text-sm text-jcc-navy-light">
                     <Calendar className="h-3 w-3 mr-1" />
                     <span>{today}</span>
                   </div>
                 </div>
               </div>
 
-              <h3 className="text-2xl font-bold text-tlcc-navy mb-3">
+              <h3 className="text-2xl font-bold text-jcc-navy mb-3">
                 {devotionals.cardTitle}
               </h3>
 
-              <p className="text-sm text-tlcc-navy-light italic mb-4">
+              <p className="text-sm text-jcc-navy-light italic mb-4">
                 {devotionals.verse} — {devotionals.verseRef}
               </p>
 
-              <p className="text-tlcc-navy-light leading-relaxed mb-6">
+              <p className="text-jcc-navy-light leading-relaxed mb-6">
                 {devotionals.cardBody}
               </p>
 
               <Link
                 href="/sermons#featured"
-                className="inline-flex items-center text-tlcc-gold hover:text-tlcc-gold-dark font-semibold transition-colors"
+                className="inline-flex items-center text-jcc-gold hover:text-jcc-gold-dark font-semibold transition-colors"
               >
                 <span>{devotionals.cta}</span>
                 <ArrowRight className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -70,10 +70,10 @@ export default function Devotionals() {
             {/* Devotional Info & CTA */}
             <div className="space-y-6">
               <div>
-                <h3 className="text-2xl md:text-3xl font-bold text-tlcc-navy mb-4">
+                <h3 className="text-2xl md:text-3xl font-bold text-jcc-navy mb-4">
                   {devotionals.introTitle}
                 </h3>
-                <p className="text-tlcc-navy-light leading-relaxed mb-6">
+                <p className="text-jcc-navy-light leading-relaxed mb-6">
                   {devotionals.introBody}
                 </p>
               </div>
@@ -84,14 +84,14 @@ export default function Devotionals() {
                     key={benefit.title}
                     className="flex items-start space-x-3"
                   >
-                    <div className="p-2 bg-tlcc-gold/10 rounded-lg mt-1">
+                    <div className="p-2 bg-jcc-gold/10 rounded-lg mt-1">
                       <span className="text-xl">{benefit.emoji}</span>
                     </div>
                     <div>
-                      <h4 className="font-semibold text-tlcc-navy mb-1">
+                      <h4 className="font-semibold text-jcc-navy mb-1">
                         {benefit.title}
                       </h4>
-                      <p className="text-sm text-tlcc-navy-light">
+                      <p className="text-sm text-jcc-navy-light">
                         {benefit.description}
                       </p>
                     </div>
@@ -101,7 +101,7 @@ export default function Devotionals() {
 
               <Link
                 href="/sermons#featured"
-                className="inline-block px-8 py-4 bg-tlcc-gold hover:bg-tlcc-gold-dark text-white font-semibold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
+                className="inline-block px-8 py-4 bg-jcc-gold hover:bg-jcc-gold-dark text-white font-semibold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
               >
                 {devotionals.primaryCta}
               </Link>

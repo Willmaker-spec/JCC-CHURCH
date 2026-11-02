@@ -96,7 +96,7 @@ export default function NationTakersClient() {
 
         {/* Dynamic Abstract Background */}
         <div className="absolute top-0 right-0 w-[40vw] h-[40vw] bg-blue-600/20 blur-[100px] rounded-full mix-blend-screen pointer-events-none translate-x-1/4 -translate-y-1/4" />
-        <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] bg-tlcc-navy/50 blur-[120px] rounded-full pointer-events-none -translate-x-1/4 translate-y-1/4" />
+        <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] bg-jcc-navy/50 blur-[120px] rounded-full pointer-events-none -translate-x-1/4 translate-y-1/4" />
         
         {/* Grid Overlay */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
@@ -218,7 +218,7 @@ export default function NationTakersClient() {
                 <div className="flex flex-col sm:flex-row gap-8 items-center sm:items-start relative z-10">
                   
                   {/* Pastor Image */}
-                  <div className="relative w-32 h-32 md:w-40 md:h-40 shrink-0 rounded-[2rem] overflow-hidden bg-tlcc-navy transform group-hover:rotate-3 transition-transform duration-500 shadow-2xl border-2 border-blue-500/30">
+                  <div className="relative w-32 h-32 md:w-40 md:h-40 shrink-0 rounded-[2rem] overflow-hidden bg-jcc-navy transform group-hover:rotate-3 transition-transform duration-500 shadow-2xl border-2 border-blue-500/30">
                     <Image src="/images/pastor.JPG" alt="Peter Nelson-Isaiah" fill className="object-cover scale-110 group-hover:scale-100 transition-transform duration-700" unoptimized />
                     <div className="absolute inset-0 bg-blue-600/10 mix-blend-overlay" />
                   </div>

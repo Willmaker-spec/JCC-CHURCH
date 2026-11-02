@@ -27,10 +27,10 @@ export default function HeartRoomPage() {
     }, containerRef);
     return () => ctx.revert();
   }, []);
-  return <main ref={containerRef} className="bg-tlcc-navy min-h-screen flex items-center justify-center relative overflow-hidden px-4">
+  return <main ref={containerRef} className="bg-jcc-navy min-h-screen flex items-center justify-center relative overflow-hidden px-4">
       {/* Background Noise & Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-20 mix-blend-overlay pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] bg-tlcc-gold/10 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] bg-jcc-gold/10 blur-[100px] rounded-full pointer-events-none" />
       
       <div className="relative z-10 max-w-4xl w-full text-center">
         <div className="flex justify-center mb-12 overflow-hidden">
@@ -45,7 +45,7 @@ export default function HeartRoomPage() {
         </h1>
 
         <div className="overflow-hidden mb-16">
-          <p className="archive-text text-xl md:text-2xl text-tlcc-gold font-medium uppercase tracking-[0.2em]">
+          <p className="archive-text text-xl md:text-2xl text-jcc-gold font-medium uppercase tracking-[0.2em]">
             Transmission Concluded
           </p>
           <p className="archive-text text-slate-400 mt-4 max-w-lg mx-auto">
@@ -55,7 +55,7 @@ export default function HeartRoomPage() {
 
         <div className="overflow-hidden">
           <div className="archive-text inline-block">
-            <Link href="/events" className="group inline-flex items-center gap-4 bg-white text-tlcc-navy px-8 py-4 rounded-full font-black uppercase text-sm tracking-[0.2em] hover:bg-tlcc-gold transition-colors">
+            <Link href="/events" className="group inline-flex items-center gap-4 bg-white text-jcc-navy px-8 py-4 rounded-full font-black uppercase text-sm tracking-[0.2em] hover:bg-jcc-gold transition-colors">
               <ArrowRight className="w-5 h-5 rotate-180 group-hover:-translate-x-1 transition-transform" />
               Return to Events
             </Link>

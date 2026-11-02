@@ -194,7 +194,7 @@ export default function MinistriesPage() {
 
         {/* Animated Background Elements */}
         <div className="absolute inset-0 z-0 opacity-20 mix-blend-screen">
-          <div className="absolute top-20 left-10 w-96 h-96 bg-tlcc-gold rounded-full blur-[100px] animate-pulse"></div>
+          <div className="absolute top-20 left-10 w-96 h-96 bg-jcc-gold rounded-full blur-[100px] animate-pulse"></div>
           <div
             className="absolute bottom-20 right-10 w-96 h-96 bg-yellow-200 rounded-full blur-[100px] animate-pulse"
             style={{
@@ -205,7 +205,7 @@ export default function MinistriesPage() {
 
         <div className="container-custom relative z-10 text-center text-white">
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-6 py-2.5 rounded-full mb-8 border border-white/20 shadow-2xl">
-            <Sparkles className="h-4 w-4 text-tlcc-gold" />
+            <Sparkles className="h-4 w-4 text-jcc-gold" />
             <span className="text-white font-bold text-xs tracking-widest uppercase">
               Find Your Calling
             </span>
@@ -214,7 +214,7 @@ export default function MinistriesPage() {
           <h1 className="font-anton text-6xl md:text-8xl lg:text-9xl mb-8 uppercase leading-[0.9] tracking-tight drop-shadow-2xl">
             There&apos;s A Place
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-tlcc-gold via-yellow-200 to-tlcc-gold">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-jcc-gold via-yellow-200 to-jcc-gold">
               For Everyone
             </span>
           </h1>
@@ -227,7 +227,7 @@ export default function MinistriesPage() {
           <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
             <Link
               href="#departments"
-              className="w-full sm:w-auto px-10 py-5 bg-tlcc-gold hover:bg-yellow-400 text-[#0a0a0a] font-bold rounded-full transition-all duration-300 shadow-[0_0_30px_rgba(200,160,50,0.3)] hover:shadow-[0_0_40px_rgba(200,160,50,0.5)] hover:-translate-y-1 flex items-center justify-center gap-2 uppercase tracking-widest text-sm"
+              className="w-full sm:w-auto px-10 py-5 bg-jcc-gold hover:bg-yellow-400 text-[#0a0a0a] font-bold rounded-full transition-all duration-300 shadow-[0_0_30px_rgba(200,160,50,0.3)] hover:shadow-[0_0_40px_rgba(200,160,50,0.5)] hover:-translate-y-1 flex items-center justify-center gap-2 uppercase tracking-widest text-sm"
             >
               <span>Explore Ministries</span>
               <ArrowRight className="h-4 w-4" />
@@ -240,8 +240,8 @@ export default function MinistriesPage() {
       <section className="py-24 bg-white relative z-20 -mt-8 rounded-t-[3rem]">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="font-anton text-4xl md:text-5xl text-tlcc-navy mb-6 uppercase tracking-wide">
-              Why <span className="text-tlcc-gold">Serve?</span>
+            <h2 className="font-anton text-4xl md:text-5xl text-jcc-navy mb-6 uppercase tracking-wide">
+              Why <span className="text-jcc-gold">Serve?</span>
             </h2>
             <p className="text-lg text-gray-500 leading-relaxed">
               Serving isn&apos;t just about what you do—it&apos;s about who you
@@ -275,12 +275,12 @@ export default function MinistriesPage() {
             ].map((item, i) => (
               <div
                 key={i}
-                className="bg-white rounded-3xl p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:border-tlcc-gold/30 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-2 group"
+                className="bg-white rounded-3xl p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:border-jcc-gold/30 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-2 group"
               >
-                <div className="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-tlcc-gold/10 transition-colors">
+                <div className="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-jcc-gold/10 transition-colors">
                   {item.icon}
                 </div>
-                <h3 className="font-bold text-xl text-tlcc-navy mb-3">
+                <h3 className="font-bold text-xl text-jcc-navy mb-3">
                   {item.title}
                 </h3>
                 <p className="text-gray-500 leading-relaxed">{item.desc}</p>
@@ -294,8 +294,8 @@ export default function MinistriesPage() {
       <section id="departments" className="py-24 bg-gray-50/50">
         <div className="container-custom">
           <div className="text-center mb-20">
-            <h2 className="font-anton text-5xl md:text-6xl text-tlcc-navy mb-6 uppercase tracking-wide">
-              Our <span className="text-tlcc-gold">Departments</span>
+            <h2 className="font-anton text-5xl md:text-6xl text-jcc-navy mb-6 uppercase tracking-wide">
+              Our <span className="text-jcc-gold">Departments</span>
             </h2>
             <p className="text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed">
               Each department plays a vital role in fulfilling our mission.
@@ -318,7 +318,7 @@ export default function MinistriesPage() {
                     >
                       <dept.icon className={`h-8 w-8 ${dept.color}`} />
                     </div>
-                    <h3 className="font-anton text-4xl text-tlcc-navy mb-4 uppercase tracking-wide">
+                    <h3 className="font-anton text-4xl text-jcc-navy mb-4 uppercase tracking-wide">
                       {dept.name}
                     </h3>
                     <p className="text-gray-500 text-lg mb-8 leading-relaxed">
@@ -327,7 +327,7 @@ export default function MinistriesPage() {
                     <div className="mt-auto pt-8 border-t border-gray-100">
                       <Link
                         href={dept.whatsappLink}
-                        className="inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 bg-tlcc-navy hover:bg-tlcc-navy-light text-white font-bold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 uppercase tracking-widest text-xs"
+                        className="inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 bg-jcc-navy hover:bg-jcc-navy-light text-white font-bold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 uppercase tracking-widest text-xs"
                       >
                         Join This Ministry
                         <ArrowRight className="h-4 w-4 ml-2" />
@@ -339,7 +339,7 @@ export default function MinistriesPage() {
                   <div className="space-y-10 lg:pl-10 lg:border-l border-gray-100">
                     {/* Mission */}
                     <div>
-                      <h4 className="font-bold text-sm text-tlcc-gold uppercase tracking-widest mb-3">
+                      <h4 className="font-bold text-sm text-jcc-gold uppercase tracking-widest mb-3">
                         Our Mission
                       </h4>
                       <p className="text-gray-700 text-lg leading-relaxed font-medium">
@@ -359,7 +359,7 @@ export default function MinistriesPage() {
                               key={activity}
                               className="flex items-start gap-3"
                             >
-                              <CheckCircle className="h-5 w-5 text-tlcc-gold flex-shrink-0" />
+                              <CheckCircle className="h-5 w-5 text-jcc-gold flex-shrink-0" />
                               <span className="text-gray-600 text-sm font-medium">
                                 {activity}
                               </span>
@@ -375,7 +375,7 @@ export default function MinistriesPage() {
                         <ul className="space-y-3">
                           {dept.requirements.map((req) => (
                             <li key={req} className="flex items-start gap-3">
-                              <div className="w-1.5 h-1.5 rounded-full bg-tlcc-gold mt-2 flex-shrink-0"></div>
+                              <div className="w-1.5 h-1.5 rounded-full bg-jcc-gold mt-2 flex-shrink-0"></div>
                               <span className="text-gray-600 text-sm font-medium">
                                 {req}
                               </span>
@@ -396,8 +396,8 @@ export default function MinistriesPage() {
       <section className="py-24 bg-white">
         <div className="container-custom">
           <div className="text-center mb-16">
-            <h2 className="font-anton text-4xl md:text-5xl text-tlcc-navy mb-6 uppercase tracking-wide">
-              More <span className="text-tlcc-gold">Opportunities</span>
+            <h2 className="font-anton text-4xl md:text-5xl text-jcc-navy mb-6 uppercase tracking-wide">
+              More <span className="text-jcc-gold">Opportunities</span>
             </h2>
             <p className="text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed">
               Beyond our main departments, we have specialized ministries that
@@ -409,12 +409,12 @@ export default function MinistriesPage() {
             {otherMinistries.map((ministry) => (
               <div
                 key={ministry.name}
-                className="bg-white rounded-3xl p-8 shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-gray-100 hover:border-tlcc-gold/30 transition-all duration-300 group"
+                className="bg-white rounded-3xl p-8 shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-gray-100 hover:border-jcc-gold/30 transition-all duration-300 group"
               >
-                <div className="inline-flex w-12 h-12 items-center justify-center bg-gray-50 group-hover:bg-tlcc-gold/10 rounded-xl mb-6 transition-colors">
-                  <ministry.icon className="h-6 w-6 text-tlcc-gold" />
+                <div className="inline-flex w-12 h-12 items-center justify-center bg-gray-50 group-hover:bg-jcc-gold/10 rounded-xl mb-6 transition-colors">
+                  <ministry.icon className="h-6 w-6 text-jcc-gold" />
                 </div>
-                <h3 className="font-bold text-xl text-tlcc-navy mb-3 group-hover:text-tlcc-gold transition-colors">
+                <h3 className="font-bold text-xl text-jcc-navy mb-3 group-hover:text-jcc-gold transition-colors">
                   {ministry.name}
                 </h3>
                 <p className="text-gray-500 mb-6 text-sm leading-relaxed">
@@ -422,7 +422,7 @@ export default function MinistriesPage() {
                 </p>
                 <Link
                   href="/contact#join-ministry"
-                  className="inline-flex items-center text-tlcc-navy font-bold text-xs uppercase tracking-widest group-hover:text-tlcc-gold transition-colors"
+                  className="inline-flex items-center text-jcc-navy font-bold text-xs uppercase tracking-widest group-hover:text-jcc-gold transition-colors"
                 >
                   Learn More
                   <ArrowRight className="h-4 w-4 ml-2 transform group-hover:translate-x-1 transition-transform" />
@@ -434,15 +434,15 @@ export default function MinistriesPage() {
       </section>
 
       {/* How to Join Timeline */}
-      <section className="py-24 bg-tlcc-navy relative overflow-hidden">
+      <section className="py-24 bg-jcc-navy relative overflow-hidden">
         {/* Abstract Background Shapes */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-tlcc-gold/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3"></div>
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-jcc-gold/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3"></div>
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] translate-y-1/3 -translate-x-1/3"></div>
 
         <div className="container-custom relative z-10">
           <div className="text-center mb-20">
             <h2 className="font-anton text-4xl md:text-6xl text-white mb-6 uppercase tracking-wide drop-shadow-lg">
-              Ready to <span className="text-tlcc-gold">Get Started?</span>
+              Ready to <span className="text-jcc-gold">Get Started?</span>
             </h2>
             <p className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
               Joining a ministry is simple. Follow these steps and we&apos;ll
@@ -478,7 +478,7 @@ export default function MinistriesPage() {
                   className="relative z-10 flex flex-col items-center text-center"
                 >
                   <div className="w-20 h-20 rounded-full bg-[#1a2235] border-2 border-gray-700 flex items-center justify-center mb-6 shadow-2xl relative">
-                    <span className="font-anton text-3xl text-tlcc-gold">
+                    <span className="font-anton text-3xl text-jcc-gold">
                       {item.step}
                     </span>
                   </div>
@@ -493,7 +493,7 @@ export default function MinistriesPage() {
             <div className="mt-20 text-center">
               <Link
                 href="/contact#join-ministry"
-                className="inline-flex items-center px-12 py-5 bg-tlcc-gold hover:bg-yellow-400 text-[#0a0a0a] font-bold rounded-full transition-all duration-300 shadow-[0_0_30px_rgba(200,160,50,0.2)] hover:shadow-[0_0_40px_rgba(200,160,50,0.4)] hover:-translate-y-1 uppercase tracking-widest text-sm"
+                className="inline-flex items-center px-12 py-5 bg-jcc-gold hover:bg-yellow-400 text-[#0a0a0a] font-bold rounded-full transition-all duration-300 shadow-[0_0_30px_rgba(200,160,50,0.2)] hover:shadow-[0_0_40px_rgba(200,160,50,0.4)] hover:-translate-y-1 uppercase tracking-widest text-sm"
               >
                 <span>Join a Ministry Today</span>
                 <ArrowRight className="h-5 w-5 ml-3" />
@@ -507,8 +507,8 @@ export default function MinistriesPage() {
       <section className="py-24 bg-gray-50/50">
         <div className="container-custom max-w-3xl">
           <div className="text-center mb-16">
-            <h2 className="font-anton text-4xl md:text-5xl text-tlcc-navy mb-4 uppercase tracking-wide">
-              Common <span className="text-tlcc-gold">Questions</span>
+            <h2 className="font-anton text-4xl md:text-5xl text-jcc-navy mb-4 uppercase tracking-wide">
+              Common <span className="text-jcc-gold">Questions</span>
             </h2>
             <p className="text-gray-500">
               Everything you need to know about serving.
@@ -536,12 +536,12 @@ export default function MinistriesPage() {
             ].map((faq, index) => (
               <details
                 key={index}
-                className="group bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm transition-all duration-300 open:shadow-md open:border-tlcc-gold/30"
+                className="group bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm transition-all duration-300 open:shadow-md open:border-jcc-gold/30"
               >
-                <summary className="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-tlcc-navy text-lg hover:text-tlcc-gold transition-colors">
+                <summary className="flex items-center justify-between p-6 cursor-pointer list-none font-bold text-jcc-navy text-lg hover:text-jcc-gold transition-colors">
                   {faq.q}
-                  <span className="ml-4 flex-shrink-0 w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-open:rotate-180 group-open:bg-tlcc-gold/10 transition-all duration-300">
-                    <ChevronDown className="w-5 h-5 text-gray-400 group-open:text-tlcc-gold transition-colors" />
+                  <span className="ml-4 flex-shrink-0 w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-open:rotate-180 group-open:bg-jcc-gold/10 transition-all duration-300">
+                    <ChevronDown className="w-5 h-5 text-gray-400 group-open:text-jcc-gold transition-colors" />
                   </span>
                 </summary>
                 <div className="px-6 pb-6 text-gray-600 leading-relaxed">

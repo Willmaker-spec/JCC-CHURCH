@@ -28,9 +28,9 @@ const pad = value => value.toString().padStart(2, '0');
 const getVariantClasses = variant => {
   if (variant === 'light') {
     return {
-      container: 'bg-white border-tlcc-cream text-tlcc-navy',
-      label: 'text-tlcc-navy/60',
-      value: 'text-tlcc-navy'
+      container: 'bg-white border-jcc-cream text-jcc-navy',
+      label: 'text-jcc-navy/60',
+      value: 'text-jcc-navy'
     };
   }
   return {

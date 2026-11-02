@@ -210,7 +210,7 @@ export default function AudioPlayer({
 
             {/* Title */}
             <div className="flex-1 min-w-0">
-              <h4 className="text-sm font-semibold text-tlcc-navy truncate">
+              <h4 className="text-sm font-semibold text-jcc-navy truncate">
                 {title}
               </h4>
               <p className="text-xs text-gray-500">{formatPublishedDate(date)}</p>
@@ -219,10 +219,10 @@ export default function AudioPlayer({
             {/* Controls */}
             <div className="flex items-center gap-2">
               <button onClick={() => skipTime(-15)} className="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors" title="Skip back 15s">
-                <SkipBack className="w-4 h-4 text-tlcc-navy" />
+                <SkipBack className="w-4 h-4 text-jcc-navy" />
               </button>
 
-              <button onClick={togglePlay} className="w-10 h-10 rounded-full bg-tlcc-navy hover:bg-tlcc-navy-light flex items-center justify-center transition-colors">
+              <button onClick={togglePlay} className="w-10 h-10 rounded-full bg-jcc-navy hover:bg-jcc-navy-light flex items-center justify-center transition-colors">
                 {isPlaying ? <Pause className="w-5 h-5 text-white" fill="white" /> : <Play className="w-5 h-5 text-white ml-0.5" fill="white" />}
               </button>
 
@@ -238,7 +238,7 @@ export default function AudioPlayer({
               {formatTime(currentTime)}
             </span>
             <div onClick={handleProgressClick} className="flex-1 h-1.5 bg-gray-200 rounded-full cursor-pointer overflow-hidden">
-              <div className="h-full bg-tlcc-gold transition-all duration-100" style={{
+              <div className="h-full bg-jcc-gold transition-all duration-100" style={{
               width: `${duration ? currentTime / duration * 100 : 0}%`
             }} />
             </div>

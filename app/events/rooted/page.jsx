@@ -23,26 +23,26 @@ export default function RootedPage() {
     }, containerRef);
     return () => ctx.revert();
   }, []);
-  return <main ref={containerRef} className="min-h-screen bg-[#fafafa] selection:bg-tlcc-navy selection:text-white overflow-hidden pb-32">
+  return <main ref={containerRef} className="min-h-screen bg-[#fafafa] selection:bg-jcc-navy selection:text-white overflow-hidden pb-32">
       
       {/* Brutalist Back Button */}
-      <Link href="/events" className="fixed left-4 md:left-8 top-8 z-50 group flex items-center gap-0 bg-white border-4 border-tlcc-navy p-1 pr-4 shadow-[6px_6px_0_#1a365d] hover:shadow-[0px_0px_0_#1a365d] hover:translate-x-1 hover:translate-y-1 transition-all duration-300">
-        <div className="w-10 h-10 bg-tlcc-navy flex items-center justify-center text-white mr-3">
+      <Link href="/events" className="fixed left-4 md:left-8 top-8 z-50 group flex items-center gap-0 bg-white border-4 border-jcc-navy p-1 pr-4 shadow-[6px_6px_0_#1a365d] hover:shadow-[0px_0px_0_#1a365d] hover:translate-x-1 hover:translate-y-1 transition-all duration-300">
+        <div className="w-10 h-10 bg-jcc-navy flex items-center justify-center text-white mr-3">
           <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
         </div>
-        <span className="text-sm font-black uppercase tracking-widest text-tlcc-navy">Events</span>
+        <span className="text-sm font-black uppercase tracking-widest text-jcc-navy">Events</span>
       </Link>
 
       {/* Massive Brutalist Hero */}
-      <section className="relative min-h-[85vh] flex flex-col justify-end bg-tlcc-navy border-b-8 border-tlcc-gold px-4 md:px-8 pb-16 pt-32">
+      <section className="relative min-h-[85vh] flex flex-col justify-end bg-jcc-navy border-b-8 border-jcc-gold px-4 md:px-8 pb-16 pt-32">
         <div className="absolute inset-0 z-0">
           <Image src="/images/rooted2.JPG" alt="Rooted Gathering" fill className="object-cover object-[center_30%] opacity-60 scale-105" priority unoptimized />
-          <div className="absolute inset-0 bg-gradient-to-t from-tlcc-navy via-tlcc-navy/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-jcc-navy via-jcc-navy/60 to-transparent" />
         </div>
 
         <div className="relative z-10 container mx-auto max-w-7xl">
           <div className="mb-6 overflow-hidden">
-            <div className="hero-text inline-flex bg-tlcc-gold text-tlcc-navy px-6 py-2 border-4 border-tlcc-navy font-black uppercase tracking-widest text-sm shadow-[6px_6px_0_#1a365d] transform -rotate-2">
+            <div className="hero-text inline-flex bg-jcc-gold text-jcc-navy px-6 py-2 border-4 border-jcc-navy font-black uppercase tracking-widest text-sm shadow-[6px_6px_0_#1a365d] transform -rotate-2">
               Monthly Gathering
             </div>
           </div>
@@ -52,7 +52,7 @@ export default function RootedPage() {
           </h1>
 
           <div className="overflow-hidden max-w-2xl">
-            <p className="hero-text text-xl md:text-3xl text-white/90 font-medium border-l-8 border-tlcc-gold pl-6 leading-relaxed">
+            <p className="hero-text text-xl md:text-3xl text-white/90 font-medium border-l-8 border-jcc-gold pl-6 leading-relaxed">
               Our explosive monthly gathering. Great sermons, deep connections, and an unapologetic pursuit of God.
             </p>
           </div>
@@ -63,31 +63,31 @@ export default function RootedPage() {
       <section className="info-grid container mx-auto max-w-7xl px-4 mt-24">
         <div className="grid md:grid-cols-3 gap-8">
           
-          <div className="info-block bg-white border-4 border-tlcc-navy p-8 shadow-[10px_10px_0_#1a365d] hover:shadow-[10px_10px_0_#EAB308] transition-all flex flex-col items-start group">
-            <div className="w-16 h-16 bg-tlcc-navy rounded-full flex items-center justify-center text-tlcc-gold mb-6 group-hover:scale-110 transition-transform">
+          <div className="info-block bg-white border-4 border-jcc-navy p-8 shadow-[10px_10px_0_#1a365d] hover:shadow-[10px_10px_0_#EAB308] transition-all flex flex-col items-start group">
+            <div className="w-16 h-16 bg-jcc-navy rounded-full flex items-center justify-center text-jcc-gold mb-6 group-hover:scale-110 transition-transform">
               <Calendar size={32} strokeWidth={2.5} />
             </div>
-            <h3 className="font-anton text-4xl text-tlcc-navy mb-2 uppercase tracking-wide">When</h3>
+            <h3 className="font-anton text-4xl text-jcc-navy mb-2 uppercase tracking-wide">When</h3>
             <p className="text-gray-600 font-bold uppercase tracking-widest">Every First Friday</p>
-            <p className="text-tlcc-navy/60 font-medium mt-2">Of The Month</p>
+            <p className="text-jcc-navy/60 font-medium mt-2">Of The Month</p>
           </div>
 
-          <div className="info-block bg-white border-4 border-tlcc-navy p-8 shadow-[10px_10px_0_#1a365d] hover:shadow-[10px_10px_0_#EAB308] transition-all flex flex-col items-start group">
-            <div className="w-16 h-16 bg-tlcc-navy rounded-full flex items-center justify-center text-tlcc-gold mb-6 group-hover:scale-110 transition-transform">
+          <div className="info-block bg-white border-4 border-jcc-navy p-8 shadow-[10px_10px_0_#1a365d] hover:shadow-[10px_10px_0_#EAB308] transition-all flex flex-col items-start group">
+            <div className="w-16 h-16 bg-jcc-navy rounded-full flex items-center justify-center text-jcc-gold mb-6 group-hover:scale-110 transition-transform">
               <Clock size={32} strokeWidth={2.5} />
             </div>
-            <h3 className="font-anton text-4xl text-tlcc-navy mb-2 uppercase tracking-wide">Time</h3>
+            <h3 className="font-anton text-4xl text-jcc-navy mb-2 uppercase tracking-wide">Time</h3>
             <p className="text-gray-600 font-bold uppercase tracking-widest">10:00 AM</p>
-            <p className="text-tlcc-navy/60 font-medium mt-2">No African Time</p>
+            <p className="text-jcc-navy/60 font-medium mt-2">No African Time</p>
           </div>
 
-          <Link href="/map" className="info-block bg-white border-4 border-tlcc-navy p-8 shadow-[10px_10px_0_#1a365d] hover:shadow-[10px_10px_0_#EAB308] hover:-translate-y-1 transition-all flex flex-col items-start group">
-            <div className="w-16 h-16 bg-tlcc-navy rounded-full flex items-center justify-center text-tlcc-gold mb-6 group-hover:scale-110 transition-transform">
+          <Link href="/map" className="info-block bg-white border-4 border-jcc-navy p-8 shadow-[10px_10px_0_#1a365d] hover:shadow-[10px_10px_0_#EAB308] hover:-translate-y-1 transition-all flex flex-col items-start group">
+            <div className="w-16 h-16 bg-jcc-navy rounded-full flex items-center justify-center text-jcc-gold mb-6 group-hover:scale-110 transition-transform">
               <MapPin size={32} strokeWidth={2.5} />
             </div>
-            <h3 className="font-anton text-4xl text-tlcc-navy mb-2 uppercase tracking-wide">Where</h3>
+            <h3 className="font-anton text-4xl text-jcc-navy mb-2 uppercase tracking-wide">Where</h3>
             <p className="text-gray-600 font-bold uppercase tracking-widest">The Light House</p>
-            <p className="text-tlcc-navy/60 font-medium mt-2 text-sm leading-relaxed">
+            <p className="text-jcc-navy/60 font-medium mt-2 text-sm leading-relaxed">
               Opp 43B Babaponmile St.<br />
               After Winners Chapel<br />
               Mangoro, Ikeja, Lagos
@@ -99,11 +99,11 @@ export default function RootedPage() {
 
       {/* Massive CTA */}
       <section className="container mx-auto max-w-5xl px-4 mt-32 text-center">
-        <h2 className="font-anton text-5xl md:text-7xl text-tlcc-navy uppercase tracking-tighter mb-12">
+        <h2 className="font-anton text-5xl md:text-7xl text-jcc-navy uppercase tracking-tighter mb-12">
           Clear your schedule.<br />See you this Friday.
         </h2>
         <div className="inline-block">
-          <Link href="#" className="group flex items-center gap-6 px-12 py-6 bg-tlcc-gold border-4 border-tlcc-navy text-tlcc-navy font-black text-xl md:text-2xl uppercase tracking-[0.2em] shadow-[12px_12px_0_#1a365d] hover:translate-x-2 hover:translate-y-2 hover:shadow-[0_0_0_#1a365d] transition-all duration-300">
+          <Link href="#" className="group flex items-center gap-6 px-12 py-6 bg-jcc-gold border-4 border-jcc-navy text-jcc-navy font-black text-xl md:text-2xl uppercase tracking-[0.2em] shadow-[12px_12px_0_#1a365d] hover:translate-x-2 hover:translate-y-2 hover:shadow-[0_0_0_#1a365d] transition-all duration-300">
             <span>Set Reminder</span>
             <ArrowRight className="w-8 h-8 group-hover:translate-x-2 transition-transform" />
           </Link>

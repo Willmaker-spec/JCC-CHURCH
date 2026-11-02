@@ -109,42 +109,42 @@ export default function WebinarRegistrationForm() {
           <label htmlFor="fullName" className="block text-sm font-medium text-gray-300 mb-1">
             Full Name *
           </label>
-          <input type="text" id="fullName" name="fullName" value={formData.fullName} onChange={handleChange} required className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-tlcc-orange" placeholder="John Doe" />
+          <input type="text" id="fullName" name="fullName" value={formData.fullName} onChange={handleChange} required className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-jcc-orange" placeholder="John Doe" />
         </div>
 
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
             Email Address *
           </label>
-          <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-tlcc-orange" placeholder="john@example.com" />
+          <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-jcc-orange" placeholder="john@example.com" />
         </div>
 
         <div>
           <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1">
             Phone Number *
           </label>
-          <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} required className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-tlcc-orange" placeholder="+234 xxx xxx xxxx" />
+          <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} required className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-jcc-orange" placeholder="+234 xxx xxx xxxx" />
         </div>
 
         <div>
           <label htmlFor="occupation" className="block text-sm font-medium text-gray-300 mb-1">
             Current Occupation/Role *
           </label>
-          <input type="text" id="occupation" name="occupation" value={formData.occupation} onChange={handleChange} required className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-tlcc-orange" placeholder="e.g. Software Engineer, Business Analyst, Student" />
+          <input type="text" id="occupation" name="occupation" value={formData.occupation} onChange={handleChange} required className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-jcc-orange" placeholder="e.g. Software Engineer, Business Analyst, Student" />
         </div>
 
         <div>
           <label htmlFor="organization" className="block text-sm font-medium text-gray-300 mb-1">
             Organization/Company (Optional)
           </label>
-          <input type="text" id="organization" name="organization" value={formData.organization} onChange={handleChange} className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-tlcc-orange" placeholder="Your company name" />
+          <input type="text" id="organization" name="organization" value={formData.organization} onChange={handleChange} className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-jcc-orange" placeholder="Your company name" />
         </div>
 
         {status === 'error' && <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 text-red-400 text-sm">
             {errorMessage || 'Registration failed. Please try again.'}
           </div>}
 
-        <button type="submit" disabled={status === 'submitting'} className="w-full bg-tlcc-orange hover:bg-orange-600 text-white font-bold py-4 px-6 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed">
+        <button type="submit" disabled={status === 'submitting'} className="w-full bg-jcc-orange hover:bg-orange-600 text-white font-bold py-4 px-6 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed">
           {status === 'submitting' ? 'Registering...' : 'Register Now'}
         </button>
 

@@ -176,7 +176,7 @@ export default function SermonsPage() {
       sermons: sermons.slice(0, 4)
     }));
   };
-  return <div className="min-h-screen bg-[#0a0a0a] text-gray-200 selection:bg-tlcc-gold selection:text-[#0a0a0a]">
+  return <div className="min-h-screen bg-[#0a0a0a] text-gray-200 selection:bg-jcc-gold selection:text-[#0a0a0a]">
       {/* Hero Image Section */}
       <section className="relative h-[80vh] md:h-[90vh] lg:h-[95vh] overflow-hidden">
         <Image src="/images/preach.jpg" alt="Preaching at Jubilee Christian Centre Church" fill className="object-cover object-top opacity-60" priority />
@@ -196,7 +196,7 @@ export default function SermonsPage() {
             delay: 0.2
           }}>
               <span className="bg-white/5 backdrop-blur-md text-white px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10 shadow-lg">
-                <span className="text-tlcc-gold mr-2">▶</span> SERMONS
+                <span className="text-jcc-gold mr-2">▶</span> SERMONS
               </span>
             </motion.div>
 
@@ -211,7 +211,7 @@ export default function SermonsPage() {
             delay: 0.4
           }}>
               Word of <br className="hidden md:block" /> 
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-tlcc-gold via-yellow-400 to-tlcc-gold">Life</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-jcc-gold via-yellow-400 to-jcc-gold">Life</span>
             </motion.h1>
 
             <motion.p className="text-lg md:text-xl text-gray-400 font-light mb-12 max-w-2xl mx-auto leading-relaxed" initial={{
@@ -237,7 +237,7 @@ export default function SermonsPage() {
             duration: 0.6,
             delay: 0.8
           }}>
-              <Link href="#featured" className="w-full sm:w-auto px-10 py-4 bg-tlcc-gold hover:bg-tlcc-gold/90 text-[#0a0a0a] font-bold rounded-full transition-all duration-300 flex items-center justify-center space-x-3 uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(200,160,50,0.3)] hover:shadow-[0_0_40px_rgba(200,160,50,0.5)] hover:scale-105">
+              <Link href="#featured" className="w-full sm:w-auto px-10 py-4 bg-jcc-gold hover:bg-jcc-gold/90 text-[#0a0a0a] font-bold rounded-full transition-all duration-300 flex items-center justify-center space-x-3 uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(200,160,50,0.3)] hover:shadow-[0_0_40px_rgba(200,160,50,0.5)] hover:scale-105">
                 <Play className="h-5 w-5" fill="currentColor" />
                 <span>Watch Latest</span>
               </Link>
@@ -250,8 +250,8 @@ export default function SermonsPage() {
       {featuredSermon && !loading && <section id="featured" className="py-20 bg-[#0a0a0a] relative -mt-32 z-10">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div className="flex items-center gap-4 mb-8">
-              <div className="h-px bg-tlcc-gold w-12"></div>
-              <span className="text-tlcc-gold text-xs font-bold uppercase tracking-widest">Featured Message</span>
+              <div className="h-px bg-jcc-gold w-12"></div>
+              <span className="text-jcc-gold text-xs font-bold uppercase tracking-widest">Featured Message</span>
             </div>
 
             <div className="grid lg:grid-cols-12 gap-10 items-start">
@@ -264,7 +264,7 @@ export default function SermonsPage() {
                       <Image src={featuredSermon.thumbnail} alt={featuredSermon.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/20 to-transparent"></div>
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-24 h-24 bg-tlcc-gold/90 backdrop-blur-sm rounded-full flex items-center justify-center transition-all transform group-hover:scale-110 group-hover:bg-tlcc-gold shadow-[0_0_40px_rgba(200,160,50,0.4)]">
+                        <div className="w-24 h-24 bg-jcc-gold/90 backdrop-blur-sm rounded-full flex items-center justify-center transition-all transform group-hover:scale-110 group-hover:bg-jcc-gold shadow-[0_0_40px_rgba(200,160,50,0.4)]">
                           <Play className="h-10 w-10 text-[#0a0a0a] ml-2" fill="currentColor" />
                         </div>
                       </div>
@@ -280,7 +280,7 @@ export default function SermonsPage() {
                 
                 <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400 font-semibold mb-6">
                   <span className="flex items-center gap-1.5 bg-[#1a1a1a] px-3 py-1.5 rounded-lg border border-gray-800">
-                    <Clock className="w-4 h-4 text-tlcc-gold" />
+                    <Clock className="w-4 h-4 text-jcc-gold" />
                     {featuredSermon.duration}
                   </span>
                   <span className="bg-[#1a1a1a] px-3 py-1.5 rounded-lg border border-gray-800">
@@ -298,7 +298,7 @@ export default function SermonsPage() {
                     Play Audio
                   </button>
                   <button onClick={() => handleShare(featuredSermon.url)} className="px-6 py-3.5 bg-[#1a1a1a] hover:bg-[#222] text-white font-bold rounded-xl border border-gray-800 transition-colors flex items-center justify-center gap-2 uppercase tracking-widest text-xs">
-                    {copied ? <CheckCircle2 className="h-4 w-4 text-tlcc-gold" /> : <Share2 className="h-4 w-4" />}
+                    {copied ? <CheckCircle2 className="h-4 w-4 text-jcc-gold" /> : <Share2 className="h-4 w-4" />}
                     {copied ? 'Copied!' : 'Share'}
                   </button>
                 </div>
@@ -311,16 +311,16 @@ export default function SermonsPage() {
       <section className="py-8 bg-[#0a0a0a]">
         <div className="max-w-5xl mx-auto px-6">
           <div className="bg-gradient-to-r from-[#111] to-[#1a1a1a] border border-gray-800 rounded-3xl p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-tlcc-gold/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
+            <div className="absolute top-0 right-0 w-64 h-64 bg-jcc-gold/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
             <div className="relative z-10 flex-1 text-center md:text-left">
               <div className="inline-flex items-center gap-2 mb-3">
-                <span className="w-2 h-2 rounded-full bg-tlcc-gold animate-pulse"></span>
-                <span className="text-tlcc-gold font-bold uppercase text-xs tracking-widest">Daily Reading</span>
+                <span className="w-2 h-2 rounded-full bg-jcc-gold animate-pulse"></span>
+                <span className="text-jcc-gold font-bold uppercase text-xs tracking-widest">Daily Reading</span>
               </div>
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Need daily inspiration?</h3>
               <p className="text-gray-400 max-w-lg">Build your faith every morning with our curated devotionals. Deep, practical, and powerfully encouraging.</p>
             </div>
-            <Link href="/devotionals" className="relative z-10 whitespace-nowrap px-8 py-4 bg-tlcc-gold hover:bg-yellow-400 text-[#0a0a0a] font-bold rounded-xl transition-all duration-300 uppercase tracking-widest text-sm shadow-[0_0_20px_rgba(200,160,50,0.2)]">
+            <Link href="/devotionals" className="relative z-10 whitespace-nowrap px-8 py-4 bg-jcc-gold hover:bg-yellow-400 text-[#0a0a0a] font-bold rounded-xl transition-all duration-300 uppercase tracking-widest text-sm shadow-[0_0_20px_rgba(200,160,50,0.2)]">
               Explore Devotionals
             </Link>
           </div>
@@ -341,8 +341,8 @@ export default function SermonsPage() {
 
             {/* Search Bar */}
             <div className="w-full md:w-96 relative group">
-              <input type="text" placeholder="Search sermons..." value={searchQuery} onChange={e => updateSearchQuery(e.target.value)} className="w-full px-6 py-4 pr-12 rounded-2xl bg-[#111] border border-gray-800 focus:border-tlcc-gold focus:outline-none focus:ring-1 focus:ring-tlcc-gold text-white transition-all duration-300 placeholder:text-gray-600" />
-              <Search className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500 group-focus-within:text-tlcc-gold transition-colors" />
+              <input type="text" placeholder="Search sermons..." value={searchQuery} onChange={e => updateSearchQuery(e.target.value)} className="w-full px-6 py-4 pr-12 rounded-2xl bg-[#111] border border-gray-800 focus:border-jcc-gold focus:outline-none focus:ring-1 focus:ring-jcc-gold text-white transition-all duration-300 placeholder:text-gray-600" />
+              <Search className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500 group-focus-within:text-jcc-gold transition-colors" />
               {searchQuery && <button onClick={() => updateSearchQuery('')} className="absolute right-12 top-1/2 -translate-y-1/2 p-1 bg-[#222] hover:bg-[#333] rounded-full transition-colors">
                   <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -359,7 +359,7 @@ export default function SermonsPage() {
                 <button onClick={() => updateSelectedTopic(null)} className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 border ${selectedTopic === null ? 'bg-white text-[#0a0a0a] border-white shadow-[0_0_15px_rgba(255,255,255,0.2)]' : 'bg-[#111] text-gray-400 border-gray-800 hover:bg-[#1a1a1a] hover:border-gray-700'}`}>
                   All Messages
                 </button>
-                {extractedTopics.map(topic => <button key={topic} onClick={() => updateSelectedTopic(topic === selectedTopic ? null : topic)} className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 border ${selectedTopic === topic ? 'bg-tlcc-gold text-[#0a0a0a] border-tlcc-gold shadow-[0_0_15px_rgba(200,160,50,0.3)]' : 'bg-[#111] text-gray-400 border-gray-800 hover:bg-[#1a1a1a] hover:border-gray-700'}`}>
+                {extractedTopics.map(topic => <button key={topic} onClick={() => updateSelectedTopic(topic === selectedTopic ? null : topic)} className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 border ${selectedTopic === topic ? 'bg-jcc-gold text-[#0a0a0a] border-jcc-gold shadow-[0_0_15px_rgba(200,160,50,0.3)]' : 'bg-[#111] text-gray-400 border-gray-800 hover:bg-[#1a1a1a] hover:border-gray-700'}`}>
                     {topic}
                   </button>)}
               </div> : null}
@@ -380,7 +380,7 @@ export default function SermonsPage() {
               <button onClick={() => {
             updateSearchQuery('');
             updateSelectedTopic(null);
-          }} className="mt-4 text-tlcc-gold font-bold hover:underline">Clear filters</button>
+          }} className="mt-4 text-jcc-gold font-bold hover:underline">Clear filters</button>
             </div> : <>
               {/* Sermon Cards Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
@@ -393,7 +393,7 @@ export default function SermonsPage() {
                         {sermon.duration}
                       </div>
                       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 scale-90 group-hover:scale-100">
-                        <div className="w-14 h-14 bg-tlcc-gold/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(200,160,50,0.5)]">
+                        <div className="w-14 h-14 bg-jcc-gold/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(200,160,50,0.5)]">
                           <Play className="h-6 w-6 text-[#0a0a0a] ml-1" fill="currentColor" />
                         </div>
                       </div>
@@ -401,8 +401,8 @@ export default function SermonsPage() {
 
                     {/* Content */}
                     <div className="p-5 flex flex-col flex-1">
-                      <div className="text-xs text-tlcc-gold font-bold tracking-widest mb-2">{formatDate(sermon.publishedAt)}</div>
-                      <h3 className="font-bold text-lg text-white mb-4 line-clamp-2 leading-snug group-hover:text-tlcc-gold transition-colors">
+                      <div className="text-xs text-jcc-gold font-bold tracking-widest mb-2">{formatDate(sermon.publishedAt)}</div>
+                      <h3 className="font-bold text-lg text-white mb-4 line-clamp-2 leading-snug group-hover:text-jcc-gold transition-colors">
                         {sermon.title}
                       </h3>
                       
@@ -447,7 +447,7 @@ export default function SermonsPage() {
             <h2 className="font-anton text-4xl md:text-6xl text-white mb-4 leading-none uppercase drop-shadow-lg">
               Dive Into a Series
             </h2>
-            <p className="text-tlcc-gold uppercase tracking-widest font-bold text-sm">Curated Collections</p>
+            <p className="text-jcc-gold uppercase tracking-widest font-bold text-sm">Curated Collections</p>
           </div>
 
           {/* Series Cards */}
@@ -473,7 +473,7 @@ export default function SermonsPage() {
                   <div className="p-4 md:p-6 space-y-2 bg-[#0d0d0d]">
                     {series.sermons.map((sermon, sermonIndex) => <div key={sermonIndex} className="group flex flex-col md:flex-row md:items-center justify-between p-4 bg-transparent hover:bg-[#1a1a1a] rounded-xl transition-all duration-300 border border-transparent hover:border-gray-800">
                         <div className="flex items-center gap-4 flex-1 mb-4 md:mb-0">
-                          <div className="w-8 h-8 rounded-full bg-[#222] text-gray-500 font-bold flex items-center justify-center text-xs group-hover:bg-tlcc-gold group-hover:text-[#0a0a0a] transition-colors">
+                          <div className="w-8 h-8 rounded-full bg-[#222] text-gray-500 font-bold flex items-center justify-center text-xs group-hover:bg-jcc-gold group-hover:text-[#0a0a0a] transition-colors">
                             {sermonIndex + 1}
                           </div>
                           <div className="flex-1">

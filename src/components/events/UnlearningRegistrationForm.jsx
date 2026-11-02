@@ -65,7 +65,7 @@ export default function UnlearningRegistrationForm() {
         <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-green-50 ring-8 ring-green-50/40">
           <CheckCircle className="h-8 w-8 text-green-600" />
         </div>
-        <h3 className="mb-3 text-3xl font-bold text-tlcc-navy">You&apos;re in.</h3>
+        <h3 className="mb-3 text-3xl font-bold text-jcc-navy">You&apos;re in.</h3>
         <p className="mx-auto mb-8 max-w-sm text-slate-600 leading-relaxed">
           Your pledge has been received. The conference community is waiting. Join the
           WhatsApp group below to get every sermon and the 8:30&nbsp;PM review, daily.
@@ -84,12 +84,12 @@ export default function UnlearningRegistrationForm() {
         </p>
       </div>;
   }
-  const inputClasses = 'w-full rounded-2xl border border-slate-100 bg-slate-50/50 px-5 py-4 text-tlcc-navy placeholder-slate-400 outline-none transition-all focus:border-tlcc-orange/30 focus:bg-white focus:ring-4 focus:ring-tlcc-orange/5';
+  const inputClasses = 'w-full rounded-2xl border border-slate-100 bg-slate-50/50 px-5 py-4 text-jcc-navy placeholder-slate-400 outline-none transition-all focus:border-jcc-orange/30 focus:bg-white focus:ring-4 focus:ring-jcc-orange/5';
   return <div id="register" className="scroll-mt-32">
       <div>
-        <h3 className="text-3xl font-bold text-tlcc-navy">Take the Pledge</h3>
+        <h3 className="text-3xl font-bold text-jcc-navy">Take the Pledge</h3>
         <p className="mt-2 text-sm font-medium text-slate-500">
-          Register once. Unlearn for <span className="font-bold text-tlcc-orange">10 days</span>.
+          Register once. Unlearn for <span className="font-bold text-jcc-orange">10 days</span>.
         </p>
       </div>
 
@@ -123,13 +123,13 @@ export default function UnlearningRegistrationForm() {
         </div>
 
         {/* The Pledge */}
-        <div className="rounded-2xl border border-tlcc-gold/30 bg-tlcc-gold/[0.06] p-5">
-          <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-tlcc-gold-dark">
+        <div className="rounded-2xl border border-jcc-gold/30 bg-jcc-gold/[0.06] p-5">
+          <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-jcc-gold-dark">
             The Pledge
           </p>
-          <p className="text-[15px] italic leading-relaxed text-tlcc-navy">
+          <p className="text-[15px] italic leading-relaxed text-jcc-navy">
             &ldquo;I,{' '}
-            <span className="font-bold not-italic underline decoration-tlcc-gold decoration-2 underline-offset-4">
+            <span className="font-bold not-italic underline decoration-jcc-gold decoration-2 underline-offset-4">
               {formData.fullName.trim() || '_______________'}
             </span>
             , hereby declare that I would follow all the principles taught and will uphold them
@@ -137,7 +137,7 @@ export default function UnlearningRegistrationForm() {
           </p>
 
           <label className="mt-4 flex cursor-pointer items-start gap-3">
-            <input type="checkbox" name="pledgeAccepted" checked={formData.pledgeAccepted} onChange={handleChange} className="mt-0.5 h-5 w-5 shrink-0 cursor-pointer rounded border-slate-300 text-tlcc-orange accent-tlcc-orange focus:ring-tlcc-orange" />
+            <input type="checkbox" name="pledgeAccepted" checked={formData.pledgeAccepted} onChange={handleChange} className="mt-0.5 h-5 w-5 shrink-0 cursor-pointer rounded border-slate-300 text-jcc-orange accent-jcc-orange focus:ring-jcc-orange" />
             <span className="text-sm font-medium text-slate-600">
               I have read and I accept this pledge.
             </span>
@@ -149,8 +149,8 @@ export default function UnlearningRegistrationForm() {
             <span className="text-sm font-semibold leading-none">{errorMessage}</span>
           </div>}
 
-        <button type="submit" disabled={status === 'submitting'} className="group relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-2xl bg-tlcc-navy py-5 text-lg font-bold text-white transition-all hover:bg-tlcc-navy/90 hover:shadow-xl active:scale-[0.98] disabled:opacity-50">
-          <div className="absolute inset-0 bg-gradient-to-r from-tlcc-orange to-tlcc-gold opacity-0 transition-opacity group-hover:opacity-10"></div>
+        <button type="submit" disabled={status === 'submitting'} className="group relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-2xl bg-jcc-navy py-5 text-lg font-bold text-white transition-all hover:bg-jcc-navy/90 hover:shadow-xl active:scale-[0.98] disabled:opacity-50">
+          <div className="absolute inset-0 bg-gradient-to-r from-jcc-orange to-jcc-gold opacity-0 transition-opacity group-hover:opacity-10"></div>
           {status === 'submitting' ? <>
               <Loader2 className="h-6 w-6 animate-spin" />
               Submitting...

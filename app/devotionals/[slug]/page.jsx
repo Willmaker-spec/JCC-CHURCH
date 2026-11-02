@@ -1,87 +1,70 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import DevotionalDetailClient from '@/components/DevotionalDetailClient'
 import { isSupabaseConfigured, supabase } from '@/lib/supabase'
 
 export default function DevotionalPage() {
   const { slug } = useParams()
-  const [result, setResult] = useState(null)
-  const status = !isSupabaseConfigured
-    ? 'unconfigured'
-    : result?.slug === slug
-      ? result.status
-      : 'loading'
-  const devotional = result?.slug === slug ? result.devotional : null
+  const [devotional, setDevotional] = useState(null)
+  const [status, setStatus] = useState('loading')
 
   useEffect(() => {
-    if (!supabase || !slug) {
-      return undefined
-    }
-
     let active = true
+
     async function loadDevotional() {
+      if (!isSupabaseConfigured || !supabase) {
+        setStatus('unconfigured')
+        return
+      }
+
       const { data, error } = await supabase
         .from('devotionals')
         .select('*')
         .eq('id', slug)
-        .maybeSingle()
+        .limit(1)
+        .single()
 
-      if (!active) {
-        return
-      }
-
+      if (!active) return
       if (error) {
         console.error('Unable to load devotional:', error)
-        setResult({ slug, status: 'error', devotional: null })
+        setStatus('error')
+        return
+      }
+      if (!data) {
+        setStatus('not-found')
         return
       }
 
-      setResult({
-        slug,
-        devotional: data,
-        status: data ? 'ready' : 'not-found',
-      })
+      setDevotional(data)
+      setStatus('loaded')
+      document.title = `${data.title || 'Devotional'} | Jubilee Christian Centre Church`
     }
 
-    loadDevotional().catch(error => {
-      if (active) {
-        console.error('Unable to load devotional:', error)
-        setResult({ slug, status: 'error', devotional: null })
-      }
-    })
-
+    loadDevotional()
     return () => {
       active = false
     }
   }, [slug])
 
-  return (
-    <article className="min-h-screen px-6 py-24">
-      {status === 'loading' && <p className="text-center">Loading devotional…</p>}
-      {status === 'unconfigured' && (
-        <p role="alert" className="mx-auto max-w-2xl text-center text-red-700">
-          Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to load devotionals.
-        </p>
-      )}
-      {status === 'error' && (
-        <p role="alert" className="mx-auto max-w-2xl text-center text-red-700">
-          This devotional could not be loaded. Please try again later.
-        </p>
-      )}
-      {status === 'not-found' && (
-        <p className="text-center text-gray-600">Devotional not found.</p>
-      )}
-      {status === 'ready' && devotional && (
-        <div className="mx-auto max-w-4xl">
-          {devotional.image && (
-            <img className="mb-8 max-h-[32rem] w-full object-cover" src={devotional.image} alt="" />
-          )}
-          <h1 className="mb-3 text-4xl font-bold">{devotional.title}</h1>
-          <time className="mb-8 block text-sm text-gray-500">
-            {devotional.scheduled_date || devotional.created_at}
-          </time>
-          <div className="whitespace-pre-wrap leading-relaxed">{devotional.content}</div>
-        </div>
-      )}
-    </article>
-  )
+  if (status === 'loading') {
+    return <p className="px-6 py-24 text-center">Loading devotional…</p>
+  }
+  if (status === 'unconfigured') {
+    return (
+      <p className="px-6 py-24 text-center">
+        Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to load devotionals.
+      </p>
+    )
+  }
+  if (status !== 'loaded') {
+    return (
+      <p className="px-6 py-24 text-center">
+        {status === 'not-found' ? 'Devotional not found.' : 'Devotional could not be loaded.'}
+      </p>
+    )
+  }
+
+  return <DevotionalDetailClient devotional={devotional} />
 }

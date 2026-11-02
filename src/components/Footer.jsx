@@ -45,7 +45,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative z-20 bg-tlcc-green text-white">
+    <footer className="relative z-20 bg-jcc-green text-white">
       <div className="container-custom py-12 md:py-16">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
@@ -68,7 +68,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 bg-tlcc-green-light hover:bg-tlcc-gold rounded-lg transition-colors duration-200"
+                  className="p-2 bg-jcc-green-light hover:bg-jcc-gold rounded-lg transition-colors duration-200"
                   aria-label={social.label}
                 >
                   <social.icon className="h-5 w-5" />
@@ -79,7 +79,7 @@ export default function Footer() {
 
           {/* Connect */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-tlcc-gold uppercase">
+            <h3 className="font-bold text-lg mb-4 text-jcc-gold uppercase">
               {sections.connect.heading}
             </h3>
             <ul className="space-y-2">
@@ -87,7 +87,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-tlcc-gold transition-colors duration-200 text-sm"
+                    className="text-gray-300 hover:text-jcc-gold transition-colors duration-200 text-sm"
                   >
                     {link.label}
                   </Link>
@@ -98,7 +98,7 @@ export default function Footer() {
 
           {/* Ministries */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-tlcc-gold uppercase">
+            <h3 className="font-bold text-lg mb-4 text-jcc-gold uppercase">
               {sections.ministries.heading}
             </h3>
             <ul className="space-y-2">
@@ -106,7 +106,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-tlcc-gold transition-colors duration-200 text-sm"
+                    className="text-gray-300 hover:text-jcc-gold transition-colors duration-200 text-sm"
                   >
                     {link.label}
                   </Link>
@@ -117,7 +117,7 @@ export default function Footer() {
 
           {/* Resources */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-tlcc-gold uppercase">
+            <h3 className="font-bold text-lg mb-4 text-jcc-gold uppercase">
               {sections.resources.heading}
             </h3>
             <ul className="space-y-2">
@@ -125,7 +125,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-tlcc-gold transition-colors duration-200 text-sm"
+                    className="text-gray-300 hover:text-jcc-gold transition-colors duration-200 text-sm"
                   >
                     {link.label}
                   </Link>
@@ -136,7 +136,7 @@ export default function Footer() {
 
           {/* Media */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-tlcc-gold uppercase">
+            <h3 className="font-bold text-lg mb-4 text-jcc-gold uppercase">
               {sections.media.heading}
             </h3>
             <ul className="space-y-2">
@@ -144,7 +144,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-tlcc-gold transition-colors duration-200 text-sm"
+                    className="text-gray-300 hover:text-jcc-gold transition-colors duration-200 text-sm"
                     {...(link.external && {
                       target: "_blank",
                       rel: "noopener noreferrer",
@@ -159,10 +159,10 @@ export default function Footer() {
         </div>
 
         {/* Contact Info */}
-        <div className="border-t border-tlcc-green-light pt-8 mb-8">
+        <div className="border-t border-jcc-green-light pt-8 mb-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h4 className="font-semibold mb-2 text-tlcc-gold">
+              <h4 className="font-semibold mb-2 text-jcc-gold">
                 {footer.contact.heading}
               </h4>
               {footer.contact.people.map((person) => (
@@ -170,7 +170,7 @@ export default function Footer() {
                   {person.name}:{" "}
                   <a
                     href={`tel:${person.phone}`}
-                    className="hover:text-tlcc-gold"
+                    className="hover:text-jcc-gold"
                   >
                     {person.phone}
                   </a>
@@ -178,7 +178,7 @@ export default function Footer() {
               ))}
             </div>
             <div>
-              <h4 className="font-semibold mb-2 text-tlcc-gold">
+              <h4 className="font-semibold mb-2 text-jcc-gold">
                 {footer.services.heading}
               </h4>
               {footer.services.lines.map((line) => (
@@ -191,7 +191,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-tlcc-green-light pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+        <div className="border-t border-jcc-green-light pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <p className="text-gray-400 text-sm">
             © {new Date().getFullYear()} {footer.copyright}
           </p>

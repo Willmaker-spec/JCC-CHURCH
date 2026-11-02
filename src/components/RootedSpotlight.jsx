@@ -31,24 +31,24 @@ export default function RootedSpotlight() {
     secondaryCta: "See Events",
   };
   const scheduleIcons = [Calendar, Clock, MapPin];
-  const mainImage = "/images/tlcevent.png";
-  const hangoutImage = "/images/tlcevent.png";
+  const mainImage = "/images/Brand.jpg";
+  const hangoutImage = "/images/Brand.jpg";
   return (
-    <section className="relative bg-gradient-to-b from-white via-tlcc-cream to-white py-20">
+    <section className="relative bg-gradient-to-b from-white via-jcc-cream to-white py-20">
       <div className="container-custom grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
         <div>
-          <p className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-tlcc-orange/10 border border-tlcc-orange/30 text-tlcc-orange font-semibold tracking-wide uppercase text-xs mb-5">
+          <p className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-jcc-orange/10 border border-jcc-orange/30 text-jcc-orange font-semibold tracking-wide uppercase text-xs mb-5">
             <Sparkles className="h-4 w-4" />
             {rooted.badge}
           </p>
-          <h2 className="font-anton text-4xl md:text-5xl text-tlcc-navy leading-tight mb-4">
+          <h2 className="font-anton text-4xl md:text-5xl text-jcc-navy leading-tight mb-4">
             {rooted.title}
           </h2>
           <p className="text-lg text-gray-700 mb-6">{rooted.description}</p>
           <ul className="space-y-3 mb-6">
             {rooted.experiences.map((item) => (
               <li key={item} className="flex items-start gap-3 text-gray-800">
-                <span className="mt-1 h-2 w-2 rounded-full bg-tlcc-orange" />
+                <span className="mt-1 h-2 w-2 rounded-full bg-jcc-orange" />
                 <span>{item}</span>
               </li>
             ))}
@@ -59,13 +59,13 @@ export default function RootedSpotlight() {
               return (
                 <div
                   key={label}
-                  className="bg-white rounded-2xl shadow-lg border border-tlcc-cream/60 p-4"
+                  className="bg-white rounded-2xl shadow-lg border border-jcc-cream/60 p-4"
                 >
-                  <Icon className="h-5 w-5 text-tlcc-orange mb-2" />
+                  <Icon className="h-5 w-5 text-jcc-orange mb-2" />
                   <p className="text-xs uppercase tracking-wide text-gray-500 font-semibold">
                     {label}
                   </p>
-                  <p className="text-sm font-semibold text-tlcc-navy">
+                  <p className="text-sm font-semibold text-jcc-navy">
                     {value}
                   </p>
                 </div>
@@ -76,13 +76,13 @@ export default function RootedSpotlight() {
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
               href="/events"
-              className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-tlcc-orange text-white font-bold uppercase tracking-wide shadow-lg hover:scale-105 transition"
+              className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-jcc-orange text-white font-bold uppercase tracking-wide shadow-lg hover:scale-105 transition"
             >
               {rooted.primaryCta || "See Events"}
             </Link>
             <Link
               href="/events"
-              className="inline-flex items-center justify-center px-8 py-4 rounded-full border-2 border-tlcc-navy text-tlcc-navy font-bold uppercase tracking-wide hover:bg-tlcc-navy hover:text-white transition"
+              className="inline-flex items-center justify-center px-8 py-4 rounded-full border-2 border-jcc-navy text-jcc-navy font-bold uppercase tracking-wide hover:bg-jcc-navy hover:text-white transition"
             >
               {rooted.secondaryCta || "More Details"}
             </Link>
@@ -111,9 +111,9 @@ export default function RootedSpotlight() {
             </div>
             <div className="bg-white rounded-2xl shadow-lg p-4 mt-4">
               <div className="flex items-center gap-3">
-                <Users className="h-6 w-6 text-tlcc-orange" />
+                <Users className="h-6 w-6 text-jcc-orange" />
                 <div>
-                  <p className="text-sm font-semibold text-tlcc-navy">
+                  <p className="text-sm font-semibold text-jcc-navy">
                     {rooted.hangoutTitle}
                   </p>
                   <p className="text-xs text-gray-500">

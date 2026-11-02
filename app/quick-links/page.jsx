@@ -221,8 +221,8 @@ export default function QuickLinksPage() {
         </div>
 
         <div className="relative z-10 max-w-6xl mx-auto text-center">
-          <div className="inline-flex items-center space-x-2 bg-tlcc-gold/20 backdrop-blur-sm px-6 py-2 rounded-full mb-6 border border-tlcc-gold/30">
-            <Globe className="h-4 w-4 text-tlcc-gold" />
+          <div className="inline-flex items-center space-x-2 bg-jcc-gold/20 backdrop-blur-sm px-6 py-2 rounded-full mb-6 border border-jcc-gold/30">
+            <Globe className="h-4 w-4 text-jcc-gold" />
             <span className="text-white font-semibold text-sm tracking-wider uppercase">
               Quick Links
             </span>
@@ -231,7 +231,7 @@ export default function QuickLinksPage() {
           <h1 className="font-anton text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 uppercase leading-tight">
             Welcome to
             <br />
-            <span className="text-tlcc-orange">
+            <span className="text-jcc-orange">
               Jubilee Christian Centre Church
             </span>
           </h1>
@@ -259,11 +259,11 @@ export default function QuickLinksPage() {
             >
               {/* Section Header */}
               <div className="flex items-start space-x-4 mb-6 pb-6 border-b-2 border-gray-100">
-                <div className="w-14 h-14 bg-tlcc-gold rounded-xl flex items-center justify-center flex-shrink-0">
+                <div className="w-14 h-14 bg-jcc-gold rounded-xl flex items-center justify-center flex-shrink-0">
                   <IconComponent className="h-7 w-7 text-white" />
                 </div>
                 <div className="flex-1">
-                  <h2 className="font-anton text-3xl md:text-4xl text-tlcc-navy mb-2 uppercase">
+                  <h2 className="font-anton text-3xl md:text-4xl text-jcc-navy mb-2 uppercase">
                     {section.title}
                   </h2>
                   <p className="text-gray-600 text-lg">{section.description}</p>
@@ -276,9 +276,9 @@ export default function QuickLinksPage() {
                   <Link
                     key={linkIndex}
                     href={link.url}
-                    className="group bg-gray-50 hover:bg-tlcc-navy rounded-xl p-6 transition-all duration-300 border-2 border-transparent hover:border-tlcc-navy"
+                    className="group bg-gray-50 hover:bg-jcc-navy rounded-xl p-6 transition-all duration-300 border-2 border-transparent hover:border-jcc-navy"
                   >
-                    <h3 className="font-bold text-lg text-tlcc-navy group-hover:text-white mb-2 transition-colors">
+                    <h3 className="font-bold text-lg text-jcc-navy group-hover:text-white mb-2 transition-colors">
                       {link.title}
                     </h3>
                     <p className="text-gray-600 group-hover:text-white/90 text-sm transition-colors">
@@ -293,7 +293,7 @@ export default function QuickLinksPage() {
       </div>
 
       {/* Call to Action */}
-      <section className="bg-gradient-to-r from-tlcc-orange to-tlcc-gold py-16 px-4">
+      <section className="bg-gradient-to-r from-jcc-orange to-jcc-gold py-16 px-4">
         <div className="max-w-4xl mx-auto text-center text-white">
           <h2 className="font-anton text-3xl md:text-4xl mb-4 uppercase">
             Need Help Finding Something?
@@ -304,7 +304,7 @@ export default function QuickLinksPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-block px-10 py-4 bg-white text-tlcc-navy font-bold rounded-full hover:bg-tlcc-navy hover:text-white border-2 border-white transition-all duration-300 uppercase tracking-wide text-sm"
+            className="inline-block px-10 py-4 bg-white text-jcc-navy font-bold rounded-full hover:bg-jcc-navy hover:text-white border-2 border-white transition-all duration-300 uppercase tracking-wide text-sm"
           >
             Contact Us
           </Link>

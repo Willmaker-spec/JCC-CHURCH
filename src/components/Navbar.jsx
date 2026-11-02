@@ -111,7 +111,7 @@ export default function Navbar() {
                   <Link
                     key={key}
                     href={navRoutes[key]}
-                    className="px-3 py-1 text-tlcc-navy hover:text-tlcc-gold transition-colors duration-200 font-medium uppercase text-[10px] tracking-wider"
+                    className="px-3 py-1 text-jcc-navy hover:text-jcc-gold transition-colors duration-200 font-medium uppercase text-[10px] tracking-wider"
                   >
                     {label}
                   </Link>
@@ -126,10 +126,10 @@ export default function Navbar() {
               </div>
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-1 rounded-lg hover:bg-tlcc-cream transition-colors"
+                className="p-1 rounded-lg hover:bg-jcc-cream transition-colors"
                 aria-label="Toggle menu"
               >
-                <Menu className="h-6 w-6 text-tlcc-navy" />
+                <Menu className="h-6 w-6 text-jcc-navy" />
               </button>
             </div>
           </div>
@@ -188,7 +188,7 @@ export default function Navbar() {
                         key={key}
                         href={href}
                         onClick={() => setIsOpen(false)}
-                        className={`font-anton text-5xl md:text-6xl lg:text-7xl ${isActive ? "text-tlcc-gold" : "text-white hover:text-tlcc-gold"} transition-colors duration-200 leading-none uppercase`}
+                        className={`font-anton text-5xl md:text-6xl lg:text-7xl ${isActive ? "text-jcc-gold" : "text-white hover:text-jcc-gold"} transition-colors duration-200 leading-none uppercase`}
                       >
                         {label}
                       </Link>
@@ -210,42 +210,42 @@ export default function Navbar() {
                       <Link
                         href="/ministries#jcc-online"
                         onClick={() => setIsOpen(false)}
-                        className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
+                        className="text-sm text-white hover:text-jcc-gold transition-colors duration-200"
                       >
                         JCC Online ministry
                       </Link>
                       <Link
                         href="/ministries#jcc-firestorm"
                         onClick={() => setIsOpen(false)}
-                        className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
+                        className="text-sm text-white hover:text-jcc-gold transition-colors duration-200"
                       >
                         JCC Firestorm
                       </Link>
                       <Link
                         href="/ministries#jcc-follow-up"
                         onClick={() => setIsOpen(false)}
-                        className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
+                        className="text-sm text-white hover:text-jcc-gold transition-colors duration-200"
                       >
                         JCC Follow up
                       </Link>
                       <Link
                         href="/ministries#jcc-prayer-team"
                         onClick={() => setIsOpen(false)}
-                        className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
+                        className="text-sm text-white hover:text-jcc-gold transition-colors duration-200"
                       >
                         JCC Prayer team
                       </Link>
                       <Link
                         href="/ministries#jcc-media-visibility"
                         onClick={() => setIsOpen(false)}
-                        className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
+                        className="text-sm text-white hover:text-jcc-gold transition-colors duration-200"
                       >
                         JCC Media & visibility
                       </Link>
                       <Link
                         href="/ministries#jcc-growth-initiatives"
                         onClick={() => setIsOpen(false)}
-                        className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
+                        className="text-sm text-white hover:text-jcc-gold transition-colors duration-200"
                       >
                         JCC Growth initiatives
                       </Link>
@@ -261,28 +261,28 @@ export default function Navbar() {
                       <Link
                         href="/sermons#featured"
                         onClick={() => setIsOpen(false)}
-                        className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
+                        className="text-sm text-white hover:text-jcc-gold transition-colors duration-200"
                       >
                         Daily Devotionals
                       </Link>
                       <Link
                         href="/about#testimonies"
                         onClick={() => setIsOpen(false)}
-                        className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
+                        className="text-sm text-white hover:text-jcc-gold transition-colors duration-200"
                       >
                         Testimonies
                       </Link>
                       <Link
                         href="/events"
                         onClick={() => setIsOpen(false)}
-                        className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
+                        className="text-sm text-white hover:text-jcc-gold transition-colors duration-200"
                       >
                         Events & Programs
                       </Link>
                       <Link
                         href="/sermons"
                         onClick={() => setIsOpen(false)}
-                        className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
+                        className="text-sm text-white hover:text-jcc-gold transition-colors duration-200"
                       >
                         Sermon Archive
                       </Link>
@@ -298,21 +298,21 @@ export default function Navbar() {
                       <Link
                         href="/contact"
                         onClick={() => setIsOpen(false)}
-                        className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
+                        className="text-sm text-white hover:text-jcc-gold transition-colors duration-200"
                       >
                         Contact Us
                       </Link>
                       <Link
                         href="/map"
                         onClick={() => setIsOpen(false)}
-                        className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
+                        className="text-sm text-white hover:text-jcc-gold transition-colors duration-200"
                       >
                         Visit JCC
                       </Link>
                       <Link
                         href="/contact#become-member"
                         onClick={() => setIsOpen(false)}
-                        className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
+                        className="text-sm text-white hover:text-jcc-gold transition-colors duration-200"
                       >
                         Become a member
                       </Link>
@@ -330,7 +330,7 @@ export default function Navbar() {
                       href="https://youtube.com/@jccchurch"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-white hover:text-tlcc-gold transition-colors duration-200"
+                      className="text-sm text-white hover:text-jcc-gold transition-colors duration-200"
                     >
                       Watch online
                     </a>

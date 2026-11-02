@@ -183,7 +183,7 @@ export default function EventsPage() {
     });
     return () => ctx.revert(); // crucial for React Strict Mode cleanup
   }, []);
-  return <main className="min-h-screen bg-[#fafafa] text-tlcc-navy overflow-hidden selection:bg-tlcc-gold selection:text-white">
+  return <main className="min-h-screen bg-[#fafafa] text-jcc-navy overflow-hidden selection:bg-jcc-gold selection:text-white">
       
       {/* Floating Image Cursor (Hidden on Mobile) */}
       <div ref={cursorRef} className={`fixed top-0 left-0 w-[400px] h-[300px] pointer-events-none z-50 transition-opacity duration-500 hidden lg:block ${hoveredEvent ? 'opacity-100' : 'opacity-0'}`}>
@@ -199,13 +199,13 @@ export default function EventsPage() {
 
       {/* Brutalist Hero Marquee */}
       <section className="pt-40 pb-20 overflow-hidden relative">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-32 h-32 bg-tlcc-gold rounded-full blur-[100px] opacity-50" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-32 h-32 bg-jcc-gold rounded-full blur-[100px] opacity-50" />
         
         <div className="flex flex-col gap-4 whitespace-nowrap select-none w-[200vw]">
           {/* Marquee Line 1 - Solid */}
           <div ref={marquee1Ref} className="flex gap-8 items-center">
             {[...Array(4)].map((_, i) => <h1 key={i} className="font-anton text-[25vw] md:text-[12vw] leading-[0.8] tracking-tighter uppercase flex items-center gap-8">
-                The Gatherings <Sparkles className="w-[15vw] h-[15vw] md:w-[8vw] md:h-[8vw] text-tlcc-gold" />
+                The Gatherings <Sparkles className="w-[15vw] h-[15vw] md:w-[8vw] md:h-[8vw] text-jcc-gold" />
               </h1>)}
           </div>
 
@@ -214,20 +214,20 @@ export default function EventsPage() {
             {[...Array(4)].map((_, i) => <h1 key={i} className="font-anton text-[25vw] md:text-[12vw] leading-[0.8] tracking-tighter uppercase flex items-center gap-8 text-transparent" style={{
             WebkitTextStroke: '2px #1a365d'
           }}>
-                Experience God <Flame className="w-[15vw] h-[15vw] md:w-[8vw] md:h-[8vw] text-transparent stroke-tlcc-navy stroke-[2px]" />
+                Experience God <Flame className="w-[15vw] h-[15vw] md:w-[8vw] md:h-[8vw] text-transparent stroke-jcc-navy stroke-[2px]" />
               </h1>)}
           </div>
         </div>
 
         <div className="container mx-auto px-4 mt-20">
-          <p className="max-w-md ml-auto text-right text-lg font-medium text-tlcc-navy/60 leading-relaxed">
+          <p className="max-w-md ml-auto text-right text-lg font-medium text-jcc-navy/60 leading-relaxed">
             We reject the ordinary. Our gatherings are designed to be powerful, intimate, and life-transforming encounters with the Spirit.
           </p>
         </div>
       </section>
 
       {/* Featured Event: The Unlearning Conference (Data from latest pull) */}
-      <section className="py-24 bg-tlcc-gold text-tlcc-navy relative z-20 overflow-hidden">
+      <section className="py-24 bg-jcc-gold text-jcc-navy relative z-20 overflow-hidden">
         <div className="absolute inset-0 opacity-10" style={{
         backgroundImage: 'radial-gradient(#1a365d 1px, transparent 1px)',
         backgroundSize: '32px 32px'
@@ -248,32 +248,32 @@ export default function EventsPage() {
               }}>Unlearning</span> <br />
                 Conference
               </h3>
-              <p className="text-xl md:text-2xl font-medium max-w-2xl mb-12 leading-relaxed text-tlcc-navy/80">
+              <p className="text-xl md:text-2xl font-medium max-w-2xl mb-12 leading-relaxed text-jcc-navy/80">
                 Ten days to lay down everything religion taught us to carry, and pick up what God actually said. Daily sermons at 10AM and live reviews at 8:30PM.
               </p>
               
               <div className="flex flex-wrap gap-8 items-center">
-                <Link href="/events/unlearning-conference" className="bg-tlcc-navy text-white px-10 py-5 font-black uppercase tracking-[0.2em] hover:bg-white hover:text-tlcc-navy transition-colors duration-300 flex items-center gap-4 border-2 border-tlcc-navy">
+                <Link href="/events/unlearning-conference" className="bg-jcc-navy text-white px-10 py-5 font-black uppercase tracking-[0.2em] hover:bg-white hover:text-jcc-navy transition-colors duration-300 flex items-center gap-4 border-2 border-jcc-navy">
                   Register Now <ArrowUpRight />
                 </Link>
-                <div className="flex flex-wrap gap-8 text-sm font-bold uppercase tracking-widest text-tlcc-navy/80">
+                <div className="flex flex-wrap gap-8 text-sm font-bold uppercase tracking-widest text-jcc-navy/80">
                   <div className="flex items-center gap-2">
-                    <CalendarDays className="w-5 h-5 text-tlcc-navy" /> Jun 29 - Jul 10
+                    <CalendarDays className="w-5 h-5 text-jcc-navy" /> Jun 29 - Jul 10
                   </div>
                   <div className="flex items-center gap-2">
-                    <MapPin className="w-5 h-5 text-tlcc-navy" /> Online (WhatsApp)
+                    <MapPin className="w-5 h-5 text-jcc-navy" /> Online (WhatsApp)
                   </div>
                 </div>
               </div>
             </div>
             
             <div className="lg:col-span-5 relative h-[400px] lg:h-[700px] w-full group">
-               <div className="absolute inset-0 bg-tlcc-navy translate-x-4 translate-y-4 transition-transform duration-500 group-hover:translate-x-8 group-hover:translate-y-8" />
-               <Image src="/images/tlc-unlearn.jpg" alt="The Unlearning Conference" fill className="object-cover relative z-10 opacity-90 group-hover:opacity-100 transition-all duration-700" unoptimized />
-               <div className="absolute inset-0 z-20 border-4 border-tlcc-navy pointer-events-none" />
+               <div className="absolute inset-0 bg-jcc-navy translate-x-4 translate-y-4 transition-transform duration-500 group-hover:translate-x-8 group-hover:translate-y-8" />
+               <Image src="/images/hero.jpg" alt="The Unlearning Conference" fill className="object-cover relative z-10 opacity-90 group-hover:opacity-100 transition-all duration-700" unoptimized />
+               <div className="absolute inset-0 z-20 border-4 border-jcc-navy pointer-events-none" />
                
-               <div className="absolute -bottom-10 -left-10 z-30 w-40 h-40 bg-white rounded-full flex items-center justify-center animate-[spin_10s_linear_infinite] border-4 border-tlcc-navy">
-                 <span className="font-anton text-2xl text-tlcc-navy uppercase text-center leading-none">
+               <div className="absolute -bottom-10 -left-10 z-30 w-40 h-40 bg-white rounded-full flex items-center justify-center animate-[spin_10s_linear_infinite] border-4 border-jcc-navy">
+                 <span className="font-anton text-2xl text-jcc-navy uppercase text-center leading-none">
                    Don&apos;t <br /> Miss <br /> This
                  </span>
                </div>
@@ -283,11 +283,11 @@ export default function EventsPage() {
       </section>
 
       {/* Experimental Event List */}
-      <section className="py-20 relative z-20 bg-tlcc-navy text-white">
+      <section className="py-20 relative z-20 bg-jcc-navy text-white">
         <div className="container mx-auto px-4 lg:px-8">
           
           <div className="flex justify-between items-end mb-20 border-b border-white/10 pb-8 mt-20">
-            <h2 className="font-anton text-5xl md:text-7xl uppercase">More<br /><span className="text-tlcc-gold">Encounters</span></h2>
+            <h2 className="font-anton text-5xl md:text-7xl uppercase">More<br /><span className="text-jcc-gold">Encounters</span></h2>
             <div className="hidden md:flex gap-4 items-center text-white/50 text-sm font-black uppercase tracking-[0.2em]">
               <span>[ Scroll ]</span>
               <ArrowUpRight className="rotate-45" />
@@ -305,9 +305,9 @@ export default function EventsPage() {
 
                 {/* Meta details */}
                 <div className="flex-1 mb-8 lg:mb-0 pr-0 lg:pr-8">
-                  <p className="text-tlcc-gold font-bold uppercase tracking-[0.2em] text-xs mb-4 flex items-center gap-4">
+                  <p className="text-jcc-gold font-bold uppercase tracking-[0.2em] text-xs mb-4 flex items-center gap-4">
                     {event.type}
-                    <span className="w-12 h-[1px] bg-tlcc-gold/50" />
+                    <span className="w-12 h-[1px] bg-jcc-gold/50" />
                   </p>
                   <h3 className="font-anton text-4xl md:text-5xl lg:text-6xl uppercase tracking-tight group-hover:translate-x-4 transition-transform duration-500 mb-4">
                     {event.title}
@@ -331,8 +331,8 @@ export default function EventsPage() {
                   
                   {/* Brutalist Button */}
                   <div className="col-span-2 md:col-span-1 mt-4 lg:mt-0 flex justify-start md:justify-end">
-                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-full border border-tlcc-gold flex items-center justify-center group-hover:bg-tlcc-gold transition-colors duration-500">
-                      <ArrowUpRight className="w-5 h-5 md:w-6 md:h-6 text-tlcc-gold group-hover:text-tlcc-navy transition-colors duration-500" />
+                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-full border border-jcc-gold flex items-center justify-center group-hover:bg-jcc-gold transition-colors duration-500">
+                      <ArrowUpRight className="w-5 h-5 md:w-6 md:h-6 text-jcc-gold group-hover:text-jcc-navy transition-colors duration-500" />
                     </div>
                   </div>
                 </div>
@@ -348,26 +348,26 @@ export default function EventsPage() {
             
             {/* Chaotic Typographic Block */}
             <div className="relative">
-              <h2 className="font-anton text-[8rem] md:text-[12rem] leading-[0.8] text-tlcc-navy/5 uppercase absolute -top-20 -left-10 select-none">
+              <h2 className="font-anton text-[8rem] md:text-[12rem] leading-[0.8] text-jcc-navy/5 uppercase absolute -top-20 -left-10 select-none">
                 WHY
               </h2>
               <div className="relative z-10 space-y-12">
                 <div>
-                  <div className="w-12 h-12 bg-tlcc-gold mb-6 rotate-12 flex items-center justify-center">
+                  <div className="w-12 h-12 bg-jcc-gold mb-6 rotate-12 flex items-center justify-center">
                     <Flame className="text-white w-6 h-6 -rotate-12" />
                   </div>
                   <h3 className="font-anton text-4xl uppercase mb-4">Pure Encounter</h3>
-                  <p className="text-lg text-tlcc-navy/60 font-medium max-w-md">
+                  <p className="text-lg text-jcc-navy/60 font-medium max-w-md">
                     Strip away the performance. We gather solely to experience the raw, transformative power of God&apos;s presence.
                   </p>
                 </div>
                 
                 <div className="pl-12 lg:pl-24">
-                  <div className="w-12 h-12 border-4 border-tlcc-navy mb-6 -rotate-6 flex items-center justify-center">
-                    <Users className="text-tlcc-navy w-5 h-5 rotate-6" />
+                  <div className="w-12 h-12 border-4 border-jcc-navy mb-6 -rotate-6 flex items-center justify-center">
+                    <Users className="text-jcc-navy w-5 h-5 rotate-6" />
                   </div>
                   <h3 className="font-anton text-4xl uppercase mb-4">Deep Roots</h3>
-                  <p className="text-lg text-tlcc-navy/60 font-medium max-w-md">
+                  <p className="text-lg text-jcc-navy/60 font-medium max-w-md">
                     Build indestructible foundations through rigorous discipleship and unyielding community support.
                   </p>
                 </div>
@@ -375,15 +375,15 @@ export default function EventsPage() {
             </div>
 
             {/* Brutalist Contact Block */}
-            <div className="bg-tlcc-navy p-12 md:p-20 relative group">
-              <div className="absolute inset-0 border-2 border-tlcc-navy translate-x-4 translate-y-4 -z-10 transition-transform duration-500 group-hover:translate-x-6 group-hover:translate-y-6" />
+            <div className="bg-jcc-navy p-12 md:p-20 relative group">
+              <div className="absolute inset-0 border-2 border-jcc-navy translate-x-4 translate-y-4 -z-10 transition-transform duration-500 group-hover:translate-x-6 group-hover:translate-y-6" />
               
-              <Heart className="w-16 h-16 text-tlcc-gold mb-10" />
+              <Heart className="w-16 h-16 text-jcc-gold mb-10" />
               <h2 className="font-anton text-5xl md:text-7xl text-white uppercase leading-[0.9] mb-8">
                 Host An<br />Event<br />With Us
               </h2>
               
-              <Link href="/contact" className="inline-flex items-center gap-4 bg-tlcc-gold text-tlcc-navy px-8 py-4 font-black uppercase tracking-[0.2em] hover:bg-white transition-colors duration-300">
+              <Link href="/contact" className="inline-flex items-center gap-4 bg-jcc-gold text-jcc-navy px-8 py-4 font-black uppercase tracking-[0.2em] hover:bg-white transition-colors duration-300">
                 Reach Out <ArrowUpRight />
               </Link>
             </div>

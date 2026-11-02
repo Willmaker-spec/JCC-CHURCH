@@ -7,6 +7,9 @@ import { AudioPlayerProvider } from './components/providers/AudioPlayerProvider.
 import { LanguageProvider } from './components/providers/LanguageProvider.jsx'
 
 const Home = lazy(() => import('../app/page.jsx'))
+const About = lazy(() => import('../app/about/page.jsx'))
+const Contact = lazy(() => import('../app/contact/page.jsx'))
+const Admin = lazy(() => import('../app/admin/page.jsx'))
 const Devotionals = lazy(() => import('../app/devotionals/page.jsx'))
 const DevotionalPage = lazy(() => import('../app/devotionals/[slug]/page.jsx'))
 const Events = lazy(() => import('../app/events/page.jsx'))
@@ -22,15 +25,6 @@ const Ministries = lazy(() => import('../app/ministries/page.jsx'))
 const QuickLinks = lazy(() => import('../app/quick-links/page.jsx'))
 const Sermons = lazy(() => import('../app/sermons/page.jsx'))
 const NotFound = lazy(() => import('../app/not-found.jsx'))
-
-function SimplePage({ title, children }) {
-  return (
-    <section className="min-h-screen px-6 py-24 text-center">
-      <h1 className="text-4xl font-bold">{title}</h1>
-      {children}
-    </section>
-  )
-}
 
 function RoutePage({ component: Component }) {
   return (
@@ -71,9 +65,9 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<RoutePage component={Home} />} />
-      <Route path="/about" element={<SimplePage title="About Us" />} />
-      <Route path="/contact" element={<SimplePage title="Contact Us" />} />
-      <Route path="/admin" element={<SimplePage title="Admin" />} />
+      <Route path="/about" element={<RoutePage component={About} />} />
+      <Route path="/contact" element={<RoutePage component={Contact} />} />
+      <Route path="/admin" element={<RoutePage component={Admin} />} />
       <Route path="/devotionals" element={<RoutePage component={Devotionals} />} />
       <Route path="/devotionals/:slug" element={<RoutePage component={DevotionalPage} />} />
       <Route path="/events" element={<RoutePage component={Events} />} />

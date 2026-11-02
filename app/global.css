@@ -29,7 +29,7 @@
   }
 
   body {
-    @apply bg-white text-tlcc-navy antialiased;
+    @apply bg-white text-jcc-navy antialiased;
   }
 }
 

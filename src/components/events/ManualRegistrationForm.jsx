@@ -95,7 +95,7 @@ export default function ManualRegistrationForm() {
   if (status === 'success') {
     return <div className="bg-green-50 border border-green-200 rounded-2xl p-8 text-center">
         <div className="text-green-600 text-5xl mb-4">✓</div>
-        <h3 className="text-2xl font-bold text-tlcc-navy mb-2">Registration Successful!</h3>
+        <h3 className="text-2xl font-bold text-jcc-navy mb-2">Registration Successful!</h3>
         <p className="text-gray-600 mb-3">
           Check your email for event details. See you at The Manual!
         </p>
@@ -104,29 +104,29 @@ export default function ManualRegistrationForm() {
         </p>
       </div>;
   }
-  return <div id="register" className="bg-white rounded-[32px] shadow-2xl border border-tlcc-cream p-8 md:p-10 scroll-mt-48">
-      <h3 className="text-2xl font-bold text-tlcc-navy mb-6">Register for The Manual</h3>
+  return <div id="register" className="bg-white rounded-[32px] shadow-2xl border border-jcc-cream p-8 md:p-10 scroll-mt-48">
+      <h3 className="text-2xl font-bold text-jcc-navy mb-6">Register for The Manual</h3>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">
             Full Name *
           </label>
-          <input type="text" id="fullName" name="fullName" value={formData.fullName} onChange={handleChange} required className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-tlcc-orange" placeholder="John Doe" />
+          <input type="text" id="fullName" name="fullName" value={formData.fullName} onChange={handleChange} required className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-jcc-orange" placeholder="John Doe" />
         </div>
 
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
             Email Address *
           </label>
-          <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-tlcc-orange" placeholder="john@example.com" />
+          <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-jcc-orange" placeholder="john@example.com" />
         </div>
 
         <div>
           <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
             Phone Number *
           </label>
-          <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} required className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-tlcc-orange" placeholder="+234 xxx xxx xxxx" />
+          <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} required className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-jcc-orange" placeholder="+234 xxx xxx xxxx" />
         </div>
 
         <div>
@@ -134,11 +134,11 @@ export default function ManualRegistrationForm() {
             Interested in sharing a ride? *
           </label>
           <div className="flex gap-4">
-            <label className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg border-2 cursor-pointer transition-all ${formData.rideShare === 'yes' ? 'border-tlcc-orange bg-tlcc-orange/10 text-tlcc-orange font-semibold' : 'border-gray-200 bg-gray-50 text-gray-700 hover:border-gray-300'}`}>
+            <label className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg border-2 cursor-pointer transition-all ${formData.rideShare === 'yes' ? 'border-jcc-orange bg-jcc-orange/10 text-jcc-orange font-semibold' : 'border-gray-200 bg-gray-50 text-gray-700 hover:border-gray-300'}`}>
               <input type="radio" name="rideShare" value="yes" checked={formData.rideShare === 'yes'} onChange={handleChange} required className="sr-only" />
               <span>Yes</span>
             </label>
-            <label className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg border-2 cursor-pointer transition-all ${formData.rideShare === 'no' ? 'border-tlcc-orange bg-tlcc-orange/10 text-tlcc-orange font-semibold' : 'border-gray-200 bg-gray-50 text-gray-700 hover:border-gray-300'}`}>
+            <label className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-lg border-2 cursor-pointer transition-all ${formData.rideShare === 'no' ? 'border-jcc-orange bg-jcc-orange/10 text-jcc-orange font-semibold' : 'border-gray-200 bg-gray-50 text-gray-700 hover:border-gray-300'}`}>
               <input type="radio" name="rideShare" value="no" checked={formData.rideShare === 'no'} onChange={handleChange} className="sr-only" />
               <span>No</span>
             </label>
@@ -149,7 +149,7 @@ export default function ManualRegistrationForm() {
           <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">
             Your Location {formData.rideShare === 'yes' ? '*' : '(Optional)'}
           </label>
-          <input type="text" id="location" name="location" value={formData.location} onChange={handleChange} required={formData.rideShare === 'yes'} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-tlcc-orange" placeholder="e.g. Ikeja, Yaba, Lekki" />
+          <input type="text" id="location" name="location" value={formData.location} onChange={handleChange} required={formData.rideShare === 'yes'} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-jcc-orange" placeholder="e.g. Ikeja, Yaba, Lekki" />
           {formData.rideShare === 'yes' && <p className="text-xs text-gray-500 mt-1">This helps us coordinate ride-sharing for attendees in similar areas.</p>}
         </div>
 
@@ -157,7 +157,7 @@ export default function ManualRegistrationForm() {
             {errorMessage || 'Registration failed. Please try again.'}
           </div>}
 
-        <button type="submit" disabled={status === 'submitting'} className="w-full bg-tlcc-orange hover:bg-orange-600 text-white font-bold py-4 px-6 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed">
+        <button type="submit" disabled={status === 'submitting'} className="w-full bg-jcc-orange hover:bg-orange-600 text-white font-bold py-4 px-6 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed">
           {status === 'submitting' ? 'Registering...' : 'Register Now'}
         </button>
 

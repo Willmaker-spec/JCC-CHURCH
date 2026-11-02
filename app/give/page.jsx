@@ -57,7 +57,7 @@ export default function GivePage() {
     setCopiedAccount(accountType);
     setTimeout(() => setCopiedAccount(null), 2000);
   };
-  return <main ref={containerRef} className="min-h-screen bg-black text-white selection:bg-tlcc-gold selection:text-black">
+  return <main ref={containerRef} className="min-h-screen bg-black text-white selection:bg-jcc-gold selection:text-black">
       
       {/* HERO SECTION - MASSIVE IMAGE & CLEAN TYPOGRAPHY */}
       <section className="hero-section relative h-screen min-h-[700px] flex items-end pb-32 overflow-hidden">
@@ -71,13 +71,13 @@ export default function GivePage() {
         {/* Content */}
         <div className="relative z-10 container mx-auto px-4 sm:px-8 lg:px-12">
           <div className="max-w-4xl">
-            <p className="give-hero-el text-tlcc-gold font-medium tracking-[0.3em] uppercase text-sm mb-6">
+            <p className="give-hero-el text-jcc-gold font-medium tracking-[0.3em] uppercase text-sm mb-6">
               Give
             </p>
 
             <h1 className="give-hero-el text-5xl sm:text-7xl lg:text-8xl font-light mb-8 leading-tight tracking-tight">
               Your Generosity <br />
-              <span className="font-semibold text-tlcc-gold">Our Mission</span>
+              <span className="font-semibold text-jcc-gold">Our Mission</span>
             </h1>
 
             <p className="give-hero-el text-lg md:text-2xl text-gray-300 font-light leading-relaxed max-w-2xl mb-12">
@@ -85,7 +85,7 @@ export default function GivePage() {
             </p>
 
             <div className="give-hero-el flex flex-col sm:flex-row gap-8 items-start sm:items-center">
-              <a href="#give-now" className="group inline-flex items-center text-tlcc-gold hover:text-white transition-colors duration-500 pb-2 border-b border-tlcc-gold/50 hover:border-white">
+              <a href="#give-now" className="group inline-flex items-center text-jcc-gold hover:text-white transition-colors duration-500 pb-2 border-b border-jcc-gold/50 hover:border-white">
                 <span className="text-sm tracking-[0.2em] uppercase font-medium">Give Now</span>
                 <ArrowRight className="h-4 w-4 ml-4 group-hover:translate-x-2 transition-transform duration-500" />
               </a>
@@ -186,24 +186,24 @@ export default function GivePage() {
           <div className="p-12 md:p-24 flex flex-col justify-center">
             
             <div className="mb-24">
-              <h3 className="text-sm font-semibold tracking-[0.2em] uppercase text-tlcc-gold mb-6">Mobile Transfer</h3>
+              <h3 className="text-sm font-semibold tracking-[0.2em] uppercase text-jcc-gold mb-6">Mobile Transfer</h3>
               <p className="text-3xl font-light leading-tight mb-8">
                 Quick, secure giving directly from your mobile banking app.
               </p>
               <ul className="space-y-4">
                 <li className="flex items-center space-x-4 text-gray-400 font-light">
-                  <span className="w-1.5 h-1.5 bg-tlcc-gold rounded-full" />
+                  <span className="w-1.5 h-1.5 bg-jcc-gold rounded-full" />
                   <span>Instant transfer</span>
                 </li>
                 <li className="flex items-center space-x-4 text-gray-400 font-light">
-                  <span className="w-1.5 h-1.5 bg-tlcc-gold rounded-full" />
+                  <span className="w-1.5 h-1.5 bg-jcc-gold rounded-full" />
                   <span>No additional fees</span>
                 </li>
               </ul>
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold tracking-[0.2em] uppercase text-tlcc-gold mb-6">The Impact</h3>
+              <h3 className="text-sm font-semibold tracking-[0.2em] uppercase text-jcc-gold mb-6">The Impact</h3>
               <div className="space-y-12">
                 <div>
                   <h4 className="text-xl font-medium mb-2">Souls Saved</h4>
@@ -233,7 +233,7 @@ export default function GivePage() {
           <p className="text-3xl md:text-5xl font-light leading-tight text-white mb-12 italic">
             &quot;Each of you should give what you have decided in your heart to give... for God loves a cheerful giver.&quot;
           </p>
-          <div className="w-px h-24 bg-tlcc-gold mx-auto" />
+          <div className="w-px h-24 bg-jcc-gold mx-auto" />
         </div>
       </section>
       

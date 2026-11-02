@@ -8,7 +8,7 @@ export default function NotFound() {
   return (
     <>
       {/* 404 Section */}
-      <div className="min-h-screen bg-gradient-to-br from-black via-tlcc-navy to-black flex items-center justify-center px-4">
+      <div className="min-h-screen bg-gradient-to-br from-black via-jcc-navy to-black flex items-center justify-center px-4">
         <div className="max-w-4xl w-full text-center space-y-8">
           {/* 404 Video Text */}
           <div className="relative w-full h-[300px] md:h-[400px] z-10">
@@ -41,7 +41,7 @@ export default function NotFound() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
             <Link
               href="/"
-              className="group flex items-center gap-2 px-8 py-4 bg-tlcc-gold text-tlcc-navy font-semibold rounded-lg hover:bg-tlcc-gold-light transition-all duration-300 transform hover:scale-105"
+              className="group flex items-center gap-2 px-8 py-4 bg-jcc-gold text-jcc-navy font-semibold rounded-lg hover:bg-jcc-gold-light transition-all duration-300 transform hover:scale-105"
             >
               <Home className="w-5 h-5" />
               Go Home
@@ -62,35 +62,35 @@ export default function NotFound() {
             <div className="flex flex-wrap items-center justify-center gap-4 text-sm">
               <Link
                 href="/about"
-                className="text-gray-300 hover:text-tlcc-gold transition-colors"
+                className="text-gray-300 hover:text-jcc-gold transition-colors"
               >
                 About Us
               </Link>
               <span className="text-gray-600">•</span>
               <Link
                 href="/sermons"
-                className="text-gray-300 hover:text-tlcc-gold transition-colors"
+                className="text-gray-300 hover:text-jcc-gold transition-colors"
               >
                 Sermons
               </Link>
               <span className="text-gray-600">•</span>
               <Link
                 href="/ministries"
-                className="text-gray-300 hover:text-tlcc-gold transition-colors"
+                className="text-gray-300 hover:text-jcc-gold transition-colors"
               >
                 Ministries
               </Link>
               <span className="text-gray-600">•</span>
               <Link
                 href="/give"
-                className="text-gray-300 hover:text-tlcc-gold transition-colors"
+                className="text-gray-300 hover:text-jcc-gold transition-colors"
               >
                 Give
               </Link>
               <span className="text-gray-600">•</span>
               <Link
                 href="/contact"
-                className="text-gray-300 hover:text-tlcc-gold transition-colors"
+                className="text-gray-300 hover:text-jcc-gold transition-colors"
               >
                 Contact
               </Link>
@@ -100,7 +100,7 @@ export default function NotFound() {
       </div>
 
       {/* Give to Jubilee Christian Centre Church Section */}
-      <section className="relative py-20 bg-gradient-to-br from-tlcc-navy via-tlcc-navy to-black overflow-hidden">
+      <section className="relative py-20 bg-gradient-to-br from-jcc-navy via-jcc-navy to-black overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-5">
           <div
@@ -128,13 +128,13 @@ export default function NotFound() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link
                     href="/give"
-                    className="px-8 py-4 bg-white border-2 border-tlcc-navy text-tlcc-navy font-bold rounded-full hover:bg-tlcc-navy hover:text-white transition-all duration-300 text-center uppercase tracking-wide"
+                    className="px-8 py-4 bg-white border-2 border-jcc-navy text-jcc-navy font-bold rounded-full hover:bg-jcc-navy hover:text-white transition-all duration-300 text-center uppercase tracking-wide"
                   >
                     Give Now
                   </Link>
                   <Link
                     href="/give#building-project"
-                    className="px-8 py-4 bg-tlcc-gold text-white font-bold rounded-full hover:bg-tlcc-gold-dark transition-all duration-300 text-center uppercase tracking-wide shadow-lg"
+                    className="px-8 py-4 bg-jcc-gold text-white font-bold rounded-full hover:bg-jcc-gold-dark transition-all duration-300 text-center uppercase tracking-wide shadow-lg"
                   >
                     Building Project
                   </Link>
@@ -180,8 +180,8 @@ export default function NotFound() {
             </div>
 
             {/* Bottom Message */}
-            <div className="bg-tlcc-gold text-center py-6 px-6">
-              <p className="text-sm text-tlcc-navy font-medium">
+            <div className="bg-jcc-gold text-center py-6 px-6">
+              <p className="text-sm text-jcc-navy font-medium">
                 We promise not to spam you, but send you edifying and amazing
                 content regularly from Jubilee Christian Centre Church International.
               </p>

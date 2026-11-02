@@ -77,7 +77,7 @@ export default function Newsletter() {
         <div className="max-w-5xl mx-auto">
           
           {/* Main Newsletter Box */}
-          <div className="newsletter-box bg-tlcc-navy text-white rounded-[2rem] p-8 md:p-16 mb-16 relative overflow-hidden">
+          <div className="newsletter-box bg-jcc-navy text-white rounded-[2rem] p-8 md:p-16 mb-16 relative overflow-hidden">
             
             {/* Subtle internal background pattern/shape */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
@@ -87,15 +87,15 @@ export default function Newsletter() {
               {/* Text Side */}
               <div>
                 <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full mb-6 border border-white/20">
-                  <Zap className="h-4 w-4 text-tlcc-gold" />
-                  <span className="text-tlcc-gold font-bold text-xs tracking-widest uppercase">
+                  <Zap className="h-4 w-4 text-jcc-gold" />
+                  <span className="text-jcc-gold font-bold text-xs tracking-widest uppercase">
                     {newsletter.badge}
                   </span>
                 </div>
                 
                 <h2 className="text-4xl md:text-5xl font-anton uppercase tracking-wide mb-6">
                   {newsletter.headingPrimary} <br />
-                  <span className="text-tlcc-gold">{newsletter.headingAccent}</span>
+                  <span className="text-jcc-gold">{newsletter.headingAccent}</span>
                 </h2>
                 
                 <p className="text-lg text-gray-300 leading-relaxed font-light">
@@ -107,12 +107,12 @@ export default function Newsletter() {
               <div className="flex flex-col justify-center">
                 <form onSubmit={handleSubmit} className="relative">
                   {/* Inline Sleek Form */}
-                  <div className="flex bg-white rounded-full p-2 shadow-lg focus-within:ring-4 focus-within:ring-tlcc-gold/30 transition-shadow">
+                  <div className="flex bg-white rounded-full p-2 shadow-lg focus-within:ring-4 focus-within:ring-jcc-gold/30 transition-shadow">
                     <div className="flex-1 flex items-center pl-4">
                       <Mail className="h-5 w-5 text-gray-400 flex-shrink-0" />
-                      <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder={newsletter.placeholder} required className="w-full bg-transparent border-none focus:outline-none focus:ring-0 text-tlcc-navy font-medium px-4" />
+                      <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder={newsletter.placeholder} required className="w-full bg-transparent border-none focus:outline-none focus:ring-0 text-jcc-navy font-medium px-4" />
                     </div>
-                    <button type="submit" disabled={status === 'loading'} className="bg-tlcc-gold hover:bg-tlcc-orange text-tlcc-navy font-bold rounded-full px-8 py-4 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2">
+                    <button type="submit" disabled={status === 'loading'} className="bg-jcc-gold hover:bg-jcc-orange text-jcc-navy font-bold rounded-full px-8 py-4 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2">
                       {status === 'loading' ? <span>{newsletter.submitLoading}</span> : <>
                           <span className="hidden sm:inline">{newsletter.submitIdle}</span>
                           <Send className="h-4 w-4" />
@@ -144,9 +144,9 @@ export default function Newsletter() {
             const Icon = benefitIcons[index % benefitIcons.length];
             return <div key={benefit.title} className="newsletter-benefit bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:border-gray-300 transition-colors">
                   <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6">
-                    <Icon className="h-6 w-6 text-tlcc-gold" />
+                    <Icon className="h-6 w-6 text-jcc-gold" />
                   </div>
-                  <h3 className="font-bold text-tlcc-navy mb-3">{benefit.title}</h3>
+                  <h3 className="font-bold text-jcc-navy mb-3">{benefit.title}</h3>
                   <p className="text-gray-500 font-light leading-relaxed text-sm">
                     {benefit.description}
                   </p>

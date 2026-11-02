@@ -4,27 +4,27 @@ export default {
   theme: {
     extend: {
       colors: {
-        'tlcc-navy': {
+        'jcc-navy': {
           DEFAULT: '#1a365d',
           light: '#284c78',
         },
-        'tlcc-gold': {
+        'jcc-gold': {
           DEFAULT: '#f5b82e',
           light: '#ffd166',
           dark: '#d89b12',
         },
-        'tlcc-orange': '#f97316',
-        'tlcc-cream': {
+        'jcc-orange': '#f97316',
+        'jcc-cream': {
           DEFAULT: '#fffaf0',
           dark: '#f3ead7',
         },
-        'tlcc-green': {
+        'jcc-green': {
           DEFAULT: '#0f5132',
           light: '#176b43',
         },
-        'tlcc-language': '#1a365d',
-        'tlcc-logo': '#1a365d',
-        'tlcc-online': '#dc2626',
+        'jcc-language': '#1a365d',
+        'jcc-logo': '#1a365d',
+        'jcc-online': '#dc2626',
       },
       fontFamily: {
         anton: ['Anton', 'Impact', 'sans-serif'],

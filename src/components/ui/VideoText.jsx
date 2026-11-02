@@ -90,7 +90,7 @@ export function VideoText({
   }, [autoPlay]);
   return <Component className={cn("relative w-full h-full overflow-hidden", className)}>
       {/* Gold gradient fallback - shows while loading or on error */}
-      {!isVideoLoaded && <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-tlcc-gold via-yellow-500 to-tlcc-gold animate-gradient-x" style={{
+      {!isVideoLoaded && <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-jcc-gold via-yellow-500 to-jcc-gold animate-gradient-x" style={{
       maskImage: svgMask,
       WebkitMaskImage: svgMask,
       maskSize: "contain",
@@ -126,7 +126,7 @@ export function VideoText({
         </div>}
 
       {/* Error fallback - shows gradient if video fails */}
-      {hasError && <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-tlcc-gold via-yellow-500 to-tlcc-gold animate-gradient-x" style={{
+      {hasError && <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-jcc-gold via-yellow-500 to-jcc-gold animate-gradient-x" style={{
       maskImage: svgMask,
       WebkitMaskImage: svgMask,
       maskSize: "contain",

@@ -179,6 +179,95 @@ const englishMessages = {
       primaryCta: "Browse devotionals",
     },
   },
+  about: {
+    hero: {
+      subtitle: "Jubilee Christian Centre Church",
+      headingLead: "Jubilee Christian",
+      headingHighlight: "Centre Church",
+      description: "Souls saved. Men trained. Nations taken.",
+    },
+    missionVision: {
+      missionLabel: "Our Mission",
+      visionLabel: "Our Vision",
+      missionHeading: "Souls Saved",
+      missionStatement: "Souls saved. Men trained. Nations taken.",
+      missionDescription:
+        "We share the Gospel, help people grow in faith, and equip believers to serve.",
+      visionHeading: "A Place for Everyone",
+      visionStatement: "Everyone is someone in Christ.",
+      visionDescription:
+        "We are building a welcoming community where people can know Christ and grow together.",
+    },
+    story: {
+      heading: "Our Story",
+      paragraphs: [
+        "Jubilee Christian Centre Church is a community of believers committed to sharing the Gospel and raising disciples.",
+        "We gather to worship, learn from Scripture, serve one another, and take the message of Christ into our communities and nations.",
+      ],
+    },
+    beliefs: {
+      heading: "What We Believe",
+      items: [
+        {
+          title: "The Bible",
+          content: "The Bible is God's Word and the foundation for our faith and life.",
+          verse: "2 Timothy 3:16",
+        },
+        {
+          title: "Jesus Christ",
+          content: "Jesus Christ is Lord and the hope of salvation for all who believe.",
+          verse: "John 3:16",
+        },
+        {
+          title: "The Gospel",
+          content: "Through the death and resurrection of Jesus, people can be reconciled to God.",
+          verse: "1 Corinthians 15:3-4",
+        },
+        {
+          title: "The Church",
+          content: "The Church is called to worship God, make disciples, and serve the world.",
+          verse: "Matthew 28:19-20",
+        },
+      ],
+    },
+    coreValues: {
+      heading: "Our Core Values",
+      items: [
+        { title: "The Word", description: "We build our lives on the truth of Scripture." },
+        { title: "Discipleship", description: "We help people grow and become mature in Christ." },
+        { title: "Love", description: "We welcome and serve people with the love of Christ." },
+        { title: "Faith", description: "We trust God and follow His leading." },
+        { title: "Excellence", description: "We serve faithfully and give our best." },
+        { title: "Mission", description: "We share the Gospel and serve our communities." },
+      ],
+    },
+    leadership: {
+      heading: "Our Leadership",
+      name: "Apostle Nelson Isaiah",
+      role: "Lead Pastor",
+      paragraphs: [
+        "Our leadership is committed to teaching God's Word and equipping believers for a life of faith and service.",
+      ],
+    },
+    testimonies: {
+      heading: "Stories of Grace",
+      intro: "We are grateful for the ways God is at work in people's lives.",
+      cards: [],
+      share: {
+        heading: "Share Your Testimony",
+        description: "Tell us how God has been at work in your life.",
+        cta: "Share your story",
+      },
+    },
+    finalCta: {
+      heading: "Find Your Place",
+      description: "Join us as we grow together in Christ.",
+      buttons: [
+        { label: "Contact Us", href: "/contact" },
+        { label: "Explore Ministries", href: "/ministries" },
+      ],
+    },
+  },
   footer: {
     tagline: "A Place where Everyone is Somebody in Christ.",
     social: {

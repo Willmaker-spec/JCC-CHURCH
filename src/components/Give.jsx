@@ -67,14 +67,14 @@ export default function Give() {
         <div className="max-w-4xl">
           {/* Minimalist Header */}
           <div className="mb-16">
-            <p className="give-elegant-el text-tlcc-gold font-medium tracking-[0.3em] uppercase text-sm mb-6">
+            <p className="give-elegant-el text-jcc-gold font-medium tracking-[0.3em] uppercase text-sm mb-6">
               {give.badge}
             </p>
 
             {/* Elegant Serif-like or highly tracked Sans display */}
             <h2 className="give-elegant-el text-5xl md:text-7xl lg:text-8xl font-light mb-8 leading-tight tracking-tight">
               {give.headingLine1} <br />
-              <span className="font-semibold text-tlcc-gold">
+              <span className="font-semibold text-jcc-gold">
                 {give.headingLine2}
               </span>
             </h2>
@@ -102,7 +102,7 @@ export default function Give() {
           <div className="give-elegant-el flex flex-col sm:flex-row gap-8 items-start sm:items-center">
             <Link
               href="/give"
-              className="group inline-flex items-center text-tlcc-gold hover:text-white transition-colors duration-500 pb-2 border-b border-tlcc-gold/50 hover:border-white"
+              className="group inline-flex items-center text-jcc-gold hover:text-white transition-colors duration-500 pb-2 border-b border-jcc-gold/50 hover:border-white"
             >
               <span className="text-lg tracking-widest uppercase font-medium">
                 {give.primaryCta}

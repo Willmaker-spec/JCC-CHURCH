@@ -22,7 +22,7 @@ export default function MapPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-anton text-tlcc-navy mb-4 uppercase">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-anton text-jcc-navy mb-4 uppercase">
             Find Us at Rooted
           </h1>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
@@ -33,13 +33,13 @@ export default function MapPage() {
         {/* Info Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {/* Location Card */}
-          <div className="bg-tlcc-cream p-6 rounded-lg shadow-md">
+          <div className="bg-jcc-cream p-6 rounded-lg shadow-md">
             <div className="flex items-start space-x-4">
               <div className="flex-shrink-0">
-                <MapPin className="h-8 w-8 text-tlcc-navy" />
+                <MapPin className="h-8 w-8 text-jcc-navy" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-tlcc-navy mb-2">Location</h3>
+                <h3 className="text-lg font-bold text-jcc-navy mb-2">Location</h3>
                 <p className="text-gray-700">
                   Opp 43b Babaponmile Street<br />
                   After Winners Chapel<br />
@@ -51,13 +51,13 @@ export default function MapPage() {
           </div>
 
           {/* Time Card */}
-          <div className="bg-tlcc-cream p-6 rounded-lg shadow-md">
+          <div className="bg-jcc-cream p-6 rounded-lg shadow-md">
             <div className="flex items-start space-x-4">
               <div className="flex-shrink-0">
-                <Clock className="h-8 w-8 text-tlcc-navy" />
+                <Clock className="h-8 w-8 text-jcc-navy" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-tlcc-navy mb-2">Meeting Time</h3>
+                <h3 className="text-lg font-bold text-jcc-navy mb-2">Meeting Time</h3>
                 <p className="text-gray-700">
                   Every First Saturday<br />
                   10:00 AM Prompt
@@ -70,19 +70,19 @@ export default function MapPage() {
           </div>
 
           {/* Contact Card */}
-          <div className="bg-tlcc-cream p-6 rounded-lg shadow-md">
+          <div className="bg-jcc-cream p-6 rounded-lg shadow-md">
             <div className="flex items-start space-x-4">
               <div className="flex-shrink-0">
-                <Phone className="h-8 w-8 text-tlcc-navy" />
+                <Phone className="h-8 w-8 text-jcc-navy" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-tlcc-navy mb-2">Directions</h3>
+                <h3 className="text-lg font-bold text-jcc-navy mb-2">Directions</h3>
                 <p className="text-gray-700">
                   For directions, please contact:
                 </p>
-                <p className="text-tlcc-navy font-semibold mt-2">
+                <p className="text-jcc-navy font-semibold mt-2">
                   Isaac<br />
-                  <a href="tel:+2349058885465" className="hover:text-tlcc-gold transition-colors">
+                  <a href="tel:+2349058885465" className="hover:text-jcc-gold transition-colors">
                     0905 888 5465
                   </a>
                 </p>
@@ -92,7 +92,7 @@ export default function MapPage() {
         </div>
 
         {/* About Rooted */}
-        <div className="bg-tlcc-navy text-white p-8 rounded-lg shadow-lg mb-12">
+        <div className="bg-jcc-navy text-white p-8 rounded-lg shadow-lg mb-12">
           <h2 className="text-2xl md:text-3xl font-anton mb-4 uppercase">What is Rooted?</h2>
           <p className="text-lg leading-relaxed">
             Rooted is our monthly physical gathering that brings Jubilee Christian Centre Church together every first Saturday
@@ -115,7 +115,7 @@ export default function MapPage() {
           <p className="text-gray-600 mb-4">
             Can&apos;t find us? Don&apos;t hesitate to call Isaac for assistance.
           </p>
-          <a href="https://maps.app.goo.gl/wP2aAjw47wV4nTbZ6" target="_blank" rel="noopener noreferrer" className="inline-block bg-tlcc-navy text-white px-8 py-3 rounded-lg hover:bg-tlcc-gold transition-colors duration-200 font-semibold">
+          <a href="https://maps.app.goo.gl/wP2aAjw47wV4nTbZ6" target="_blank" rel="noopener noreferrer" className="inline-block bg-jcc-navy text-white px-8 py-3 rounded-lg hover:bg-jcc-gold transition-colors duration-200 font-semibold">
             Open in Google Maps
           </a>
         </div>
