@@ -13,6 +13,7 @@ const Admin = lazy(() => import('../app/admin/page.jsx'))
 const Devotionals = lazy(() => import('../app/devotionals/page.jsx'))
 const DevotionalPage = lazy(() => import('../app/devotionals/[slug]/page.jsx'))
 const Events = lazy(() => import('../app/events/page.jsx'))
+const DynamicEventPage = lazy(() => import('../app/events/[slug]/page.jsx'))
 const HeartRoom = lazy(() => import('../app/events/heart-room/page.jsx'))
 const Manual = lazy(() => import('../app/events/manual/page.jsx'))
 const NationTakers = lazy(() => import('../app/events/nation-takers-webinar/page.jsx'))
@@ -48,7 +49,7 @@ function AppRoutes() {
       '/events/heart-room': 'The Heart Room',
       '/events/manual': 'The Manual',
       '/events/nation-takers-webinar': 'Nation Takers Career Webinar',
-      '/events/rooted': 'Rooted',
+      '/events/rooted': 'Find Us',
       '/events/understanding-salvation': 'Understanding Salvation',
       '/events/unlearning-conference': 'The Unlearning Conference',
       '/give': 'Give',
@@ -58,7 +59,7 @@ function AppRoutes() {
       '/sermons': 'Sermons',
     }
 
-    const title = titles[pathname] || (pathname.startsWith('/devotionals/') ? 'Devotional' : 'Page Not Found')
+    const title = titles[pathname] || (pathname.startsWith('/devotionals/') ? 'Devotional' : pathname.startsWith('/events/') ? 'Event' : 'Page Not Found')
     document.title = `${title} | Jubilee Christian Centre Church`
   }, [pathname])
 
@@ -71,6 +72,7 @@ function AppRoutes() {
       <Route path="/devotionals" element={<RoutePage component={Devotionals} />} />
       <Route path="/devotionals/:slug" element={<RoutePage component={DevotionalPage} />} />
       <Route path="/events" element={<RoutePage component={Events} />} />
+      <Route path="/events/:slug" element={<RoutePage component={DynamicEventPage} />} />
       <Route path="/events/heart-room" element={<RoutePage component={HeartRoom} />} />
       <Route path="/events/manual" element={<RoutePage component={Manual} />} />
       <Route path="/events/nation-takers-webinar" element={<RoutePage component={NationTakers} />} />

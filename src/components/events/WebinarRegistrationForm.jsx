@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
+import { registerEvent } from '@/lib/registerEvent'
 export default function WebinarRegistrationForm() {
   const [formData, setFormData] = useState({
     fullName: '',
@@ -16,25 +17,10 @@ export default function WebinarRegistrationForm() {
     e.preventDefault();
     setStatus('submitting');
     setErrorMessage('');
+    let registrationSaved = false;
     try {
-      // Send registration data to backend API
-      const apiResponse = await fetch('/api/nation-takers-registration', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          fullName: formData.fullName,
-          email: formData.email,
-          phone: formData.phone,
-          occupation: formData.occupation,
-          organization: formData.organization
-        })
-      });
-      if (!apiResponse.ok) {
-        const errorData = await apiResponse.json().catch(() => ({}));
-        throw new Error(errorData.error || 'Registration failed. Please try again.');
-      }
+      await registerEvent('nation-takers-webinar', formData);
+      registrationSaved = true;
 
       // Send confirmation email with Google Meet link via EmailJS
       const emailJsPublicKey = import.meta.env.VITE_EMAILJS_NTCW_PUBLIC_KEY;
@@ -82,8 +68,13 @@ export default function WebinarRegistrationForm() {
       });
     } catch (error) {
       console.error('Registration error:', error);
-      setStatus('error');
-      setErrorMessage(error instanceof Error ? error.message : 'An error occurred');
+      if (registrationSaved) {
+        setStatus('success');
+        setFormData({ fullName: '', email: '', phone: '', occupation: '', organization: '' });
+      } else {
+        setStatus('error');
+        setErrorMessage(error instanceof Error ? error.message : 'An error occurred');
+      }
     }
   };
   const handleChange = e => {

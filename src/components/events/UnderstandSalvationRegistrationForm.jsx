@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { AlertCircle, CheckCircle, Loader2, Mail } from 'lucide-react';
+import { registerEvent } from '@/lib/registerEvent'
 const initialFormState = {
   fullName: '',
   email: '',
@@ -29,18 +30,10 @@ export default function UnderstandingSalvationRegistrationForm() {
     }
     setStatus('submitting');
     setErrorMessage('');
+    let registrationSaved = false;
     try {
-      const apiResponse = await fetch('/api/understanding-salvation-registration', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
-      if (!apiResponse.ok) {
-        const errorData = await apiResponse.json().catch(() => ({}));
-        throw new Error(errorData.error || 'Registration failed. Please try again.');
-      }
+      await registerEvent('understanding-salvation', formData);
+      registrationSaved = true;
       const emailJsPublicKey = import.meta.env.VITE_EMAILJS_NTCW_PUBLIC_KEY;
       if (!emailJsPublicKey) {
         throw new Error('Email configuration is missing. Please contact support.');
@@ -86,8 +79,13 @@ export default function UnderstandingSalvationRegistrationForm() {
       setFormData(initialFormState);
     } catch (error) {
       console.error('Understanding Salvation registration error:', error);
-      setStatus('error');
-      setErrorMessage(error instanceof Error ? error.message : 'Registration failed. Please try again.');
+      if (registrationSaved) {
+        setStatus('success');
+        setFormData(initialFormState);
+      } else {
+        setStatus('error');
+        setErrorMessage(error instanceof Error ? error.message : 'Registration failed. Please try again.');
+      }
     }
   };
   if (status === 'success') {

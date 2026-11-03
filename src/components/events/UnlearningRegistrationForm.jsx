@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { AlertCircle, ArrowRight, CheckCircle, Loader2, Lock, MessageCircle } from 'lucide-react';
+import { registerEvent } from '@/lib/registerEvent'
 const WHATSAPP_GROUP_LINK = 'https://chat.whatsapp.com/F1CAQqPgUKW691ohpL0T6G?s=cl&p=i&mlu=2';
 const initialFormState = {
   fullName: '',
@@ -40,17 +41,7 @@ export default function UnlearningRegistrationForm() {
     setStatus('submitting');
     setErrorMessage('');
     try {
-      const apiResponse = await fetch('/api/unlearning-registration', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
-      if (!apiResponse.ok) {
-        const errorData = await apiResponse.json().catch(() => ({}));
-        throw new Error(errorData.error || 'Registration failed. Please try again.');
-      }
+      await registerEvent('unlearning-conference', formData);
       setStatus('success');
     } catch (error) {
       console.error('Unlearning Conference registration error:', error);

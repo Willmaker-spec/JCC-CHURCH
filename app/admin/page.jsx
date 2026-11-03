@@ -5,6 +5,8 @@ import Image from 'next/image'
 import simpleMarkdownToHtml from '@/lib/markdown'
 import PublishToast from '@/components/PublishToast'
 import ClientOnlyEditor from '@/components/ClientOnlyEditor'
+import { isSupabaseConfigured, supabase } from '@/lib/supabase'
+import { uploadDevotionalImage } from '@/lib/uploadDevotionalImage'
 
 
 function readInitialDraft() {
@@ -23,32 +25,402 @@ function readInitialDraft() {
   }
 }
 
+function toLocalDateTimeValue(value) {
+  const date = new Date(value)
+  return new Date(date.getTime() - date.getTimezoneOffset() * 60000).toISOString().slice(0, 16)
+}
+
+const EMPTY_EVENT = {
+  slug: '',
+  title: '',
+  tagline: '',
+  description: '',
+  event_date: '',
+  event_time: '',
+  location: '',
+  event_type: 'Event',
+  image: '/images/event-hero.jpg',
+  is_published: false,
+  registration_open: true,
+}
+
+function AdminEventsManager() {
+  const [events, setEvents] = useState([])
+  const [eventForm, setEventForm] = useState(EMPTY_EVENT)
+  const [editingSlug, setEditingSlug] = useState(null)
+  const [eventMessage, setEventMessage] = useState('')
+  const [eventLoading, setEventLoading] = useState(true)
+  const [savingEvent, setSavingEvent] = useState(false)
+
+  const fetchEvents = useCallback(() => (
+    supabase
+      .from('events')
+      .select('*')
+      .order('created_at', { ascending: false })
+  ), [])
+
+  useEffect(() => {
+    let active = true
+    fetchEvents()
+      .then(({ data, error }) => {
+        if (!active) return
+        if (error) {
+          console.error('Unable to load events:', error)
+          setEventMessage('Could not load events. Run the dynamic events database setup in Supabase.')
+        } else {
+          setEvents(data || [])
+          setEventMessage('')
+        }
+        setEventLoading(false)
+      })
+      .catch(error => {
+        if (!active) return
+        console.error('Unable to load events:', error)
+        setEventMessage('Could not load events. Please check your Supabase connection.')
+        setEventLoading(false)
+      })
+    return () => {
+      active = false
+    }
+  }, [fetchEvents])
+
+  async function refreshEvents() {
+    setEventLoading(true)
+    try {
+      const { data, error } = await fetchEvents()
+      if (error) {
+        console.error('Unable to load events:', error)
+        setEventMessage('Could not load events. Run the dynamic events database setup in Supabase.')
+      } else {
+        setEvents(data || [])
+        setEventMessage('')
+      }
+    } catch (error) {
+      console.error('Unable to load events:', error)
+      setEventMessage('Could not load events. Please check your Supabase connection.')
+    } finally {
+      setEventLoading(false)
+    }
+  }
+
+  function updateEventField(name, value) {
+    setEventForm(current => ({
+      ...current,
+      [name]: value,
+      ...(name === 'title' && !editingSlug
+        ? { slug: value.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') }
+        : {}),
+    }))
+  }
+
+  function editEvent(event) {
+    setEditingSlug(event.slug)
+    setEventForm({
+      slug: event.slug,
+      title: event.title,
+      tagline: event.tagline || '',
+      description: event.description || '',
+      event_date: event.event_date || '',
+      event_time: event.event_time || '',
+      location: event.location || '',
+      event_type: event.event_type || 'Event',
+      image: event.image || '/images/event-hero.jpg',
+      is_published: event.is_published,
+      registration_open: event.registration_open,
+    })
+    setEventMessage('')
+  }
+
+  function resetEventForm() {
+    setEditingSlug(null)
+    setEventForm(EMPTY_EVENT)
+    setEventMessage('')
+  }
+
+  async function saveEvent(event) {
+    event.preventDefault()
+    if (!eventForm.slug || !eventForm.title.trim()) {
+      setEventMessage('Add an event title so a valid URL can be created.')
+      return
+    }
+
+    setSavingEvent(true)
+    setEventMessage('')
+    const payload = {
+      ...eventForm,
+      title: eventForm.title.trim(),
+      slug: eventForm.slug.trim().toLowerCase(),
+      updated_at: new Date().toISOString(),
+    }
+    const result = editingSlug
+      ? await supabase.from('events').update(payload).eq('slug', editingSlug).select().single()
+      : await supabase.from('events').insert(payload).select().single()
+    setSavingEvent(false)
+
+    if (result.error) {
+      console.error('Unable to save event:', result.error)
+      setEventMessage(result.error.code === '23505'
+        ? 'That event URL is already in use.'
+        : `Could not save event: ${result.error.message}`)
+      return
+    }
+
+    setEvents(current => [
+      result.data,
+      ...current.filter(item => item.slug !== editingSlug && item.slug !== result.data.slug),
+    ])
+    setEventMessage(payload.is_published ? 'Event saved and published.' : 'Event saved as a draft.')
+    setEditingSlug(result.data.slug)
+  }
+
+  async function deleteEvent(event) {
+    if (!window.confirm(`Delete "${event.title}"? Existing registration records will remain.`)) return
+
+    const { error } = await supabase.from('events').delete().eq('slug', event.slug)
+    if (error) {
+      console.error('Unable to delete event:', error)
+      setEventMessage(`Could not delete event: ${error.message}`)
+      return
+    }
+
+    setEvents(current => current.filter(item => item.slug !== event.slug))
+    if (editingSlug === event.slug) resetEventForm()
+    setEventMessage(`Deleted "${event.title}".`)
+  }
+
+  const inputClass = 'w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-gray-900 focus:border-jcc-navy focus:outline-none focus:ring-2 focus:ring-jcc-navy/10'
+  const labelClass = 'mb-2 block text-xs font-bold uppercase tracking-widest text-gray-500'
+
+  return (
+    <section className="mt-16 border-t-4 border-jcc-navy pt-10">
+      <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-jcc-gold">Site management</p>
+          <h2 className="mt-2 font-anton text-4xl uppercase text-jcc-navy md:text-5xl">Events</h2>
+          <p className="mt-2 max-w-2xl text-sm text-gray-500">
+            Add an event here and it will appear on the Events page when published. New events use the standard name, email, and phone registration form.
+          </p>
+        </div>
+        <button type="button" onClick={resetEventForm} className="rounded-xl border-2 border-jcc-navy px-5 py-3 text-xs font-bold uppercase tracking-widest text-jcc-navy hover:bg-jcc-navy hover:text-white">
+          New event
+        </button>
+      </div>
+
+      {eventMessage && <p role="status" className="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm font-medium text-amber-900">{eventMessage}</p>}
+
+      <div className="grid gap-8 lg:grid-cols-5">
+        <form onSubmit={saveEvent} className="space-y-5 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm lg:col-span-3">
+          <h3 className="font-bold uppercase tracking-widest text-jcc-navy">{editingSlug ? 'Edit event' : 'Create event'}</h3>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <label>
+              <span className={labelClass}>Event title *</span>
+              <input className={inputClass} value={eventForm.title} onChange={e => updateEventField('title', e.target.value)} required maxLength={160} />
+            </label>
+            <label>
+              <span className={labelClass}>URL slug</span>
+              <input className={`${inputClass} bg-gray-50`} value={eventForm.slug} readOnly aria-describedby="event-slug-help" />
+              <span id="event-slug-help" className="mt-1 block text-xs text-gray-400">Generated from the title. This becomes the event URL.</span>
+            </label>
+          </div>
+          <label className="block">
+            <span className={labelClass}>Short tagline</span>
+            <input className={inputClass} value={eventForm.tagline} onChange={e => updateEventField('tagline', e.target.value)} maxLength={180} />
+          </label>
+          <label className="block">
+            <span className={labelClass}>Description</span>
+            <textarea className={inputClass} rows={4} value={eventForm.description} onChange={e => updateEventField('description', e.target.value)} maxLength={4000} />
+          </label>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <label>
+              <span className={labelClass}>Date</span>
+              <input className={inputClass} value={eventForm.event_date} onChange={e => updateEventField('event_date', e.target.value)} placeholder="e.g. Saturday, December 12" maxLength={120} />
+            </label>
+            <label>
+              <span className={labelClass}>Time</span>
+              <input className={inputClass} value={eventForm.event_time} onChange={e => updateEventField('event_time', e.target.value)} placeholder="e.g. 10:00 AM WAT" maxLength={120} />
+            </label>
+            <label>
+              <span className={labelClass}>Location</span>
+              <input className={inputClass} value={eventForm.location} onChange={e => updateEventField('location', e.target.value)} maxLength={240} />
+            </label>
+            <label>
+              <span className={labelClass}>Event category</span>
+              <input className={inputClass} value={eventForm.event_type} onChange={e => updateEventField('event_type', e.target.value)} maxLength={80} />
+            </label>
+          </div>
+          <label className="block">
+            <span className={labelClass}>Image URL</span>
+            <input className={inputClass} value={eventForm.image} onChange={e => updateEventField('image', e.target.value)} placeholder="/images/event-hero.jpg or a public image URL" maxLength={1000} />
+          </label>
+          <div className="flex flex-wrap gap-6">
+            <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+              <input type="checkbox" checked={eventForm.is_published} onChange={e => updateEventField('is_published', e.target.checked)} />
+              Publish on Events page
+            </label>
+            <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+              <input type="checkbox" checked={eventForm.registration_open} onChange={e => updateEventField('registration_open', e.target.checked)} />
+              Accept registrations
+            </label>
+          </div>
+          <button type="submit" disabled={savingEvent} className="rounded-xl bg-jcc-navy px-6 py-3 text-sm font-bold uppercase tracking-widest text-white hover:bg-jcc-gold hover:text-jcc-navy disabled:opacity-60">
+            {savingEvent ? 'Saving…' : editingSlug ? 'Save changes' : 'Create event'}
+          </button>
+        </form>
+
+        <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white lg:col-span-2">
+          <div className="flex items-center justify-between border-b border-gray-100 bg-gray-50 p-5">
+            <h3 className="font-bold uppercase tracking-widest text-jcc-navy">Managed events</h3>
+            <button type="button" onClick={refreshEvents} className="text-xs font-bold uppercase tracking-widest text-jcc-navy hover:text-jcc-gold">Refresh</button>
+          </div>
+          <div className="max-h-[620px] overflow-y-auto">
+            {eventLoading ? <p className="p-6 text-sm text-gray-500">Loading events…</p> : events.length === 0 ? (
+              <p className="p-6 text-sm text-gray-500">No admin-created events yet.</p>
+            ) : events.map(event => (
+              <div key={event.slug} className="flex items-start gap-3 border-b border-gray-100 p-4">
+                <button type="button" onClick={() => editEvent(event)} className="min-w-0 flex-1 text-left">
+                  <span className="block truncate font-bold text-gray-900">{event.title}</span>
+                  <span className="mt-1 block text-xs text-gray-500">{event.is_published ? 'Published' : 'Draft'} · {event.registration_open ? 'Registration open' : 'Registration closed'}</span>
+                </button>
+                <button type="button" onClick={() => deleteEvent(event)} className="rounded-lg border border-red-200 px-3 py-2 text-xs font-bold uppercase text-red-700 hover:bg-red-50">Delete</button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function AdminApp() {
   const [initialDraft] = useState(readInitialDraft)
   // All state declarations at the very top
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [title, setTitle] = useState(initialDraft.title || '')
   const [image, setImage] = useState(initialDraft.image || '')
+  const [imageFile, setImageFile] = useState(null)
   const [localPreview, setLocalPreview] = useState('')
   const [content, setContent] = useState(initialDraft.content || '')
   const [message, setMessage] = useState('')
   const [scheduledDate, setScheduledDate] = useState(initialDraft.scheduledDate || '')
   const [timezone, setTimezone] = useState(initialDraft.timezone || '')
   // uploading state removed (not used directly)
-  const [attempts, setAttempts] = useState(0)
   const [showPublishToast, setShowPublishToast] = useState(false)
   const [toastText, setToastText] = useState('')
-  const [isAuthed, setIsAuthed] = useState(
-    () => typeof document !== 'undefined' && document.cookie.includes('dev_auth=1'),
-  )
+  const [isAuthed, setIsAuthed] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false)
+  const [authLoading, setAuthLoading] = useState(isSupabaseConfigured)
   const [mode, setMode] = useState('edit')
   const fileInputRef = useRef(null)
   // Undo/redo stacks
   const [history, setHistory] = useState([{ title: '', content: '', image: '' }])
   const [historyIndex, setHistoryIndex] = useState(0)
+  const [devotionals, setDevotionals] = useState([])
+  const [editingId, setEditingId] = useState(null)
+
+  useEffect(() => {
+    if (!supabase) return
+
+    let active = true
+    async function restoreAdminSession() {
+      const { data: { session }, error } = await supabase.auth.getSession()
+      if (error) {
+        console.error('Unable to restore admin session:', error)
+        if (active) setMessage('Could not check your sign-in. Please refresh and try again.')
+      } else if (session) {
+        const { data, error: roleError } = await supabase
+          .from('admin_users')
+          .select('user_id')
+          .eq('user_id', session.user.id)
+          .maybeSingle()
+        if (roleError) {
+          console.error('Unable to check admin access:', roleError)
+          if (active) setMessage(`Could not verify admin access: ${roleError.message}. Confirm the database setup has been run.`)
+        } else if (active && data) {
+          setEmail(session.user.email || '')
+          setIsAuthed(true)
+          setIsAdmin(true)
+        } else if (active) {
+          await supabase.auth.signOut()
+          setMessage('This signed-in user is not an admin. Add its Auth user ID to public.admin_users.')
+        }
+      }
+      if (active) setAuthLoading(false)
+    }
+
+    restoreAdminSession()
+    return () => {
+      active = false
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!isAdmin || !supabase) return
+
+    let active = true
+    async function loadDevotionals() {
+      const { data, error } = await supabase
+        .from('devotionals')
+        .select('id, title, image, content, scheduled_date')
+        .order('scheduled_date', { ascending: false })
+      if (!active) return
+      if (error) {
+        console.error('Unable to load admin devotionals:', error)
+        setMessage('Could not load the devotional library. Check the database policies.')
+      } else {
+        setDevotionals(data || [])
+      }
+    }
+
+    loadDevotionals()
+    return () => {
+      active = false
+    }
+  }, [isAdmin])
+
   async function save() {
-    setMessage('Publishing is disabled until a devotional backend is configured.')
-    return false
+    if (!supabase || !isAdmin) {
+      setMessage('Sign in with an authorized admin account to publish.')
+      return false
+    }
+    try {
+      const imageUrl = imageFile ? await uploadDevotionalImage(imageFile) : image
+      const scheduled = scheduledDate
+        ? new Date(scheduledDate).toISOString()
+        : new Date().toISOString()
+      const devotional = {
+        title: title.trim(),
+        image: imageUrl,
+        content,
+        scheduled_date: scheduled,
+        updated_at: new Date().toISOString(),
+      }
+      const result = editingId
+        ? await supabase.from('devotionals').update(devotional).eq('id', editingId).select().single()
+        : await supabase.from('devotionals').insert(devotional).select().single()
+
+      if (result.error) {
+        console.error('Unable to save devotional:', result.error)
+        setMessage('Could not save the devotional. Check the database policies and required fields.')
+        return false
+      }
+
+      setImage(imageUrl)
+      setImageFile(null)
+      if (localPreview) URL.revokeObjectURL(localPreview)
+      setLocalPreview('')
+      setEditingId(result.data.id)
+      setDevotionals(current => [
+        result.data,
+        ...current.filter(item => item.id !== result.data.id),
+      ].sort((a, b) => new Date(b.scheduled_date) - new Date(a.scheduled_date)))
+      setMessage('Devotional saved.')
+      return true
+    } catch (error) {
+      console.error('Unable to save devotional:', error)
+      setMessage(error instanceof Error ? error.message : 'Could not save the devotional.')
+      return false
+    }
   }
 
   // Push to history on change
@@ -101,46 +473,121 @@ function AdminApp() {
   }, [title, content, image, scheduledDate, timezone])
   async function login(e) {
     e.preventDefault()
-    try {
-      const res = await fetch('/api/admin/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password }),
-      })
-      if (res.ok) {
-        setIsAuthed(true)
-        setMessage('')
-      } else {
-        const next = attempts + 1
-        setAttempts(next)
-        const msgs = [
-          'Is that you, Jezebel?',
-          'Depart, tempter!',
-          'Who walks in darkness?',
-          'Do you mistake this for the wilderness?',
-          'By what test do you come?',
-          'Repent, wanderer!',
-          'Is this a trial from the adversary?'
-        ]
-        let msg = msgs[Math.floor(Math.random() * msgs.length)]
-        if (next >= 3) msg = 'The Lord sees your heart — cease these false keys.'
-        if (next >= 6) msg = 'This is a reckoning; return with truth.'
-        setMessage(msg)
-      }
-    } catch {
-      setMessage('Login failed')
+    if (!supabase) {
+      setMessage('Add your Supabase URL and publishable key to .env, then restart the app.')
+      return
     }
+
+    setMessage('')
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email.trim(),
+      password,
+    })
+    if (error) {
+      console.error('Supabase admin sign-in failed:', error)
+      setMessage(`Sign-in failed: ${error.message}`)
+      return
+    }
+
+    const { data: admin, error: roleError } = await supabase
+      .from('admin_users')
+      .select('user_id')
+      .eq('user_id', data.user.id)
+      .maybeSingle()
+    if (roleError) {
+      console.error('Unable to verify admin access:', roleError)
+      await supabase.auth.signOut()
+      setMessage(`Signed in, but admin access could not be checked: ${roleError.message}. Run the database setup SQL first.`)
+    } else if (!admin) {
+      await supabase.auth.signOut()
+      setMessage('Your login is valid, but this user is not an admin yet. Add its Auth user ID to public.admin_users.')
+    } else {
+      setIsAuthed(true)
+      setIsAdmin(true)
+      setMessage('')
+    }
+  }
+
+  function loadDevotional(devotional) {
+    setTitle(devotional.title || '')
+    setImage(devotional.image || '')
+    setContent(devotional.content || '')
+    setScheduledDate(devotional.scheduled_date ? toLocalDateTimeValue(devotional.scheduled_date) : '')
+    setEditingId(devotional.id)
+    setImageFile(null)
+    setLocalPreview('')
+    setMode('edit')
+    setMessage(`Editing “${devotional.title}”.`)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  function startNewDevotional() {
+    setTitle('')
+    setImage('')
+    setContent('')
+    setScheduledDate('')
+    setEditingId(null)
+    setImageFile(null)
+    if (localPreview) URL.revokeObjectURL(localPreview)
+    setLocalPreview('')
+    setMessage('')
+    setMode('edit')
+  }
+
+  async function deleteDevotional(devotional) {
+    const confirmed = window.confirm(
+      `Delete "${devotional.title}" permanently? This cannot be undone.`,
+    )
+    if (!confirmed) return
+
+    const { error } = await supabase
+      .from('devotionals')
+      .delete()
+      .eq('id', devotional.id)
+
+    if (error) {
+      console.error('Unable to delete devotional:', error)
+      setMessage(`Could not delete "${devotional.title}". Check your database permissions and try again.`)
+      return
+    }
+
+    setDevotionals(current => current.filter(item => item.id !== devotional.id))
+    if (editingId === devotional.id) startNewDevotional()
+    setMessage(`Deleted "${devotional.title}".`)
+  }
+
+  async function signOut() {
+    const { error } = await supabase.auth.signOut()
+    if (error) {
+      console.error('Unable to sign out:', error)
+      setMessage('Sign-out failed. Please try again.')
+      return
+    }
+    setIsAuthed(false)
+    setIsAdmin(false)
+    setPassword('')
   }
 
   function handleSelectFile(file) {
     if (!file) return
+    if (localPreview) URL.revokeObjectURL(localPreview)
     try {
       const url = URL.createObjectURL(file)
+      setImageFile(file)
       setLocalPreview(url)
     } catch {
       setLocalPreview('')
+      setImageFile(file)
     }
-    setMessage('Cover selected for local preview')
+    setMessage('Cover selected. It will upload when you save the devotional.')
+  }
+
+  if (authLoading) {
+    return <p className="px-6 py-24 text-center">Checking admin access…</p>
+  }
+
+  if (!isSupabaseConfigured) {
+    return <p role="alert" className="px-6 py-24 text-center">Add your Supabase URL and publishable key to .env, then restart the app.</p>
   }
 
   if (!isAuthed) {
@@ -153,7 +600,19 @@ function AdminApp() {
           </div>
           <form onSubmit={login} className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 p-8 md:p-10 space-y-6">
             <div>
-              <label htmlFor="admin-password" className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Authorization Key</label>
+              <label htmlFor="admin-email" className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Email</label>
+              <input
+                id="admin-email"
+                type="email"
+                autoComplete="username"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="block w-full rounded-xl border border-gray-200 px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-jcc-navy"
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="admin-password" className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Password</label>
               <input
                 id="admin-password"
                 type="password"
@@ -165,7 +624,7 @@ function AdminApp() {
               />
             </div>
             <button type="submit" className="w-full bg-jcc-navy text-white py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-jcc-gold hover:text-jcc-navy hover:shadow-lg transition-all duration-300">
-              Unlock Workspace
+              Sign In
             </button>
             {message && (
               <div className="p-3 bg-red-50 border border-red-100 rounded-lg text-sm text-red-600 font-medium text-center">
@@ -191,7 +650,8 @@ function AdminApp() {
             <span className="px-2 py-1 bg-gray-100 text-gray-500 rounded text-xs font-semibold uppercase tracking-widest hidden sm:inline-block">Devotionals</span>
           </div>
           <div className="flex items-center gap-4">
-            <button onClick={async () => { await fetch('/api/admin/logout', { method: 'POST' }); setIsAuthed(false); setPassword('') }} className="text-sm font-bold text-gray-500 hover:text-gray-900 transition-colors uppercase tracking-widest">Sign Out</button>
+            <button onClick={startNewDevotional} className="text-sm font-bold text-jcc-navy hover:text-jcc-gold transition-colors uppercase tracking-widest">New devotional</button>
+            <button onClick={signOut} className="text-sm font-bold text-gray-500 hover:text-gray-900 transition-colors uppercase tracking-widest">Sign Out</button>
           </div>
         </div>
       </header>
@@ -290,7 +750,7 @@ function AdminApp() {
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 bg-gray-50 p-4 sm:p-6 rounded-2xl border border-gray-100">
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Publish Date (UTC)</label>
+                      <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Publish Date &amp; Time (local)</label>
                       <input
                         type="datetime-local"
                         value={scheduledDate}
@@ -346,18 +806,58 @@ function AdminApp() {
             <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 overflow-hidden">
               <div className="p-6 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
                 <h2 className="text-sm font-bold uppercase tracking-widest text-gray-500">Library</h2>
-                <span className="text-xs font-bold text-gray-400">Unavailable</span>
+                <button onClick={() => {
+                  if (!supabase) return
+                  supabase.from('devotionals')
+                    .select('id, title, image, content, scheduled_date')
+                    .order('scheduled_date', { ascending: false })
+                    .then(({ data, error }) => {
+                      if (error) {
+                        console.error('Unable to refresh devotional library:', error)
+                        setMessage('Could not refresh the devotional library.')
+                      } else {
+                        setDevotionals(data || [])
+                      }
+                    })
+                }} className="text-xs font-bold text-jcc-navy hover:text-jcc-gold transition-colors">Refresh</button>
               </div>
               
               <div className="max-h-[70vh] overflow-y-auto">
-                <div className="p-8 text-center text-gray-400 text-sm">
-                  The devotional library will appear here after the backend is configured.
-                </div>
+                {devotionals.length === 0 ? (
+                  <div className="p-8 text-center text-gray-400 text-sm">No devotionals yet. Create your first post.</div>
+                ) : devotionals.map((devotional) => {
+                  const scheduled = new Date(devotional.scheduled_date)
+                  const published = scheduled <= new Date()
+                  return (
+                    <div
+                      key={devotional.id}
+                      className={`flex items-center gap-3 border-b border-gray-100 p-5 transition-colors hover:bg-gray-50 ${editingId === devotional.id ? 'bg-jcc-navy/5' : ''}`}
+                    >
+                      <button
+                        type="button"
+                        onClick={() => loadDevotional(devotional)}
+                        className="min-w-0 flex-1 text-left"
+                      >
+                        <span className="block truncate font-bold text-gray-900">{devotional.title}</span>
+                        <span className="mt-1 block text-xs text-gray-500">{scheduled.toLocaleString()} · {published ? 'Published' : 'Scheduled'}</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => deleteDevotional(devotional)}
+                        aria-label={`Delete ${devotional.title}`}
+                        className="shrink-0 rounded-lg border border-red-200 px-3 py-2 text-xs font-bold uppercase tracking-wide text-red-700 transition-colors hover:bg-red-50"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  )
+                })}
               </div>
             </div>
           </div>
 
         </div>
+        <AdminEventsManager />
       </main>
 
       <PublishToast show={showPublishToast} message={toastText} />

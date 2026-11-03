@@ -5,6 +5,7 @@ import { Mail, Send, CheckCircle, Zap, Star, Shield, ArrowUpRight } from 'lucide
 import { useLanguage } from '@/components/providers/LanguageProvider';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { supabase } from '@/lib/supabase'
 gsap.registerPlugin(ScrollTrigger);
 export default function Newsletter() {
   const [email, setEmail] = useState('');
@@ -47,24 +48,21 @@ export default function Newsletter() {
     e.preventDefault();
     setStatus('loading');
     try {
-      const res = await fetch('/api/newsletter/subscribe', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email
-        })
-      });
-      if (res.ok) {
-        setStatus('success');
-        setEmail('');
-        setTimeout(() => setStatus('idle'), 5000);
-      } else {
-        setStatus('error');
-        setTimeout(() => setStatus('idle'), 5000);
+      if (!supabase) {
+        throw new Error('Newsletter sign-up is temporarily unavailable.')
       }
-    } catch {
+      const { error } = await supabase
+        .from('newsletter_subscribers')
+        .insert({ email: email.trim().toLowerCase() })
+      if (error && error.code !== '23505') {
+        console.error('Unable to save newsletter subscription:', error)
+        throw new Error('Unable to subscribe right now.')
+      }
+      setStatus('success');
+      setEmail('');
+      setTimeout(() => setStatus('idle'), 5000);
+    } catch (error) {
+      console.error('Newsletter subscription failed:', error)
       setStatus('error');
       setTimeout(() => setStatus('idle'), 5000);
     }

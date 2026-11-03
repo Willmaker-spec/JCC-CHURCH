@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { ArrowUpRight, Sparkles, Flame, Users, Heart, CalendarDays, MapPin } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { supabase } from '@/lib/supabase';
 gsap.registerPlugin(ScrollTrigger);
 const upcomingEvents = [{
   id: 'understanding-salvation',
@@ -114,10 +115,47 @@ const upcomingEvents = [{
 }];
 export default function EventsPage() {
   const [hoveredEvent, setHoveredEvent] = useState(null);
+  const [dynamicEvents, setDynamicEvents] = useState([]);
   const cursorRef = useRef(null);
   const marquee1Ref = useRef(null);
   const marquee2Ref = useRef(null);
   const listRef = useRef(null);
+  const displayedEvents = [...upcomingEvents, ...dynamicEvents];
+
+  useEffect(() => {
+    if (!supabase) return;
+
+    let active = true;
+    supabase
+      .from('events')
+      .select('slug, title, tagline, description, event_date, event_time, location, event_type, image')
+      .eq('is_published', true)
+      .order('created_at', { ascending: false })
+      .then(({ data, error }) => {
+        if (!active) return;
+        if (error) {
+          console.error('Unable to load published events:', error);
+          return;
+        }
+        setDynamicEvents((data || []).map(event => ({
+          id: event.slug,
+          title: event.title,
+          tagline: event.tagline,
+          description: event.description,
+          date: event.event_date,
+          time: event.event_time,
+          location: event.location,
+          type: event.event_type,
+          image: event.image || '/images/event-hero.jpg',
+          ctaLabel: 'Register',
+          ctaLink: `/events/${event.slug}`,
+        })));
+      });
+
+    return () => {
+      active = false;
+    };
+  }, []);
   useEffect(() => {
     // Custom cursor image revealer for Desktop Only
     let xTo;
@@ -188,7 +226,7 @@ export default function EventsPage() {
       {/* Floating Image Cursor (Hidden on Mobile) */}
       <div ref={cursorRef} className={`fixed top-0 left-0 w-[400px] h-[300px] pointer-events-none z-50 transition-opacity duration-500 hidden lg:block ${hoveredEvent ? 'opacity-100' : 'opacity-0'}`}>
         <div className={`relative w-full h-full rounded-2xl overflow-hidden -translate-x-1/2 -translate-y-1/2 shadow-2xl transition-transform duration-500 ${hoveredEvent ? 'scale-100' : 'scale-90'}`}>
-          {upcomingEvents.map(event => <div key={`img-${event.id}`} className="absolute inset-0 transition-opacity duration-500" style={{
+          {displayedEvents.map(event => <div key={`img-${event.id}`} className="absolute inset-0 transition-opacity duration-500" style={{
           opacity: hoveredEvent === event.id ? 1 : 0
         }}>
               <Image src={event.image} alt={event.title} fill className="object-cover" unoptimized />
@@ -295,7 +333,7 @@ export default function EventsPage() {
           </div>
 
           <div ref={listRef} className="flex flex-col border-t border-white/10">
-            {upcomingEvents.map(event => <Link href={event.ctaLink || '#'} key={event.id} className="event-row group relative flex flex-col lg:flex-row lg:items-center justify-between py-12 lg:py-16 border-b border-white/10 hover:bg-white/5 transition-colors duration-500 cursor-pointer px-4 lg:px-8 -mx-4 lg:-mx-8" onMouseEnter={() => setHoveredEvent(event.id)} onMouseLeave={() => setHoveredEvent(null)}>
+            {displayedEvents.map(event => <Link href={event.ctaLink || '#'} key={event.id} className="event-row group relative flex flex-col lg:flex-row lg:items-center justify-between py-12 lg:py-16 border-b border-white/10 hover:bg-white/5 transition-colors duration-500 cursor-pointer px-4 lg:px-8 -mx-4 lg:-mx-8" onMouseEnter={() => setHoveredEvent(event.id)} onMouseLeave={() => setHoveredEvent(null)}>
                 
                 {/* Mobile Inline Image (Hidden on Desktop) */}
                 <div className="lg:hidden w-full h-56 relative mb-8 rounded-[2rem] overflow-hidden">

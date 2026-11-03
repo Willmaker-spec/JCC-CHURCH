@@ -55,8 +55,8 @@ export default function Give() {
         <Image
           src="/images/give.jpg"
           alt="Give Background"
-          cover
-          className="give-parallax-bg object-cover opacity-60 scale-110"
+          fill
+          className="give-parallax-bg object-cover object-center opacity-60 scale-110"
           priority
         />
         {/* Very elegant, subtle gradient overlay to ensure text readability without ruining the photo */}

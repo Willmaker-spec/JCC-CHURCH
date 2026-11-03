@@ -69,7 +69,7 @@ export default function GivePage() {
             src="/images/give.jpg"
             alt="Give"
             fill
-            className="give-parallax-bg object-cover opacity-60 scale-110"
+            className="give-parallax-bg object-cover object-center opacity-60 scale-110"
             priority
             unoptimized
           />

@@ -1,114 +1,119 @@
-'use client';
-
-import { useRef, useLayoutEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, MapPin, Calendar, Clock, ArrowRight } from 'lucide-react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-gsap.registerPlugin(ScrollTrigger);
+import { ArrowRight, CalendarDays, Clock3, MapPin, Navigation, Phone } from 'lucide-react';
+
+const directionsUrl = 'https://www.google.com/maps/search/?api=1&query=The+Light+House%2C+43B+Babaponmile+Street%2C+Mangoro%2C+Ikeja%2C+Lagos';
+
 export default function RootedPage() {
-  const containerRef = useRef(null);
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      // Hero Animation
-      gsap.from('.hero-text', {
-        y: 150,
-        opacity: 0,
-        rotate: 5,
-        duration: 1.2,
-        stagger: 0.1,
-        ease: 'power4.out'
-      });
-    }, containerRef);
-    return () => ctx.revert();
-  }, []);
-  return <main ref={containerRef} className="min-h-screen bg-[#fafafa] selection:bg-jcc-navy selection:text-white overflow-hidden pb-32">
-      
-      {/* Brutalist Back Button */}
-      <Link href="/events" className="fixed left-4 md:left-8 top-8 z-50 group flex items-center gap-0 bg-white border-4 border-jcc-navy p-1 pr-4 shadow-[6px_6px_0_#1a365d] hover:shadow-[0px_0px_0_#1a365d] hover:translate-x-1 hover:translate-y-1 transition-all duration-300">
-        <div className="w-10 h-10 bg-jcc-navy flex items-center justify-center text-white mr-3">
-          <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
-        </div>
-        <span className="text-sm font-black uppercase tracking-widest text-jcc-navy">Events</span>
-      </Link>
-
-      {/* Massive Brutalist Hero */}
-      <section className="relative min-h-[85vh] flex flex-col justify-end bg-jcc-navy border-b-8 border-jcc-gold px-4 md:px-8 pb-16 pt-32">
-        <div className="absolute inset-0 z-0">
-          <Image src="/images/rooted2.JPG" alt="Rooted Gathering" fill className="object-cover object-[center_30%] opacity-60 scale-105" priority unoptimized />
-          <div className="absolute inset-0 bg-gradient-to-t from-jcc-navy via-jcc-navy/60 to-transparent" />
-        </div>
-
-        <div className="relative z-10 container mx-auto max-w-7xl">
-          <div className="mb-6 overflow-hidden">
-            <div className="hero-text inline-flex bg-jcc-gold text-jcc-navy px-6 py-2 border-4 border-jcc-navy font-black uppercase tracking-widest text-sm shadow-[6px_6px_0_#1a365d] transform -rotate-2">
-              Monthly Gathering
-            </div>
-          </div>
-
-          <h1 className="font-anton text-[20vw] md:text-[14rem] leading-[0.75] uppercase tracking-tighter text-white mb-8">
-            <div className="overflow-hidden pb-4"><span className="hero-text block drop-shadow-2xl">Rooted</span></div>
+  return (
+    <main className="min-h-screen bg-[#f7f7f4] text-jcc-navy">
+      <section className="relative flex min-h-[62vh] items-end overflow-hidden bg-jcc-navy px-5 pb-16 pt-28 sm:px-8 md:min-h-[70vh] md:pb-20">
+        <Image
+          src="/images/rooted2.JPG"
+          alt=""
+          fill
+          priority
+          unoptimized
+          className="object-cover object-center opacity-45"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-jcc-navy/95 via-jcc-navy/70 to-jcc-navy/25" />
+        <div className="relative mx-auto w-full max-w-7xl">
+          <p className="mb-5 text-sm font-bold uppercase tracking-[0.24em] text-jcc-gold">
+            Jubilee Christian Centre Church
+          </p>
+          <h1 className="max-w-4xl font-anton text-6xl uppercase leading-[0.95] tracking-tight text-white sm:text-7xl md:text-8xl">
+            We&apos;d love to see you.
           </h1>
-
-          <div className="overflow-hidden max-w-2xl">
-            <p className="hero-text text-xl md:text-3xl text-white/90 font-medium border-l-8 border-jcc-gold pl-6 leading-relaxed">
-              Our explosive monthly gathering. Great sermons, deep connections, and an unapologetic pursuit of God.
-            </p>
-          </div>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/85 md:text-xl">
+            Join us in person at The Light House for a warm welcome, worship, and time together as a church family.
+          </p>
+          <a
+            href={directionsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-8 inline-flex items-center gap-3 rounded-sm bg-jcc-gold px-6 py-4 font-bold text-jcc-navy transition-colors hover:bg-white"
+          >
+            Get directions
+            <Navigation size={18} />
+          </a>
         </div>
       </section>
 
-      {/* Event Details Grid */}
-      <section className="info-grid container mx-auto max-w-7xl px-4 mt-24">
-        <div className="grid md:grid-cols-3 gap-8">
-          
-          <div className="info-block bg-white border-4 border-jcc-navy p-8 shadow-[10px_10px_0_#1a365d] hover:shadow-[10px_10px_0_#EAB308] transition-all flex flex-col items-start group">
-            <div className="w-16 h-16 bg-jcc-navy rounded-full flex items-center justify-center text-jcc-gold mb-6 group-hover:scale-110 transition-transform">
-              <Calendar size={32} strokeWidth={2.5} />
-            </div>
-            <h3 className="font-anton text-4xl text-jcc-navy mb-2 uppercase tracking-wide">When</h3>
-            <p className="text-gray-600 font-bold uppercase tracking-widest">Every First Friday</p>
-            <p className="text-jcc-navy/60 font-medium mt-2">Of The Month</p>
-          </div>
+      <section className="mx-auto max-w-7xl px-5 py-14 sm:px-8 md:py-20">
+        <div className="mb-10 max-w-2xl">
+          <p className="text-sm font-bold uppercase tracking-[0.2em] text-jcc-gold">Plan your visit</p>
+          <h2 className="mt-3 font-anton text-4xl uppercase leading-tight md:text-5xl">
+            Everything you need to find us
+          </h2>
+        </div>
 
-          <div className="info-block bg-white border-4 border-jcc-navy p-8 shadow-[10px_10px_0_#1a365d] hover:shadow-[10px_10px_0_#EAB308] transition-all flex flex-col items-start group">
-            <div className="w-16 h-16 bg-jcc-navy rounded-full flex items-center justify-center text-jcc-gold mb-6 group-hover:scale-110 transition-transform">
-              <Clock size={32} strokeWidth={2.5} />
-            </div>
-            <h3 className="font-anton text-4xl text-jcc-navy mb-2 uppercase tracking-wide">Time</h3>
-            <p className="text-gray-600 font-bold uppercase tracking-widest">10:00 AM</p>
-            <p className="text-jcc-navy/60 font-medium mt-2">No African Time</p>
-          </div>
-
-          <Link href="/map" className="info-block bg-white border-4 border-jcc-navy p-8 shadow-[10px_10px_0_#1a365d] hover:shadow-[10px_10px_0_#EAB308] hover:-translate-y-1 transition-all flex flex-col items-start group">
-            <div className="w-16 h-16 bg-jcc-navy rounded-full flex items-center justify-center text-jcc-gold mb-6 group-hover:scale-110 transition-transform">
-              <MapPin size={32} strokeWidth={2.5} />
-            </div>
-            <h3 className="font-anton text-4xl text-jcc-navy mb-2 uppercase tracking-wide">Where</h3>
-            <p className="text-gray-600 font-bold uppercase tracking-widest">The Light House</p>
-            <p className="text-jcc-navy/60 font-medium mt-2 text-sm leading-relaxed">
-              Opp 43B Babaponmile St.<br />
+        <div className="grid gap-5 md:grid-cols-3">
+          <article className="rounded-lg border border-slate-200 bg-white p-7 shadow-sm">
+            <MapPin className="mb-5 text-jcc-gold" size={30} aria-hidden="true" />
+            <h3 className="font-anton text-2xl uppercase">Our location</h3>
+            <p className="mt-4 leading-relaxed text-slate-600">
+              The Light House<br />
+              Opposite 43B Babaponmile Street<br />
               After Winners Chapel<br />
-              Mangoro, Ikeja, Lagos
+              Mangoro, Ikeja, Lagos, Nigeria
             </p>
-          </Link>
+          </article>
 
+          <article className="rounded-lg border border-slate-200 bg-white p-7 shadow-sm">
+            <CalendarDays className="mb-5 text-jcc-gold" size={30} aria-hidden="true" />
+            <h3 className="font-anton text-2xl uppercase">When we meet</h3>
+            <p className="mt-4 text-lg font-semibold">First Saturday of every month</p>
+            <p className="mt-1 text-slate-600">10:00 AM</p>
+            <div className="mt-5 flex items-start gap-3 border-t border-slate-100 pt-4 text-sm leading-relaxed text-slate-500">
+              <Clock3 size={18} className="mt-0.5 shrink-0 text-jcc-gold" aria-hidden="true" />
+              Please arrive a little early so we can welcome you.
+            </div>
+          </article>
+
+          <article className="rounded-lg border border-slate-200 bg-white p-7 shadow-sm">
+            <Phone className="mb-5 text-jcc-gold" size={30} aria-hidden="true" />
+            <h3 className="font-anton text-2xl uppercase">Need a hand?</h3>
+            <p className="mt-4 leading-relaxed text-slate-600">
+              If you need help finding the venue, our team is happy to guide you.
+            </p>
+            <a
+              href="tel:+2349058885465"
+              className="mt-5 inline-flex items-center gap-2 font-bold text-jcc-navy underline decoration-jcc-gold decoration-2 underline-offset-4 hover:text-jcc-gold"
+            >
+              Call Isaac: 0905 888 5465
+              <ArrowRight size={16} aria-hidden="true" />
+            </a>
+          </article>
+        </div>
+
+        <div className="mt-8 grid gap-8 overflow-hidden rounded-lg bg-jcc-navy text-white md:grid-cols-[1.2fr_0.8fr]">
+          <div className="p-7 sm:p-10">
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-jcc-gold">Your first visit</p>
+            <h2 className="mt-3 font-anton text-3xl uppercase md:text-4xl">Come as you are</h2>
+            <p className="mt-4 max-w-xl leading-relaxed text-white/75">
+              Rooted is our monthly in-person gathering. Expect a welcoming community, worship, a message, and time to connect. Whether it&apos;s your first visit or you&apos;re returning, there&apos;s a place for you.
+            </p>
+          </div>
+          <div className="flex flex-col justify-center gap-4 bg-white/5 p-7 sm:p-10">
+            <a
+              href={directionsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-between gap-4 rounded-sm bg-jcc-gold px-5 py-4 font-bold text-jcc-navy transition-colors hover:bg-white"
+            >
+              Open directions
+              <Navigation size={18} aria-hidden="true" />
+            </a>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-between gap-4 rounded-sm border border-white/30 px-5 py-4 font-semibold text-white transition-colors hover:border-jcc-gold hover:text-jcc-gold"
+            >
+              Contact our team
+              <ArrowRight size={18} aria-hidden="true" />
+            </Link>
+          </div>
         </div>
       </section>
-
-      {/* Massive CTA */}
-      <section className="container mx-auto max-w-5xl px-4 mt-32 text-center">
-        <h2 className="font-anton text-5xl md:text-7xl text-jcc-navy uppercase tracking-tighter mb-12">
-          Clear your schedule.<br />See you this Friday.
-        </h2>
-        <div className="inline-block">
-          <Link href="#" className="group flex items-center gap-6 px-12 py-6 bg-jcc-gold border-4 border-jcc-navy text-jcc-navy font-black text-xl md:text-2xl uppercase tracking-[0.2em] shadow-[12px_12px_0_#1a365d] hover:translate-x-2 hover:translate-y-2 hover:shadow-[0_0_0_#1a365d] transition-all duration-300">
-            <span>Set Reminder</span>
-            <ArrowRight className="w-8 h-8 group-hover:translate-x-2 transition-transform" />
-          </Link>
-        </div>
-      </section>
-
-    </main>;
+    </main>
+  );
 }

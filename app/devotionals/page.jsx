@@ -1,12 +1,14 @@
 "use client";
 
-import { useRef, useLayoutEffect } from "react";
+import { useEffect, useRef, useLayoutEffect, useState } from "react";
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Sparkles, BookOpen } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { isSupabaseConfigured, supabase } from '@/lib/supabase';
 gsap.registerPlugin(ScrollTrigger);
+const PAGE_SIZE = 9;
 function estimateReadingTime(text) {
   if (!text) return '1 MIN';
   const words = text.replace(/<[^>]+>/g, '').trim().split(/\s+/).filter(Boolean).length;
@@ -14,11 +16,53 @@ function estimateReadingTime(text) {
   return `${minutes} MIN READ`;
 }
 export default function PublicDevotionalsPage() {
-  const devotionals = [];
-  const loading = false;
-  const loadError = 'The devotional backend is not connected yet.';
+  const [devotionals, setDevotionals] = useState([]);
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(isSupabaseConfigured);
+  const [loadError, setLoadError] = useState(
+    isSupabaseConfigured ? '' : 'Add your Supabase URL and publishable key to the local .env file.',
+  );
   const containerRef = useRef(null);
   const listRef = useRef(null);
+  const totalPages = Math.ceil(total / PAGE_SIZE);
+
+  useEffect(() => {
+    if (!supabase) return undefined;
+    let active = true;
+
+    async function loadDevotionals() {
+      setLoading(true);
+      setLoadError('');
+      try {
+        const from = (page - 1) * PAGE_SIZE;
+        const { data, count, error } = await supabase
+          .from('devotionals')
+          .select('id, title, image, content, scheduled_date, created_at', { count: 'exact' })
+          .lte('scheduled_date', new Date().toISOString())
+          .order('scheduled_date', { ascending: false })
+          .range(from, from + PAGE_SIZE - 1);
+
+        if (!active) return;
+        if (error) throw error;
+        setDevotionals(data || []);
+        setTotal(count || 0);
+      } catch (error) {
+        if (!active) return;
+        console.error('Unable to load devotionals:', error);
+        setLoadError('Devotionals could not be loaded. Check the Supabase database setup and try again.');
+        setDevotionals([]);
+        setTotal(0);
+      } finally {
+        if (active) setLoading(false);
+      }
+    }
+
+    loadDevotionals();
+    return () => {
+      active = false;
+    };
+  }, [page]);
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       // Hero Animation
@@ -152,6 +196,11 @@ export default function PublicDevotionalsPage() {
             })}
               </div>
 
+              {totalPages > 1 && <div className="mt-16 flex justify-center items-center gap-6">
+                  <button onClick={() => setPage(current => Math.max(1, current - 1))} disabled={page === 1} className="px-6 py-3 bg-white border-4 border-jcc-navy text-jcc-navy font-bold shadow-[6px_6px_0_#1a365d] disabled:opacity-30">Previous</button>
+                  <span className="font-anton text-xl text-jcc-navy">{page} / {totalPages}</span>
+                  <button onClick={() => setPage(current => Math.min(totalPages, current + 1))} disabled={page === totalPages} className="px-6 py-3 bg-white border-4 border-jcc-navy text-jcc-navy font-bold shadow-[6px_6px_0_#1a365d] disabled:opacity-30">Next</button>
+                </div>}
             </>}
         </div>
       </section>

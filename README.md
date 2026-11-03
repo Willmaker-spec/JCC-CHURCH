@@ -28,11 +28,25 @@ Vite serves `index.html` for nested routes so direct links and browser refreshes
 
 Set `VITE_SITE_URL` to the canonical public URL when the church domain is purchased. The sitemap remains empty until this value is configured.
 
-## Integrations
+## Supabase setup
 
-Add the public keys/settings used by the client to the existing `.env` file:
+The app uses Supabase for devotional publishing, event management and registrations, and newsletter sign-ups. The initial database setup is in [the initial migration](./supabase/migrations/20261103000000_initial_church_backend.sql).
 
-- YouTube API key and channel ID load sermon videos.
-- EmailJS public keys enable event registration forms.
+1. In Supabase, open **SQL Editor**, create a query, paste the contents of the migration file, and run it once. It creates the tables, access policies, and public devotional image bucket.
+2. In **Project Settings → API**, copy the Project URL and publishable key. Put them in the root `.env` as `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`. This project already has a `.env`; keep the values there and do not replace it with `.env.example`. The client also accepts the older `VITE_SUPABASE_ANON_KEY` name. Do not use a secret or service-role key in the browser.
+3. In **Authentication → Users**, create your admin account. Copy its user ID and run this in SQL Editor, replacing the placeholder:
 
-The previous Supabase devotional integration has been removed. Devotional pages currently display a backend-not-connected message until a replacement is configured. This is a Vite + React app, so the `app/api/` files are not server routes; use Supabase Edge Functions or a separate backend for trusted operations. Never put private/service-role keys in `VITE_` variables because Vite exposes them to browsers.
+   ```sql
+   insert into public.admin_users (user_id)
+   values ('PASTE-ADMIN-USER-UUID-HERE');
+   ```
+
+4. Restart `npm run dev`, open `/admin`, and sign in with that user’s email and password. Create a test devotional and verify that it appears at `/devotionals`. Future-dated posts stay hidden from visitors until their scheduled time.
+5. Event form submissions are saved in `event_registrations`; newsletter emails are saved in `newsletter_subscribers`. View them in Supabase **Table Editor**. RLS allows public submissions but does not permit public reads. EmailJS confirmations remain client-side; newsletter sign-ups are stored in Supabase but are not yet synced to EmailOctopus.
+6. To enable admin-created events, open Supabase **SQL Editor**, paste and run [the dynamic events migration](./supabase/migrations/20261103010000_dynamic_events.sql) once, after the initial setup. This adds the `events` table and updates registration rules without deleting existing registrations; do not rerun or replace the initial migration. In `/admin`, scroll to **Events** to create, publish, edit, or delete events. Published events appear on `/events`, open at their own URL, and accept registrations while **Accept registrations** is enabled. Review new sign-ups in `event_registrations`.
+
+This is a Vite + React app. Files in `app/api/` are not running backend routes here; forms now use the Supabase client directly. Public forms can be abused by automated submissions, so add an Edge Function with rate limiting/CAPTCHA before relying on them for high-volume or sensitive sign-ups. Never expose a Supabase service-role key in frontend code or any `VITE_` variable.
+
+## Other integrations
+
+Set `VITE_YOUTUBE_API_KEY`, `VITE_YOUTUBE_CHANNEL_ID`, and the EmailJS public keys in `.env` if those integrations are used. Set `VITE_SITE_URL` to the canonical public URL when the church domain is ready.

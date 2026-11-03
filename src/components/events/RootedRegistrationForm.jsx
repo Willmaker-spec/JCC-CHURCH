@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
+import { registerEvent } from '@/lib/registerEvent'
 import { CheckCircle, Loader2, AlertCircle, Users } from 'lucide-react';
 const initialState = {
   fullName: '',
@@ -32,19 +33,7 @@ export default function RootedRegistrationForm() {
       const submission = {
         ...form
       };
-      const response = await fetch('/api/rooted-registration', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          ...submission
-        })
-      });
-      const payload = await response.json();
-      if (!response.ok) {
-        throw new Error(payload.error || 'Unable to save your registration right now.');
-      }
+      await registerEvent('rooted', submission);
       try {
         await emailjs.send('service_neo34an', 'template_ibwm048', {
           full_name: submission.fullName,

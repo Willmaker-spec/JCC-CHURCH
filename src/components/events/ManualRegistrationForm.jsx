@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
+import { registerEvent } from '@/lib/registerEvent'
 export default function ManualRegistrationForm() {
   const [formData, setFormData] = useState({
     fullName: '',
@@ -16,25 +17,10 @@ export default function ManualRegistrationForm() {
     e.preventDefault();
     setStatus('submitting');
     setErrorMessage('');
+    let registrationSaved = false;
     try {
-      // Send registration data to backend API
-      const apiResponse = await fetch('/api/manual-registration', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          fullName: formData.fullName,
-          email: formData.email,
-          phone: formData.phone,
-          rideShare: formData.rideShare,
-          location: formData.location
-        })
-      });
-      if (!apiResponse.ok) {
-        const errorData = await apiResponse.json().catch(() => ({}));
-        throw new Error(errorData.error || 'Registration failed. Please try again.');
-      }
+      await registerEvent('manual', formData);
+      registrationSaved = true;
 
       // Send confirmation email via EmailJS (reusing NTCW keys)
       const emailJsPublicKey = import.meta.env.VITE_EMAILJS_NTCW_PUBLIC_KEY;
@@ -82,8 +68,13 @@ export default function ManualRegistrationForm() {
       });
     } catch (error) {
       console.error('Registration error:', error);
-      setStatus('error');
-      setErrorMessage(error instanceof Error ? error.message : 'An error occurred');
+      if (registrationSaved) {
+        setStatus('success');
+        setFormData({ fullName: '', email: '', phone: '', rideShare: '', location: '' });
+      } else {
+        setStatus('error');
+        setErrorMessage(error instanceof Error ? error.message : 'An error occurred');
+      }
     }
   };
   const handleChange = e => {

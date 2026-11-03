@@ -2,6 +2,7 @@
 
 // markdown rendering moved to shared util
 import { useRef, useState } from 'react';
+import { uploadDevotionalImage } from '@/lib/uploadDevotionalImage'
 // markdown rendering moved to shared util `lib/markdown.ts`
 
 export default function ClientOnlyEditorInner({
@@ -73,20 +74,9 @@ export default function ClientOnlyEditorInner({
     if (!file) return;
     setUploading(true);
     try {
-      const fd = new FormData();
-      fd.append('file', file);
-      const r = await fetch('/api/devotionals/upload', {
-        method: 'POST',
-        body: fd
-      });
-      const j = await r.json();
-      if (r.ok && j.url) {
-        // insert markdown image syntax
-        insertAtCursor(`![](${j.url})`);
-        if (typeof onImageUpload === 'function') onImageUpload(j.url);
-      } else {
-        alert(j.error || 'Upload failed');
-      }
+      const url = await uploadDevotionalImage(file);
+      insertAtCursor(`![](${url})`);
+      if (typeof onImageUpload === 'function') onImageUpload(url);
     } catch (error) {
       const msg = error instanceof Error ? error.message : String(error);
       alert(msg || 'Upload error');
