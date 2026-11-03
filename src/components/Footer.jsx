@@ -195,6 +195,12 @@ export default function Footer() {
           <p className="text-gray-400 text-sm">
             © {new Date().getFullYear()} {footer.copyright}
           </p>
+          <Link
+            href="/admin"
+            className="inline-flex items-center rounded-md border border-white/15 px-3 py-2 text-xs font-medium text-gray-400 transition-colors hover:border-jcc-gold/60 hover:text-jcc-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-jcc-gold"
+          >
+            Staff login
+          </Link>
         </div>
       </div>
     </footer>

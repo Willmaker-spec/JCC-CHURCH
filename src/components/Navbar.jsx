@@ -149,7 +149,7 @@ export default function Navbar() {
                   alt="Jubilee Christian Centre Church Logo"
                   width={420}
                   height={150}
-                  className="h-20 w-auto md:h-24 lg:h-28 brightness-0 invert"
+                  className="h-20 w-auto md:h-24 lg:h-28"
                   priority
                 />
               </Link>

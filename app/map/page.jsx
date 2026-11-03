@@ -50,7 +50,7 @@ export default function MapPage() {
             href={directionsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-8 inline-flex items-center gap-3 rounded-sm bg-jcc-gold px-6 py-4 font-bold text-jcc-navy transition-colors hover:bg-white"
+            className="mt-8 mb-8 inline-flex items-center gap-3 rounded-sm bg-jcc-gold px-6 py-4 font-bold text-jcc-navy transition-colors hover:bg-white"
           >
             Get directions
             <Navigation size={18} aria-hidden="true" />
