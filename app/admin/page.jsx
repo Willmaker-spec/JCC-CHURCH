@@ -29,7 +29,6 @@ function AdminApp() {
   const [password, setPassword] = useState('')
   const [title, setTitle] = useState(initialDraft.title || '')
   const [image, setImage] = useState(initialDraft.image || '')
-  const [imageFile, setImageFile] = useState(null)
   const [localPreview, setLocalPreview] = useState('')
   const [content, setContent] = useState(initialDraft.content || '')
   const [message, setMessage] = useState('')
@@ -47,128 +46,9 @@ function AdminApp() {
   // Undo/redo stacks
   const [history, setHistory] = useState([{ title: '', content: '', image: '' }])
   const [historyIndex, setHistoryIndex] = useState(0)
-  // List of devotionals for admin
-  const [devotionals, setDevotionals] = useState([]);
-  const [editingId, setEditingId] = useState(null);
-
-
-  // Helper to fetch devotionals from Supabase
-  const fetchDevotionals = () => {
-    fetch('/api/devotionals/list?includeScheduled=true')
-      .then(r => r.json())
-      .then(data => {
-        console.log('Fetched devotionals:', data);
-        setDevotionals(Array.isArray(data.items) ? data.items : []);
-      });
-  };
-
-  // Fetch devotionals list on auth
-  useEffect(() => {
-    if (!isAuthed) return;
-    fetchDevotionals();
-  }, [isAuthed]);
-
-  // Load devotional for editing
-  async function loadDevotional(id) {
-    const d = devotionals.find((d) => d.id === id);
-    if (!d) return;
-    setTitle(d.title || '');
-    setImage(d.image || '');
-    setContent(d.content || '');
-    // Show raw UTC datetime from DB (strip timezone, keep UTC values)
-    setScheduledDate(d.scheduled_date ? d.scheduled_date.slice(0, 16) : '');
-    setEditingId(id);
-    setMode('edit');
-  }
-
-  // Save: create or update
   async function save() {
-    try {
-      let uploadedUrl = '';
-      if (imageFile) {
-        uploadedUrl = await uploadFile(imageFile);
-        if (uploadedUrl) {
-          setImage(uploadedUrl);
-          if (localPreview) { URL.revokeObjectURL(localPreview); setLocalPreview(''); }
-          setImageFile(null);
-        }
-      }
-      const finalImage = uploadedUrl || image || '';
-      // Treat datetime-local value as UTC by appending 'Z'
-      const scheduled = scheduledDate ? (scheduledDate.includes('T') ? scheduledDate + ':00Z' : new Date().toISOString()) : new Date().toISOString();
-      let res, j;
-      async function fetchScheduledInfo(id) {
-        try {
-          const r = await fetch(`/api/admin/devotional-scheduled?id=${encodeURIComponent(id)}`)
-          if (!r.ok) return null
-          return await r.json()
-        } catch {
-          return null
-        }
-      }
-
-      if (editingId) {
-        res = await fetch('/api/devotionals/update', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id: editingId, title, image: finalImage, content, scheduled_date: scheduled }),
-        });
-        j = await res.json();
-        if (res.ok) {
-          // fetch scheduled info and show to admin
-          const info = await fetchScheduledInfo(editingId)
-          if (info && info.scheduled) {
-            const localShown = info.utc && timezone ? new Date(info.utc).toLocaleString(undefined, { timeZone: timezone }) : info.serverLocal
-            setMessage(`Updated — scheduled: ${localShown} (${timezone || 'server local'}) / UTC ${info.utc}`)
-          } else {
-            setMessage('Updated')
-          }
-          return true
-        } else {
-          setMessage(j.error || 'Update failed');
-          return false
-        }
-      } else {
-        res = await fetch('/api/devotionals/create', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ title, image: finalImage, content, scheduled_date: scheduled }),
-        });
-        j = await res.json();
-        if (res.ok) {
-          // after create, fetch scheduled info for the new id
-          const newId = j.id || null
-          if (newId) {
-            const info = await fetchScheduledInfo(newId)
-            if (info && info.scheduled) {
-              // show saved time in admin-preferred timezone when available
-              const localShown = info.utc && timezone ? new Date(info.utc).toLocaleString(undefined, { timeZone: timezone }) : info.serverLocal
-              setMessage(`Saved — scheduled: ${localShown} (${timezone || 'server local'}) / UTC ${info.utc}`)
-            } else {
-              setMessage('Saved')
-            }
-          } else {
-            setMessage('Saved')
-          }
-          setTitle('');
-          setImage('');
-          setContent('');
-          setScheduledDate('');
-          setImageFile(null);
-          setLocalPreview('');
-          setEditingId(null);
-          // Refresh devotionals list from Supabase
-          fetchDevotionals();
-          return true
-        } else {
-          setMessage(j.error || 'Save failed');
-          return false
-        }
-      }
-    } catch {
-      setMessage('Save failed');
-      return false
-    }
+    setMessage('Publishing is disabled until a devotional backend is configured.')
+    return false
   }
 
   // Push to history on change
@@ -252,40 +132,15 @@ function AdminApp() {
     }
   }
 
-  // Note: `save` and `uploadFile` are implemented earlier in the file (single definitions).
-  // The legacy duplicate definitions were removed to avoid redeclaration and lint errors.
-  async function uploadFile(file) {
-    // legacy immediate upload helper (returns url or empty string)
-    if (!file) return ''
-    try {
-      const fd = new FormData()
-      fd.append('file', file)
-      const r = await fetch('/api/devotionals/upload', { method: 'POST', body: fd })
-      const j = await r.json()
-      if (r.ok && j.url) {
-        setMessage('Image uploaded')
-        return j.url
-      } else {
-        setMessage(j.error || 'Upload failed')
-        return ''
-      }
-    } catch (error) {
-      const msg = error instanceof Error ? error.message : String(error)
-      setMessage(msg || 'Upload error')
-      return ''
-    }
-  }
-
   function handleSelectFile(file) {
     if (!file) return
-    setImageFile(file)
     try {
       const url = URL.createObjectURL(file)
       setLocalPreview(url)
     } catch {
       setLocalPreview('')
     }
-    setMessage('Cover selected — will upload on publish')
+    setMessage('Cover selected for local preview')
   }
 
   if (!isAuthed) {
@@ -384,8 +239,8 @@ function AdminApp() {
         </div>
 
         {message && (
-          <div className="mb-6 p-4 bg-green-50 border border-green-100 rounded-xl text-sm text-green-700 font-medium flex items-center gap-3 animate-in fade-in slide-in-from-top-4">
-            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+          <div className="mb-6 p-4 bg-amber-50 border border-amber-100 rounded-xl text-sm text-amber-800 font-medium flex items-center gap-3 animate-in fade-in slide-in-from-top-4">
+            <span className="w-2 h-2 rounded-full bg-amber-500" />
             {message}
           </div>
         )}
@@ -410,7 +265,7 @@ function AdminApp() {
                       <Image src={localPreview || image} alt="Cover" fill className="object-cover" unoptimized />
                       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
                         <button type="button" onClick={() => fileInputRef.current?.click()} className="px-6 py-3 bg-white text-gray-900 rounded-xl font-bold text-sm shadow-xl hover:scale-105 transition-transform">Change Cover</button>
-                        <button type="button" onClick={() => { setImage(''); setImageFile(null); if (localPreview) { URL.revokeObjectURL(localPreview); setLocalPreview('') } }} className="px-6 py-3 bg-red-600 text-white rounded-xl font-bold text-sm shadow-xl hover:scale-105 transition-transform">Remove</button>
+                        <button type="button" onClick={() => { setImage(''); if (localPreview) { URL.revokeObjectURL(localPreview); setLocalPreview('') } }} className="px-6 py-3 bg-red-600 text-white rounded-xl font-bold text-sm shadow-xl hover:scale-105 transition-transform">Remove</button>
                       </div>
                     </div>
                   ) : (
@@ -491,45 +346,12 @@ function AdminApp() {
             <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 overflow-hidden">
               <div className="p-6 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
                 <h2 className="text-sm font-bold uppercase tracking-widest text-gray-500">Library</h2>
-                <button onClick={fetchDevotionals} className="text-xs font-bold text-jcc-navy hover:text-jcc-gold transition-colors">Refresh</button>
+                <span className="text-xs font-bold text-gray-400">Unavailable</span>
               </div>
               
               <div className="max-h-[70vh] overflow-y-auto">
-                {devotionals.length === 0 && (
-                  <div className="p-8 text-center text-gray-400 text-sm">No devotionals found.</div>
-                )}
-                <div className="divide-y divide-gray-100">
-                  {devotionals.map((d) => {
-                    const scheduledDate = d.scheduled_date ? new Date(d.scheduled_date) : null;
-                    const isPublished = scheduledDate ? scheduledDate <= new Date() : true;
-                    const isEditing = editingId === d.id;
-
-                    return (
-                      <div key={d.id} className={`p-5 transition-colors group ${isEditing ? 'bg-jcc-navy/5' : 'hover:bg-gray-50'}`}>
-                        <div className="flex items-start justify-between gap-4">
-                          <div className="flex-1 min-w-0">
-                            <h3 className={`font-bold truncate mb-1 ${isEditing ? 'text-jcc-navy' : 'text-gray-900'}`}>{d.title}</h3>
-                            <p className="text-xs text-gray-500 truncate mb-3">
-                              {scheduledDate ? scheduledDate.toLocaleString(undefined, {
-                                month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
-                              }) : 'Not scheduled'}
-                            </p>
-                            {isPublished ? (
-                              <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-green-50 text-green-700 border border-green-200">Published</span>
-                            ) : (
-                              <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-amber-50 text-amber-700 border border-amber-200">Scheduled</span>
-                            )}
-                          </div>
-                          <button
-                            onClick={() => loadDevotional(d.id)}
-                            className={`shrink-0 px-4 py-2 rounded-xl text-xs font-bold transition-all ${isEditing ? 'bg-jcc-navy text-white shadow-md' : 'bg-white border border-gray-200 text-gray-600 group-hover:border-gray-300 group-hover:text-gray-900'}`}
-                          >
-                            {isEditing ? 'Editing' : 'Edit'}
-                          </button>
-                        </div>
-                      </div>
-                    );
-                  })}
+                <div className="p-8 text-center text-gray-400 text-sm">
+                  The devotional library will appear here after the backend is configured.
                 </div>
               </div>
             </div>

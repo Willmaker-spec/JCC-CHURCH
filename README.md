@@ -28,12 +28,11 @@ Vite serves `index.html` for nested routes so direct links and browser refreshes
 
 Set `VITE_SITE_URL` to the canonical public URL when the church domain is purchased. The sitemap remains empty until this value is configured.
 
-## Optional integrations
+## Integrations
 
-Copy `.env.example` to `.env.local` and add the public keys/settings used by the client:
+Add the public keys/settings used by the client to the existing `.env` file:
 
-- Supabase URL and anon key load devotional records.
 - YouTube API key and channel ID load sermon videos.
 - EmailJS public keys enable event registration forms.
 
-The app remains navigable if an integration is not configured; the relevant page reports the missing integration instead of crashing. Never put private/service-role keys in `VITE_` variables because Vite exposes them to browsers.
+The previous Supabase devotional integration has been removed. Devotional pages currently display a backend-not-connected message until a replacement is configured. This is a Vite + React app, so the `app/api/` files are not server routes; use Supabase Edge Functions or a separate backend for trusted operations. Never put private/service-role keys in `VITE_` variables because Vite exposes them to browsers.

@@ -1,43 +1,11 @@
-import { isSupabaseConfigured, supabase } from '@/lib/supabase'
-
-function stripMarkdown(markdown = '') {
-  return markdown
-    .replace(/```[\s\S]*?```/g, '')
-    .replace(/[`*_>#]/g, '')
-    .replaceAll('[', '')
-    .replaceAll(']', '')
-    .replaceAll('(', '')
-    .replaceAll(')', '')
-    .replace(/\s+/g, ' ')
-    .trim()
-}
-
 export default async function Head({ params }) {
   const id = params.slug
   const siteUrl = (import.meta.env?.VITE_SITE_URL || '').replace(/\/$/, '')
   const fallbackRel = '/images/jcc-logo.png'
   const fallback = siteUrl ? `${siteUrl}${fallbackRel}` : fallbackRel
-  let devotional = null
-
-  if (isSupabaseConfigured && supabase) {
-    try {
-      const { data, error } = await supabase
-        .from('devotionals')
-        .select('*')
-        .eq('id', id)
-        .limit(1)
-        .single()
-      if (error) throw error
-      devotional = data
-    } catch (error) {
-      console.error('Unable to load devotional metadata:', error)
-    }
-  }
-
-  const title = devotional?.title || 'Devotional'
-  const excerpt = stripMarkdown(devotional?.content || '').slice(0, 140)
-  const description = excerpt ? `${title} — ${excerpt}` : 'Devotional from JCC'
-  const image = devotional?.image || fallback
+  const title = 'Devotional'
+  const description = 'Devotional from JCC'
+  const image = fallback
   const absoluteImage = /^https?:\/\//i.test(image)
     ? image
     : siteUrl

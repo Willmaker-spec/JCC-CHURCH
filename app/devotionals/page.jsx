@@ -1,12 +1,11 @@
 "use client";
 
-import { useEffect, useState, useRef, useLayoutEffect } from "react";
+import { useRef, useLayoutEffect } from "react";
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Sparkles, BookOpen } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { isSupabaseConfigured, supabase } from '@/lib/supabase';
 gsap.registerPlugin(ScrollTrigger);
 function estimateReadingTime(text) {
   if (!text) return '1 MIN';
@@ -14,74 +13,12 @@ function estimateReadingTime(text) {
   const minutes = Math.max(1, Math.round(words / 200));
   return `${minutes} MIN READ`;
 }
-const PAGE_SIZE = 9;
 export default function PublicDevotionalsPage() {
-  const [devotionals, setDevotionals] = useState([]);
-  const [page, setPage] = useState(1);
-  const [total, setTotal] = useState(0);
-  const [loading, setLoading] = useState(isSupabaseConfigured);
-  const [loadError, setLoadError] = useState(
-    isSupabaseConfigured ? '' : 'Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to load devotionals.'
-  );
+  const devotionals = [];
+  const loading = false;
+  const loadError = 'The devotional backend is not connected yet.';
   const containerRef = useRef(null);
   const listRef = useRef(null);
-  const isInitialLoad = useRef(true);
-  useEffect(() => {
-    if (!supabase) {
-      return undefined;
-    }
-
-    let active = true;
-
-    async function loadDevotionals() {
-      try {
-        const from = (page - 1) * PAGE_SIZE;
-        const to = from + PAGE_SIZE - 1;
-        const { data, count, error } = await supabase
-          .from('devotionals')
-          .select('*', { count: 'exact' })
-          .order('scheduled_date', { ascending: false })
-          .range(from, to);
-        if (error) {
-          throw error;
-        }
-
-        if (!active) {
-          return;
-        }
-
-        setLoadError('');
-        setDevotionals(data || []);
-        setTotal(count || 0);
-        if (!isInitialLoad.current) {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else {
-          isInitialLoad.current = false;
-        }
-      } catch (error) {
-        if (active) {
-          console.error('Unable to load devotionals:', error);
-          setLoadError('Devotionals could not be loaded. Check your Supabase configuration and try again.');
-          setDevotionals([]);
-          setTotal(0);
-        }
-      } finally {
-        if (active) {
-          setLoading(false);
-        }
-      }
-    }
-
-    loadDevotionals();
-    return () => {
-      active = false;
-    };
-  }, [page]);
-  const totalPages = Math.ceil(total / PAGE_SIZE);
-  const changePage = nextPage => {
-    setLoading(true);
-    setPage(nextPage);
-  };
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       // Hero Animation
@@ -215,20 +152,6 @@ export default function PublicDevotionalsPage() {
             })}
               </div>
 
-              {/* PAGINATION */}
-              {totalPages > 1 && <div className="mt-32 flex justify-center items-center gap-6">
-                  <button onClick={() => changePage(Math.max(1, page - 1))} disabled={page === 1} className="w-16 h-16 bg-white border-4 border-jcc-navy text-jcc-navy font-bold shadow-[6px_6px_0_#1a365d] hover:bg-jcc-gold hover:translate-y-1 hover:translate-x-1 hover:shadow-[0_0_0_#1a365d] transition-all disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center uppercase tracking-widest">
-                    Prev
-                  </button>
-                  
-                  <div className="flex items-center justify-center bg-jcc-navy text-white border-4 border-jcc-navy shadow-[6px_6px_0_#EAB308] px-6 h-16 font-anton text-2xl">
-                    {page.toString().padStart(2, '0')} / {totalPages.toString().padStart(2, '0')}
-                  </div>
-
-                  <button onClick={() => changePage(Math.min(totalPages, page + 1))} disabled={page === totalPages || totalPages === 0} className="w-16 h-16 bg-white border-4 border-jcc-navy text-jcc-navy font-bold shadow-[6px_6px_0_#1a365d] hover:bg-jcc-gold hover:translate-y-1 hover:translate-x-1 hover:shadow-[0_0_0_#1a365d] transition-all disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center uppercase tracking-widest">
-                    Next
-                  </button>
-                </div>}
             </>}
         </div>
       </section>
