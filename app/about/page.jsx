@@ -288,7 +288,7 @@ export default function AboutPage() {
             {/* Pastor Photo */}
             <div className="grid-item md:col-span-5 relative h-[60vh] md:h-[80vh] w-full -mt-20 md:mt-0 md:-ml-20 z-10 filter grayscale contrast-125 border-8 border-white">
               <Image
-                src="public/images/pastor.JPG"
+                src="/images/pastor.JPG"
                 alt="Rev. Pastor Udoka O. Ukah"
                 fill
                 className="object-cover object-top"

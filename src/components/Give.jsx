@@ -55,7 +55,7 @@ export default function Give() {
         <Image
           src="/images/give.jpg"
           alt="Give Background"
-          fill
+          cover
           className="give-parallax-bg object-cover opacity-60 scale-110"
           priority
         />
