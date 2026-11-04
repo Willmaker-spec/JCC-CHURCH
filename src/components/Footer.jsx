@@ -45,30 +45,31 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative z-20 bg-[#0d3b3b] text-white">
-      <div className="container-custom py-12 md:py-16">
+    <footer className="relative z-20 overflow-hidden border-t-4 border-jcc-gold bg-gradient-to-br from-[#10243d] via-jcc-navy to-[#0d1b2a] text-slate-200">
+      <div aria-hidden="true" className="pointer-events-none absolute -right-40 -top-48 h-96 w-96 rounded-full bg-jcc-gold/[0.06] blur-3xl" />
+      <div className="container-custom relative py-12 md:py-16">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+        <div className="mb-12 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-6 lg:gap-8">
           {/* Logo and Description */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-2">
             <Image
               src="/images/jcc-logo.png"
               alt="Jubilee Christian Centre Church"
               width={160}
               height={160}
-              className="h-12 w-12 mb-4"
+              className="mb-4 h-14 w-14 rounded-full"
             />
-            <p className="text-gray-300 text-sm leading-relaxed mb-4">
+            <p className="mb-5 max-w-sm text-sm leading-6 text-slate-300">
               {footer.tagline}
             </p>
-            <div className="flex space-x-3">
+            <div className="flex gap-2.5">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 bg-jcc-green-light hover:bg-jcc-gold rounded-lg transition-colors duration-200"
+                  className="rounded-full border border-white/15 bg-white/[0.06] p-2.5 text-slate-200 transition-colors duration-200 hover:border-jcc-gold hover:bg-jcc-gold hover:text-jcc-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-jcc-gold"
                   aria-label={social.label}
                 >
                   <social.icon className="h-5 w-5" />
@@ -79,15 +80,15 @@ export default function Footer() {
 
           {/* Connect */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-jcc-gold uppercase">
+            <h3 className="mb-5 text-xs font-bold uppercase tracking-[0.16em] text-jcc-gold">
               {sections.connect.heading}
             </h3>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               {sections.connect.links.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-jcc-gold transition-colors duration-200 text-sm"
+                    className="text-sm text-slate-300 transition-colors duration-200 hover:text-jcc-gold focus-visible:text-jcc-gold focus-visible:outline-none"
                   >
                     {link.label}
                   </Link>
@@ -98,15 +99,15 @@ export default function Footer() {
 
           {/* Ministries */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-jcc-gold uppercase">
+            <h3 className="mb-5 text-xs font-bold uppercase tracking-[0.16em] text-jcc-gold">
               {sections.ministries.heading}
             </h3>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               {sections.ministries.links.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-jcc-gold transition-colors duration-200 text-sm"
+                    className="text-sm text-slate-300 transition-colors duration-200 hover:text-jcc-gold focus-visible:text-jcc-gold focus-visible:outline-none"
                   >
                     {link.label}
                   </Link>
@@ -117,15 +118,15 @@ export default function Footer() {
 
           {/* Resources */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-jcc-gold uppercase">
+            <h3 className="mb-5 text-xs font-bold uppercase tracking-[0.16em] text-jcc-gold">
               {sections.resources.heading}
             </h3>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               {sections.resources.links.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-jcc-gold transition-colors duration-200 text-sm"
+                    className="text-sm text-slate-300 transition-colors duration-200 hover:text-jcc-gold focus-visible:text-jcc-gold focus-visible:outline-none"
                   >
                     {link.label}
                   </Link>
@@ -136,15 +137,15 @@ export default function Footer() {
 
           {/* Media */}
           <div>
-            <h3 className="font-bold text-lg mb-4 text-jcc-gold uppercase">
+            <h3 className="mb-5 text-xs font-bold uppercase tracking-[0.16em] text-jcc-gold">
               {sections.media.heading}
             </h3>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               {sections.media.links.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-jcc-gold transition-colors duration-200 text-sm"
+                    className="text-sm text-slate-300 transition-colors duration-200 hover:text-jcc-gold focus-visible:text-jcc-gold focus-visible:outline-none"
                     {...(link.external && {
                       target: "_blank",
                       rel: "noopener noreferrer",
@@ -159,18 +160,18 @@ export default function Footer() {
         </div>
 
         {/* Contact Info */}
-        <div className="border-t border-jcc-green-light pt-8 mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="mb-8 rounded-2xl border border-white/10 bg-white/[0.035] p-6 sm:p-7">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
             <div>
-              <h4 className="font-semibold mb-2 text-jcc-gold">
+              <h4 className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-jcc-gold">
                 {footer.contact.heading}
               </h4>
               {footer.contact.people.map((person) => (
-                <p key={person.phone} className="text-gray-300 text-sm">
+                <p key={person.phone} className="text-sm leading-6 text-slate-300">
                   {person.name}:{" "}
                   <a
                     href={`tel:${person.phone}`}
-                    className="hover:text-jcc-gold"
+                    className="transition-colors hover:text-jcc-gold focus-visible:text-jcc-gold focus-visible:outline-none"
                   >
                     {person.phone}
                   </a>
@@ -178,11 +179,11 @@ export default function Footer() {
               ))}
             </div>
             <div>
-              <h4 className="font-semibold mb-2 text-jcc-gold">
+              <h4 className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-jcc-gold">
                 {footer.services.heading}
               </h4>
               {footer.services.lines.map((line) => (
-                <p key={line} className="text-gray-300 text-sm">
+                <p key={line} className="text-sm leading-6 text-slate-300">
                   {line}
                 </p>
               ))}
@@ -191,13 +192,13 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-jcc-green-light pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <p className="text-gray-400 text-sm">
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row">
+          <p className="text-center text-xs text-slate-400 sm:text-left sm:text-sm">
             © {new Date().getFullYear()} {footer.copyright}
           </p>
           <Link
             href="/admin"
-            className="inline-flex items-center rounded-md border border-white/15 px-3 py-2 text-xs font-medium text-gray-400 transition-colors hover:border-jcc-gold/60 hover:text-jcc-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-jcc-gold"
+            className="inline-flex items-center rounded-full border border-white/15 px-4 py-2 text-xs font-medium text-slate-300 transition-colors hover:border-jcc-gold/60 hover:text-jcc-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-jcc-gold"
           >
             Staff login
           </Link>
