@@ -583,55 +583,82 @@ function AdminApp() {
   }
 
   if (authLoading) {
-    return <p className="px-6 py-24 text-center">Checking admin access…</p>
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-slate-50 px-6">
+        <div className="rounded-2xl border border-slate-200 bg-white px-8 py-7 text-center shadow-sm">
+          <div className="mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-2 border-slate-200 border-t-jcc-navy" />
+          <p className="text-sm font-semibold text-slate-700">Checking admin access…</p>
+          <p className="mt-1 text-xs text-slate-500">Securely connecting to your workspace</p>
+        </div>
+      </div>
+    )
   }
 
   if (!isSupabaseConfigured) {
-    return <p role="alert" className="px-6 py-24 text-center">Add your Supabase URL and publishable key to .env, then restart the app.</p>
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-slate-50 px-6">
+        <div role="alert" className="max-w-lg rounded-2xl border border-amber-200 bg-white p-8 text-center shadow-sm">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-700">Workspace setup required</p>
+          <h1 className="mt-3 text-xl font-bold text-slate-900">Connect your admin workspace</h1>
+          <p className="mt-2 text-sm leading-6 text-slate-600">Add your Supabase URL and publishable key to .env, then restart the app.</p>
+        </div>
+      </div>
+    )
   }
 
   if (!isAuthed) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#fafafa] selection:bg-jcc-navy selection:text-white px-4">
-        <div className="max-w-md w-full">
-          <div className="text-center mb-10">
-            <h1 className="text-4xl font-anton text-jcc-navy uppercase tracking-tight mb-2">JCC Editor</h1>
-            <p className="text-gray-500 font-medium">Secure Access Required</p>
+      <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-50 px-4 py-12 selection:bg-jcc-navy selection:text-white">
+        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-jcc-navy via-jcc-gold to-jcc-navy" />
+        <div aria-hidden="true" className="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-jcc-navy/[0.04] blur-3xl" />
+        <div className="relative w-full max-w-md">
+          <div className="mb-8 text-center">
+            <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-jcc-navy text-xl font-bold text-white shadow-lg shadow-jcc-navy/15">J</div>
+            <p className="text-xs font-bold uppercase tracking-[0.24em] text-jcc-gold-dark">Jubilee Christian Centre</p>
+            <h1 className="mt-2 font-anton text-4xl uppercase tracking-tight text-jcc-navy">Admin workspace</h1>
+            <p className="mt-2 text-sm text-slate-500">Sign in to manage devotionals and events.</p>
           </div>
-          <form onSubmit={login} className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 p-8 md:p-10 space-y-6">
+          <form onSubmit={login} className="space-y-6 rounded-2xl border border-slate-200 bg-white p-7 shadow-xl shadow-slate-900/[0.04] sm:p-9">
+            <div className="border-b border-slate-100 pb-5">
+              <h2 className="text-lg font-bold text-slate-900">Welcome back</h2>
+              <p className="mt-1 text-sm text-slate-500">Enter your administrator credentials to continue.</p>
+            </div>
             <div>
-              <label htmlFor="admin-email" className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Email</label>
+              <label htmlFor="admin-email" className="mb-2 block text-xs font-bold uppercase tracking-widest text-slate-600">Email address</label>
               <input
                 id="admin-email"
                 type="email"
                 autoComplete="username"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="block w-full rounded-xl border border-gray-200 px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-jcc-navy"
+                className="block w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-jcc-navy focus:ring-4 focus:ring-jcc-navy/10"
                 required
               />
             </div>
             <div>
-              <label htmlFor="admin-password" className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Password</label>
+              <label htmlFor="admin-password" className="mb-2 block text-xs font-bold uppercase tracking-widest text-slate-600">Password</label>
               <input
                 id="admin-password"
                 type="password"
-                placeholder="Enter password..."
+                autoComplete="current-password"
+                placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="block w-full rounded-xl border border-gray-200 px-4 py-3 placeholder-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-jcc-navy focus:border-transparent transition-all"
+                className="block w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-jcc-navy focus:ring-4 focus:ring-jcc-navy/10"
                 required
               />
             </div>
-            <button type="submit" className="w-full bg-jcc-navy text-white py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-jcc-gold hover:text-jcc-navy hover:shadow-lg transition-all duration-300">
-              Sign In
+            <button type="submit" className="flex w-full items-center justify-center gap-2 rounded-xl bg-jcc-navy py-3.5 text-sm font-bold text-white shadow-md shadow-jcc-navy/15 transition hover:bg-jcc-navy-light focus:outline-none focus:ring-4 focus:ring-jcc-navy/20">
+              Sign in to workspace
+              <svg aria-hidden="true" className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14m-7-7 7 7-7 7" /></svg>
             </button>
             {message && (
-              <div className="p-3 bg-red-50 border border-red-100 rounded-lg text-sm text-red-600 font-medium text-center">
+              <div role="alert" className="rounded-xl border border-red-200 bg-red-50 p-3 text-sm font-medium leading-5 text-red-700">
                 {message}
               </div>
             )}
           </form>
+          <p className="mt-6 text-center text-xs text-slate-400">Authorized JCC administrators only</p>
         </div>
       </div>
     )
@@ -640,25 +667,46 @@ function AdminApp() {
   const isReadyToPublish = title.trim().length > 0 && content.trim().length > 0;
 
   return (
-    <div className="min-h-screen w-full overflow-x-hidden bg-[#fafafa] text-gray-900 pb-20 selection:bg-jcc-navy selection:text-white">
-      
-      {/* SaaS Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <h1 className="text-xl font-anton uppercase text-jcc-navy tracking-wide">JCC Editor</h1>
-            <span className="px-2 py-1 bg-gray-100 text-gray-500 rounded text-xs font-semibold uppercase tracking-widest hidden sm:inline-block">Devotionals</span>
+    <div className="min-h-screen w-full overflow-x-hidden bg-slate-50 text-slate-900 pb-20 selection:bg-jcc-navy selection:text-white">
+      <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 shadow-sm backdrop-blur">
+        <div className="mx-auto flex min-h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
+          <div className="flex min-w-0 items-center gap-3">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-jcc-navy font-anton text-lg text-white">J</div>
+            <div className="min-w-0">
+              <p className="truncate text-sm font-bold tracking-wide text-jcc-navy">JCC Admin</p>
+              <p className="hidden text-xs text-slate-500 sm:block">Content management workspace</p>
+            </div>
+            <span className="hidden rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-600 md:inline-flex">Devotionals</span>
           </div>
-          <div className="flex items-center gap-4">
-            <button onClick={startNewDevotional} className="text-sm font-bold text-jcc-navy hover:text-jcc-gold transition-colors uppercase tracking-widest">New devotional</button>
-            <button onClick={signOut} className="text-sm font-bold text-gray-500 hover:text-gray-900 transition-colors uppercase tracking-widest">Sign Out</button>
+          <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+            <button type="button" onClick={startNewDevotional} className="rounded-lg bg-jcc-navy px-3 py-2 text-xs font-bold text-white shadow-sm transition hover:bg-jcc-navy-light focus:outline-none focus:ring-4 focus:ring-jcc-navy/20 sm:px-4 sm:text-sm">
+              + <span className="hidden sm:inline">New devotional</span><span className="sm:hidden">New</span>
+            </button>
+            <button
+              type="button"
+              onClick={signOut}
+              className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-red-200 hover:bg-red-50 hover:text-red-700 focus:outline-none focus:ring-4 focus:ring-slate-200 sm:px-4 sm:text-sm"
+            >
+              <svg aria-hidden="true" className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6A2.25 2.25 0 005.25 5.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3-3H9m0 0 3-3m-3 3 3 3" /></svg>
+              Sign out
+            </button>
           </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-6 mt-10">
-        
-        {/* Editor vs Preview Segmented Control & Global Actions */}
+      <main className="mx-auto mt-8 max-w-7xl px-4 sm:mt-10 sm:px-6">
+        <div className="mb-8 flex flex-col gap-3 border-b border-slate-200 pb-6 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-jcc-gold-dark">Editorial</p>
+            <h1 className="mt-1 font-anton text-3xl uppercase tracking-wide text-jcc-navy sm:text-4xl">Devotional editor</h1>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-500">Create, schedule, and publish devotionals for your church community.</p>
+          </div>
+          <div className="hidden items-center gap-2 self-start rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-800 sm:inline-flex">
+            <span className="h-2 w-2 rounded-full bg-emerald-500" />
+            Admin access active
+          </div>
+        </div>
+
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
           <div className="bg-gray-100 p-1 rounded-xl inline-flex shadow-inner w-full sm:w-auto">
             <button onClick={() => setMode('edit')} className={`flex-1 sm:flex-none px-6 py-2 rounded-lg text-sm font-bold uppercase tracking-wide transition-all ${mode === 'edit' ? 'bg-white text-jcc-navy shadow-sm' : 'text-gray-500 hover:text-gray-900'}`}>Edit Mode</button>
