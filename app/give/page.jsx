@@ -166,7 +166,7 @@ export default function GivePage() {
                       <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-2">
                         Bank
                       </p>
-                      <p className="text-3xl font-light">Moniepoint MFB</p>
+                      <p className="text-3xl font-light">Access Bank</p>
                     </div>
 
                     <div className="mb-12">
@@ -174,8 +174,7 @@ export default function GivePage() {
                         Account Name
                       </p>
                       <p className="text-xl font-light text-gray-800">
-                        Nelson Concept Studios - Jubilee Christian Centre Church
-                        Projects
+                        Jubilee Christian Centre Amakohia
                       </p>
                     </div>
 
@@ -186,14 +185,14 @@ export default function GivePage() {
                       <div
                         className="flex items-center justify-between border-b border-gray-200 pb-6 group cursor-pointer"
                         onClick={() =>
-                          copyToClipboard("4583629271", "moniepoint")
+                          copyToClipboard("0077404368", "Access Bank")
                         }
                       >
                         <p className="text-4xl md:text-5xl font-light tracking-widest text-black">
-                          4583629271
+                          0077404368
                         </p>
                         <div className="w-12 h-12 flex items-center justify-center rounded-full bg-gray-50 group-hover:bg-gray-100 transition-colors">
-                          {copiedAccount === "moniepoint" ? (
+                          {copiedAccount === "Access Bank" ? (
                             <Check className="h-5 w-5 text-green-500" />
                           ) : (
                             <Copy className="h-5 w-5 text-gray-400 group-hover:text-black transition-colors" />
