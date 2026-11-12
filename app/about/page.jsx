@@ -52,56 +52,48 @@ export default function AboutPage() {
   return (
     <main
       ref={containerRef}
-      className="min-h-screen bg-white selection:bg-jcc-navy selection:text-white overflow-hidden pb-32"
+      className="min-h-screen overflow-hidden bg-[#f7f7f4] pb-32 text-slate-900 selection:bg-jcc-navy selection:text-white"
     >
-      {/* MASSIVE BRUTALIST HERO */}
-      <section className="relative min-h-[90vh] flex flex-col justify-end bg-jcc-navy border-b-8 border-jcc-gold px-4 md:px-8 pb-16 pt-32 overflow-hidden">
+      <section className="relative flex min-h-[82vh] items-end overflow-hidden bg-jcc-navy px-4 pb-16 pt-32 md:px-8">
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/about.JPG"
             alt="About Us"
             fill
-            className="object-cover object-top opacity-30 grayscale scale-105"
+            className="scale-105 object-cover object-top opacity-30 grayscale"
             priority
             unoptimized
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-jcc-navy via-jcc-navy/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-jcc-navy via-jcc-navy/75 to-black/20" />
         </div>
 
-        <div className="relative z-10 container mx-auto max-w-7xl">
+        <div className="relative z-10 mx-auto w-full max-w-7xl">
           <div className="mb-6 overflow-hidden">
-            <div className="hero-chunk inline-flex bg-white text-jcc-navy px-6 py-2 border-4 border-jcc-navy font-black uppercase tracking-widest text-sm shadow-[6px_6px_0_#EAB308] transform -rotate-2">
+            <div className="hero-chunk inline-flex rounded-full border border-white/20 bg-white/10 px-5 py-2 text-xs font-bold uppercase tracking-[0.24em] text-white backdrop-blur-sm">
               {about.hero.subtitle}
             </div>
           </div>
 
-          <h1 className="font-anton text-[15vw] md:text-[11rem] leading-[0.8] uppercase tracking-tighter text-white mb-8 flex flex-col">
-            <div className="overflow-hidden pb-2">
-              <span className="hero-chunk block text-jcc-gold">
-                {about.hero.headingLead}
-              </span>
-            </div>
-            <div className="overflow-hidden pb-4">
-              <span
-                className="hero-chunk block text-transparent"
-                style={{ WebkitTextStroke: "3px white" }}
-              >
-                {about.hero.headingHighlight}
-              </span>
-            </div>
+          <h1 className="mb-8 flex flex-col font-anton text-[15vw] uppercase leading-[0.8] tracking-tighter text-white md:text-[11rem]">
+            <span className="hero-chunk block text-jcc-gold">{about.hero.headingLead}</span>
+            <span
+              className="hero-chunk block text-transparent"
+              style={{ WebkitTextStroke: "2px rgba(255,255,255,0.8)" }}
+            >
+              {about.hero.headingHighlight}
+            </span>
           </h1>
 
-          <div className="overflow-hidden max-w-3xl">
-            <p className="hero-chunk text-xl md:text-3xl text-white font-medium border-l-[12px] border-jcc-gold pl-6 leading-relaxed bg-black/20 p-4 backdrop-blur-sm">
+          <div className="max-w-3xl overflow-hidden">
+            <p className="hero-chunk rounded-2xl border-l-4 border-jcc-gold bg-black/20 p-5 text-lg leading-relaxed text-white/90 backdrop-blur-sm md:text-2xl">
               {about.hero.description}
             </p>
           </div>
         </div>
       </section>
 
-      {/* CONTINUOUS MARQUEE */}
-      <div className="bg-jcc-gold text-jcc-navy py-6 overflow-hidden border-b-8 border-jcc-navy flex">
-        <div className="marquee-track flex whitespace-nowrap items-center font-anton text-4xl md:text-6xl uppercase tracking-widest">
+      <div className="flex overflow-hidden border-y border-jcc-navy/10 bg-jcc-gold text-jcc-navy py-5">
+        <div className="marquee-track flex whitespace-nowrap items-center font-anton text-4xl uppercase tracking-widest md:text-5xl">
           {Array(8)
             .fill(
               `${about.missionVision.missionLabel} • ${about.missionVision.visionLabel} • `,
@@ -114,54 +106,59 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* OUR STORY - EDITORIAL SPREAD */}
-      <section className="py-24 md:py-40 px-4 bg-white relative z-20">
-        <div className="max-w-5xl mx-auto">
-          <div className="overflow-hidden mb-16">
-            <h2 className="section-heading font-anton text-[12vw] md:text-8xl text-jcc-navy uppercase leading-none tracking-tighter">
+      <section className="relative z-20 px-4 py-24 md:py-32">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-12 overflow-hidden">
+            <h2 className="section-heading font-anton text-[12vw] uppercase leading-none tracking-tighter text-jcc-navy md:text-8xl">
               {about.story.heading}
             </h2>
           </div>
 
-          <div
-            className="prose prose-xl md:prose-2xl prose-jcc max-w-none text-gray-800 font-medium
-            first-letter:font-anton first-letter:text-9xl first-letter:float-left first-letter:mr-6 first-letter:text-jcc-navy first-letter:leading-[0.8] first-letter:mt-2
-            prose-p:mb-12 prose-p:leading-relaxed"
-          >
-            {about.story.paragraphs.map((paragraph, idx) => (
-              <p key={idx} className="grid-item">
-                {paragraph}
+          <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
+            <div className="space-y-8 text-lg leading-relaxed text-slate-700">
+              {about.story.paragraphs.map((paragraph, idx) => (
+                <p key={idx} className="grid-item">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+
+            <div className="rounded-[28px] border border-jcc-gold/35 bg-white p-7 shadow-[0_18px_40px_rgba(15,23,42,0.08)]">
+              <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.24em] text-jcc-navy/70">
+                Our calling
               </p>
-            ))}
+              <p className="font-anton text-3xl uppercase leading-tight text-jcc-navy md:text-4xl">
+                Building a community where every life can encounter Christ.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* WHAT WE BELIEVE - BRUTALIST GRID */}
-      <section className="py-24 md:py-40 px-4 bg-jcc-navy border-y-8 border-jcc-gold text-white relative">
-        <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-jcc-gold/10 blur-[150px] rounded-full pointer-events-none" />
+      <section className="relative border-y border-jcc-gold/30 bg-jcc-navy px-4 py-24 text-white md:py-32">
+        <div className="absolute right-0 top-0 h-[36rem] w-[36rem] rounded-full bg-jcc-gold/10 blur-[120px]" />
 
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="overflow-hidden mb-20">
-            <h2 className="section-heading font-anton text-[12vw] md:text-8xl text-white uppercase leading-none tracking-tighter">
+        <div className="relative z-10 mx-auto max-w-7xl">
+          <div className="mb-16 overflow-hidden">
+            <h2 className="section-heading font-anton text-[12vw] uppercase leading-none tracking-tighter text-white md:text-8xl">
               {about.beliefs.heading}
             </h2>
           </div>
 
-          <div className="grid-container grid md:grid-cols-2 gap-8 md:gap-12">
+          <div className="grid gap-8 md:grid-cols-2">
             {about.beliefs.items.map((belief) => (
               <div
                 key={belief.title}
-                className="grid-item bg-white border-4 border-jcc-gold text-jcc-navy p-8 md:p-12 shadow-[15px_15px_0_#EAB308] hover:shadow-[0_0_0_#EAB308] hover:translate-x-3 hover:translate-y-3 transition-all duration-300"
+                className="grid-item rounded-[24px] border border-white/10 bg-white/5 p-8 shadow-[0_18px_32px_rgba(0,0,0,0.12)] backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1"
               >
-                <h3 className="font-anton text-4xl mb-6 uppercase tracking-wide">
+                <h3 className="mb-5 font-anton text-3xl uppercase tracking-tight text-jcc-gold">
                   {belief.title}
                 </h3>
-                <p className="text-xl font-medium leading-relaxed mb-6">
+                <p className="mb-6 text-lg leading-relaxed text-slate-200">
                   {belief.content}
                 </p>
                 {belief.verse && (
-                  <div className="inline-block bg-jcc-navy text-jcc-gold px-4 py-2 font-black uppercase tracking-widest text-sm">
+                  <div className="inline-block rounded-full border border-jcc-gold/40 bg-jcc-gold/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-jcc-gold">
                     {belief.verse}
                   </div>
                 )}
@@ -171,51 +168,47 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* MISSION & VISION */}
-      <section className="py-24 md:py-40 px-4 relative border-y-8 border-jcc-gold overflow-hidden">
+      <section className="relative overflow-hidden border-y border-jcc-gold/30 bg-white px-4 py-24 md:py-32">
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/hero-fallback.jpg"
             alt="Mission and Vision"
             fill
-            className="object-cover opacity-60 grayscale scale-105"
+            className="scale-105 object-cover opacity-60 grayscale"
             unoptimized
           />
-          <div className="absolute inset-0 bg-jcc-navy/60" />
+          <div className="absolute inset-0 bg-jcc-navy/65" />
         </div>
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="grid-container grid md:grid-cols-2 gap-16 md:gap-24">
-            {/* Mission */}
-            <div className="grid-item flex flex-col items-start bg-white p-12 border-4 border-black shadow-[15px_15px_0_black]">
-              <div className="bg-jcc-navy text-white px-6 py-2 border-4 border-jcc-gold font-black uppercase tracking-widest shadow-[8px_8px_0_#EAB308] mb-8 transform -rotate-2">
-                {about.missionVision.missionLabel}
-              </div>
-              <h3 className="font-anton text-5xl md:text-7xl mb-8 uppercase text-jcc-navy leading-none">
-                {about.missionVision.missionHeading}
-              </h3>
-              <p className="text-2xl font-black text-jcc-gold mb-6 uppercase border-l-8 border-jcc-navy pl-6">
-                {about.missionVision.missionStatement}
-              </p>
-              <p className="text-xl text-gray-700 font-medium leading-relaxed">
-                {about.missionVision.missionDescription}
-              </p>
-            </div>
 
-            {/* Vision */}
-            <div className="grid-item flex flex-col items-start bg-white p-12 border-4 border-black shadow-[15px_15px_0_black]">
-              <div className="bg-jcc-gold text-jcc-navy px-6 py-2 border-4 border-jcc-navy font-black uppercase tracking-widest shadow-[8px_8px_0_#1a365d] mb-8 transform rotate-2">
-                {about.missionVision.visionLabel}
-              </div>
-              <h3 className="font-anton text-5xl md:text-7xl mb-8 uppercase text-jcc-navy leading-none">
-                {about.missionVision.visionHeading}
-              </h3>
-              <p className="text-2xl font-black text-jcc-navy mb-6 uppercase border-l-8 border-jcc-gold pl-6">
-                {about.missionVision.visionStatement}
-              </p>
-              <p className="text-xl text-gray-700 font-medium leading-relaxed">
-                {about.missionVision.visionDescription}
-              </p>
+        <div className="relative z-10 mx-auto grid max-w-7xl gap-10 md:grid-cols-2">
+          <div className="grid-item rounded-[28px] border border-jcc-gold/30 bg-white p-8 shadow-[0_18px_40px_rgba(15,23,42,0.08)] md:p-10">
+            <div className="mb-6 inline-flex rounded-full border border-jcc-navy/20 bg-jcc-navy px-4 py-2 text-[10px] font-bold uppercase tracking-[0.24em] text-white">
+              {about.missionVision.missionLabel}
             </div>
+            <h3 className="mb-5 font-anton text-4xl uppercase leading-none text-jcc-navy md:text-5xl">
+              {about.missionVision.missionHeading}
+            </h3>
+            <p className="mb-6 border-l-4 border-jcc-gold pl-5 text-xl font-semibold uppercase leading-relaxed text-jcc-gold">
+              {about.missionVision.missionStatement}
+            </p>
+            <p className="text-lg leading-relaxed text-slate-700">
+              {about.missionVision.missionDescription}
+            </p>
+          </div>
+
+          <div className="grid-item rounded-[28px] border border-jcc-gold/30 bg-[#f5efe6] p-8 shadow-[0_18px_40px_rgba(15,23,42,0.08)] md:p-10">
+            <div className="mb-6 inline-flex rounded-full border border-jcc-gold/30 bg-jcc-gold px-4 py-2 text-[10px] font-bold uppercase tracking-[0.24em] text-jcc-navy">
+              {about.missionVision.visionLabel}
+            </div>
+            <h3 className="mb-5 font-anton text-4xl uppercase leading-none text-jcc-navy md:text-5xl">
+              {about.missionVision.visionHeading}
+            </h3>
+            <p className="mb-6 border-l-4 border-jcc-navy pl-5 text-xl font-semibold uppercase leading-relaxed text-jcc-navy">
+              {about.missionVision.visionStatement}
+            </p>
+            <p className="text-lg leading-relaxed text-slate-700">
+              {about.missionVision.visionDescription}
+            </p>
           </div>
         </div>
       </section>
