@@ -62,7 +62,7 @@ export default function GivePage() {
       className="min-h-screen bg-black text-white selection:bg-jcc-gold selection:text-black"
     >
       {/* HERO SECTION - MASSIVE IMAGE & CLEAN TYPOGRAPHY */}
-      <section className="hero-section relative h-screen min-h-[700px] flex items-end pb-32 overflow-hidden">
+      <section className="hero-section relative min-h-[38rem] h-[82svh] md:h-[86vh] max-h-[52rem] flex items-end pb-20 md:pb-24 overflow-hidden">
         {/* Full Bleed Parallax Background */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -93,23 +93,19 @@ export default function GivePage() {
               cities with the message of the gospel.
             </p>
 
-            <div className="give-hero-el flex flex-col sm:flex-row gap-8 items-start sm:items-center">
+            <div className="give-hero-el flex flex-col sm:flex-row gap-4 sm:gap-6 items-start sm:items-center">
               <a
                 href="#give-now"
-                className="group inline-flex items-center text-jcc-gold hover:text-white transition-colors duration-500 pb-2 border-b border-jcc-gold/50 hover:border-white"
+                className="group inline-flex items-center justify-center gap-3 rounded-full bg-jcc-gold px-6 py-3 text-sm font-semibold uppercase tracking-[0.15em] text-black shadow-lg shadow-black/20 transition-all hover:-translate-y-0.5 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
-                <span className="text-sm tracking-[0.2em] uppercase font-medium">
-                  Give Now
-                </span>
-                <ArrowRight className="h-4 w-4 ml-4 group-hover:translate-x-2 transition-transform duration-500" />
+                <span>Give Now</span>
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </a>
               <a
                 href="#other-ways"
-                className="group inline-flex items-center text-gray-400 hover:text-white transition-colors duration-500 pb-2 border-b border-transparent hover:border-white/50"
+                className="group inline-flex items-center justify-center rounded-full border border-white/40 px-6 py-3 text-sm font-medium uppercase tracking-[0.15em] text-white transition-colors hover:border-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
-                <span className="text-sm tracking-[0.2em] uppercase font-light">
-                  Other Ways
-                </span>
+                <span>Other Ways</span>
               </a>
             </div>
           </div>
@@ -119,13 +115,13 @@ export default function GivePage() {
       {/* LUXURY BANK DETAILS SECTION */}
       <section
         id="give-now"
-        className="give-section py-32 md:py-48 bg-white text-black"
+        className="give-section scroll-mt-24 py-20 md:py-28 bg-white text-black"
       >
         <div className="container mx-auto px-4 sm:px-8 lg:px-12">
-          <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-start">
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-20 items-start">
             {/* Sticky Header Column */}
             <div className="lg:col-span-5 lg:sticky lg:top-32">
-              <h2 className="text-4xl md:text-6xl font-light mb-8 leading-tight tracking-tight">
+              <h2 className="text-4xl md:text-5xl font-light mb-6 leading-tight tracking-tight">
                 Ways to Give
               </h2>
               <p className="text-xl text-gray-500 font-light leading-relaxed max-w-md">
@@ -135,12 +131,13 @@ export default function GivePage() {
             </div>
 
             {/* Account Details Column */}
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-7 rounded-3xl border border-gray-200 bg-gray-50 p-6 sm:p-8 lg:p-10 shadow-sm">
               {/* Ultra-Minimal Tab Switcher */}
-              <div className="flex gap-12 mb-16 border-b border-gray-200">
+              <div className="flex flex-wrap gap-x-6 sm:gap-x-10 gap-y-2 mb-10 border-b border-gray-200">
                 <button
                   onClick={() => setActiveTab("naira")}
-                  className={`pb-4 text-sm font-medium tracking-[0.2em] uppercase transition-colors duration-500 relative ${activeTab === "naira" ? "text-black" : "text-gray-400 hover:text-gray-600"}`}
+                  aria-pressed={activeTab === "naira"}
+                  className={`pb-3 text-xs sm:text-sm font-medium tracking-[0.12em] sm:tracking-[0.2em] uppercase transition-colors duration-300 relative ${activeTab === "naira" ? "text-black" : "text-gray-400 hover:text-gray-600"}`}
                 >
                   Naira Account
                   {activeTab === "naira" && (
@@ -149,7 +146,8 @@ export default function GivePage() {
                 </button>
                 <button
                   onClick={() => setActiveTab("domiciliary")}
-                  className={`pb-4 text-sm font-medium tracking-[0.2em] uppercase transition-colors duration-500 relative ${activeTab === "domiciliary" ? "text-black" : "text-gray-400 hover:text-gray-600"}`}
+                  aria-pressed={activeTab === "domiciliary"}
+                  className={`pb-3 text-xs sm:text-sm font-medium tracking-[0.12em] sm:tracking-[0.2em] uppercase transition-colors duration-300 relative ${activeTab === "domiciliary" ? "text-black" : "text-gray-400 hover:text-gray-600"}`}
                 >
                   Domiciliary Account
                   {activeTab === "domiciliary" && (
@@ -159,21 +157,21 @@ export default function GivePage() {
               </div>
 
               {/* Account Views */}
-              <div className="min-h-[400px]">
+              <div className="min-h-[22rem]">
                 {activeTab === "naira" && (
                   <div className="animate-in fade-in duration-700">
-                    <div className="mb-12">
+                    <div className="mb-8">
                       <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-2">
                         Bank
                       </p>
-                      <p className="text-3xl font-light">Access Bank</p>
+                      <p className="text-2xl sm:text-3xl font-light">Access Bank</p>
                     </div>
 
-                    <div className="mb-12">
+                    <div className="mb-8">
                       <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-2">
                         Account Name
                       </p>
-                      <p className="text-xl font-light text-gray-800">
+                      <p className="text-lg sm:text-xl font-light text-gray-800">
                         Jubilee Christian Centre Amakohia
                       </p>
                     </div>
@@ -182,23 +180,36 @@ export default function GivePage() {
                       <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-2">
                         Account Number
                       </p>
-                      <div
-                        className="flex items-center justify-between border-b border-gray-200 pb-6 group cursor-pointer"
+                      <button
+                        type="button"
                         onClick={() =>
                           copyToClipboard("0077404368", "Access Bank")
                         }
+                        aria-label={
+                          copiedAccount === "Access Bank"
+                            ? "Account number copied"
+                            : "Copy account number"
+                        }
+                        className="group w-full border-b border-gray-200 pb-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jcc-gold focus-visible:ring-offset-4"
                       >
-                        <p className="text-4xl md:text-5xl font-light tracking-widest text-black">
-                          0077404368
-                        </p>
-                        <div className="w-12 h-12 flex items-center justify-center rounded-full bg-gray-50 group-hover:bg-gray-100 transition-colors">
-                          {copiedAccount === "Access Bank" ? (
-                            <Check className="h-5 w-5 text-green-500" />
-                          ) : (
-                            <Copy className="h-5 w-5 text-gray-400 group-hover:text-black transition-colors" />
-                          )}
-                        </div>
-                      </div>
+                        <span className="flex items-center justify-between gap-3">
+                          <span className="text-3xl sm:text-4xl md:text-5xl font-light tracking-[0.12em] sm:tracking-[0.16em] text-black">
+                            0077404368
+                          </span>
+                          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white transition-colors group-hover:bg-gray-200">
+                            {copiedAccount === "Access Bank" ? (
+                              <Check className="h-5 w-5 text-green-600" />
+                            ) : (
+                              <Copy className="h-5 w-5 text-gray-500 transition-colors group-hover:text-black" />
+                            )}
+                          </span>
+                        </span>
+                        <span className="mt-2 block text-xs text-gray-500">
+                          {copiedAccount === "Access Bank"
+                            ? "Copied to clipboard"
+                            : "Tap to copy account number"}
+                        </span>
+                      </button>
                     </div>
                   </div>
                 )}
@@ -237,10 +248,10 @@ export default function GivePage() {
       </section>
 
       {/* SPLIT IMAGE/TEXT SECTION (WHY GIVE / OTHER WAYS) */}
-      <section id="other-ways" className="give-section bg-[#111] text-white">
-        <div className="grid md:grid-cols-2 min-h-[80vh]">
+      <section id="other-ways" className="give-section scroll-mt-24 bg-[#111] text-white">
+        <div className="grid md:grid-cols-2 md:min-h-[80vh]">
           {/* Half Image */}
-          <div className="relative h-[50vh] md:h-auto">
+          <div className="relative h-[40vh] min-h-[18rem] md:h-auto">
             <Image
               src="/images/reach.jpg"
               alt="Worship"
@@ -251,8 +262,8 @@ export default function GivePage() {
           </div>
 
           {/* Half Content */}
-          <div className="p-12 md:p-24 flex flex-col justify-center">
-            <div className="mb-24">
+          <div className="p-8 sm:p-10 md:p-14 lg:p-20 flex flex-col justify-center">
+            <div className="mb-16 md:mb-20">
               <h3 className="text-sm font-semibold tracking-[0.2em] uppercase text-jcc-gold mb-6">
                 Mobile Transfer
               </h3>
@@ -275,7 +286,7 @@ export default function GivePage() {
               <h3 className="text-sm font-semibold tracking-[0.2em] uppercase text-jcc-gold mb-6">
                 The Impact
               </h3>
-              <div className="space-y-12">
+              <div className="space-y-8 md:space-y-10">
                 <div>
                   <h4 className="text-xl font-medium mb-2">Witnesses Sent</h4>
                   <p className="text-gray-400 font-light">
@@ -304,12 +315,12 @@ export default function GivePage() {
       </section>
 
       {/* FINAL QUOTE (Minimal) */}
-      <section className="give-section py-32 bg-black text-center px-4">
+      <section className="give-section py-24 md:py-32 bg-black text-center px-4">
         <div className="max-w-4xl mx-auto">
           <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-500 mb-12">
             2 Corinthians 9:7
           </p>
-          <p className="text-3xl md:text-5xl font-light leading-tight text-white mb-12 italic">
+          <p className="text-2xl sm:text-3xl md:text-5xl font-light leading-tight text-white mb-12 italic">
             &quot;Each of you should give what you have decided in your heart to
             give... for God loves a cheerful giver.&quot;
           </p>

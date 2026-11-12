@@ -178,7 +178,7 @@ export default function SermonsPage() {
   };
   return <div className="min-h-screen bg-[#0a0a0a] text-gray-200 selection:bg-jcc-gold selection:text-[#0a0a0a]">
       {/* Hero Image Section */}
-      <section className="relative h-[80vh] md:h-[90vh] lg:h-[95vh] overflow-hidden">
+      <section className="relative min-h-[30rem] h-[68svh] sm:h-[74svh] lg:h-[82vh] max-h-[50rem] overflow-hidden">
         <Image src="/images/preach.jpg" alt="Preaching at Jubilee Christian Centre Church" fill className="object-cover object-top opacity-60" priority />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/40 via-[#0a0a0a]/60 to-[#0a0a0a]"></div>
         
@@ -237,7 +237,7 @@ export default function SermonsPage() {
             duration: 0.6,
             delay: 0.8
           }}>
-              <Link href="#featured" className="w-full sm:w-auto px-10 py-4 bg-jcc-gold hover:bg-jcc-gold/90 text-[#0a0a0a] font-bold rounded-full transition-all duration-300 flex items-center justify-center space-x-3 uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(200,160,50,0.3)] hover:shadow-[0_0_40px_rgba(200,160,50,0.5)] hover:scale-105">
+              <Link href={featuredSermon ? "#featured" : "https://youtube.com/@jccchurch"} target={featuredSermon ? undefined : "_blank"} rel={featuredSermon ? undefined : "noopener noreferrer"} className="w-full sm:w-auto px-10 py-4 bg-jcc-gold hover:bg-jcc-gold/90 text-[#0a0a0a] font-bold rounded-full transition-all duration-300 flex items-center justify-center space-x-3 uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(200,160,50,0.3)] hover:shadow-[0_0_40px_rgba(200,160,50,0.5)] hover:scale-105">
                 <Play className="h-5 w-5" fill="currentColor" />
                 <span>Watch Latest</span>
               </Link>
@@ -307,28 +307,8 @@ export default function SermonsPage() {
           </div>
         </section>}
 
-      {/* Devotionals Promo Snippet */}
-      <section className="py-8 bg-[#0a0a0a]">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="bg-gradient-to-r from-[#111] to-[#1a1a1a] border border-gray-800 rounded-3xl p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-jcc-gold/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
-            <div className="relative z-10 flex-1 text-center md:text-left">
-              <div className="inline-flex items-center gap-2 mb-3">
-                <span className="w-2 h-2 rounded-full bg-jcc-gold animate-pulse"></span>
-                <span className="text-jcc-gold font-bold uppercase text-xs tracking-widest">Word for Today</span>
-              </div>
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Need daily inspiration?</h3>
-              <p className="text-gray-400 max-w-lg">Build your faith every morning with the Word for Today. Deep, practical, and powerfully encouraging.</p>
-            </div>
-            <Link href="/devotionals" className="relative z-10 whitespace-nowrap px-8 py-4 bg-jcc-gold hover:bg-yellow-400 text-[#0a0a0a] font-bold rounded-xl transition-all duration-300 uppercase tracking-widest text-sm shadow-[0_0_20px_rgba(200,160,50,0.2)]">
-              Explore Word for Today
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* Search & Library Section */}
-      <section className="py-20 bg-[#0a0a0a]">
+      <section id="library" className="py-20 bg-[#0a0a0a]">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           {/* Section Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
@@ -441,7 +421,7 @@ export default function SermonsPage() {
       </section>
 
       {/* Featured Series Section */}
-      <section className="py-24 bg-gradient-to-b from-[#0a0a0a] to-[#050505] border-t border-gray-900">
+      {(loading || videos.length > 0) && <section className="py-24 bg-gradient-to-b from-[#0a0a0a] to-[#050505] border-t border-gray-900">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex flex-col items-center mb-16 text-center">
             <h2 className="font-anton text-4xl md:text-6xl text-white mb-4 leading-none uppercase drop-shadow-lg">
@@ -500,6 +480,26 @@ export default function SermonsPage() {
                   </div>
                 </div>)}
             </div>}
+        </div>
+      </section>}
+
+      {/* Devotionals Promo Snippet */}
+      <section className="py-8 bg-[#0a0a0a]">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="bg-gradient-to-r from-[#111] to-[#1a1a1a] border border-gray-800 rounded-3xl p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-jcc-gold/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
+            <div className="relative z-10 flex-1 text-center md:text-left">
+              <div className="inline-flex items-center gap-2 mb-3">
+                <span className="w-2 h-2 rounded-full bg-jcc-gold animate-pulse"></span>
+                <span className="text-jcc-gold font-bold uppercase text-xs tracking-widest">Word for Today</span>
+              </div>
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Need daily inspiration?</h3>
+              <p className="text-gray-400 max-w-lg">Build your faith every morning with the Word for Today. Deep, practical, and powerfully encouraging.</p>
+            </div>
+            <Link href="/devotionals" className="relative z-10 whitespace-nowrap px-8 py-4 bg-jcc-gold hover:bg-yellow-400 text-[#0a0a0a] font-bold rounded-xl transition-all duration-300 uppercase tracking-widest text-sm shadow-[0_0_20px_rgba(200,160,50,0.2)]">
+              Explore Word for Today
+            </Link>
+          </div>
         </div>
       </section>
 

@@ -1,10 +1,12 @@
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
-import { lazy, Suspense, useEffect } from 'react'
+import { lazy, Suspense, useEffect, useRef } from 'react'
 import AudioPlayerRoot from './components/AudioPlayerRoot.jsx'
 import Footer from './components/Footer.jsx'
 import Navbar from './components/Navbar.jsx'
 import { AudioPlayerProvider } from './components/providers/AudioPlayerProvider.jsx'
 import { LanguageProvider } from './components/providers/LanguageProvider.jsx'
+import { ADMIN_AWAY_STORAGE_KEY, ADMIN_AWAY_TIMEOUT_MS } from './lib/adminSessionTimeout.js'
+import { supabase } from './lib/supabase.js'
 
 const Home = lazy(() => import('../app/page.jsx'))
 const About = lazy(() => import('../app/about/page.jsx'))
@@ -37,6 +39,8 @@ function RoutePage({ component: Component }) {
 
 function AppRoutes() {
   const { pathname } = useLocation()
+  const previousPathname = useRef(pathname)
+  const adminLogoutTimer = useRef(null)
 
   useEffect(() => {
     const titles = {
@@ -61,6 +65,41 @@ function AppRoutes() {
 
     const title = titles[pathname] || (pathname.startsWith('/devotionals/') ? 'Devotional' : pathname.startsWith('/events/') ? 'Event' : 'Page Not Found')
     document.title = `${title} | Jubilee Christian Centre Church`
+  }, [pathname])
+
+  useEffect(() => {
+    const previousPath = previousPathname.current
+
+    if (pathname === '/admin') {
+      if (adminLogoutTimer.current !== null) {
+        window.clearTimeout(adminLogoutTimer.current)
+        adminLogoutTimer.current = null
+      }
+
+      const awaySince = window.sessionStorage.getItem(ADMIN_AWAY_STORAGE_KEY)
+      if (awaySince) {
+        const awayDuration = Date.now() - Number(awaySince)
+        if (!Number.isFinite(awayDuration) || awayDuration < ADMIN_AWAY_TIMEOUT_MS) {
+          window.sessionStorage.removeItem(ADMIN_AWAY_STORAGE_KEY)
+        }
+      }
+    } else if (previousPath === '/admin') {
+      const awaySince = Date.now()
+      const awayMarker = String(awaySince)
+      window.sessionStorage.setItem(ADMIN_AWAY_STORAGE_KEY, awayMarker)
+      adminLogoutTimer.current = window.setTimeout(async () => {
+        if (window.sessionStorage.getItem(ADMIN_AWAY_STORAGE_KEY) !== awayMarker || !supabase) return
+
+        try {
+          const { error } = await supabase.auth.signOut()
+          if (error) console.error('Unable to expire the admin session:', error)
+        } catch (error) {
+          console.error('Unable to expire the admin session:', error)
+        }
+      }, ADMIN_AWAY_TIMEOUT_MS)
+    }
+
+    previousPathname.current = pathname
   }, [pathname])
 
   return (

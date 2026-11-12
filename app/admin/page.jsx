@@ -7,6 +7,8 @@ import PublishToast from '@/components/PublishToast'
 import ClientOnlyEditor from '@/components/ClientOnlyEditor'
 import { isSupabaseConfigured, supabase } from '@/lib/supabase'
 import { uploadDevotionalImage } from '@/lib/uploadDevotionalImage'
+import { deleteEventImage, uploadEventImage } from '@/lib/uploadEventImage'
+import { ADMIN_AWAY_STORAGE_KEY, ADMIN_AWAY_TIMEOUT_MS } from '@/lib/adminSessionTimeout'
 
 
 function readInitialDraft() {
@@ -37,11 +39,268 @@ const EMPTY_EVENT = {
   description: '',
   event_date: '',
   event_time: '',
+  event_start_at: '',
   location: '',
   event_type: 'Event',
   image: '/images/event-hero.jpg',
   is_published: false,
   registration_open: true,
+}
+
+const LEGACY_EVENT_TITLES = {
+  'heart-room': 'The Heart Room',
+  rooted: 'Rooted',
+  manual: 'The Manual',
+  'nation-takers-webinar': 'Nation Takers Career Webinar 1.0',
+  'understanding-salvation': '4 Days of Understanding Salvation',
+  'unlearning-conference': 'The Unlearning Conference',
+}
+const REGISTRATION_BATCH_SIZE = 500
+const REGISTRATION_PAGE_SIZE = 25
+
+function csvCell(value) {
+  let text = String(value ?? '')
+  if (/^[=+\-@]/.test(text.trimStart())) text = `'${text}`
+  return `"${text.replace(/"/g, '""')}"`
+}
+
+function registrationAnswerText(value) {
+  if (typeof value === 'string') return value
+  if (value === null || value === undefined) return ''
+  return JSON.stringify(value)
+}
+
+function AdminEventRegistrations({ events }) {
+  const [registrations, setRegistrations] = useState([])
+  const [registrationsLoading, setRegistrationsLoading] = useState(true)
+  const [registrationMessage, setRegistrationMessage] = useState('')
+  const [registrationSearch, setRegistrationSearch] = useState('')
+  const [registrationEventFilter, setRegistrationEventFilter] = useState('all')
+  const [registrationPage, setRegistrationPage] = useState(1)
+  const [reloadVersion, setReloadVersion] = useState(0)
+
+  useEffect(() => {
+    let active = true
+
+    async function loadRegistrations() {
+      try {
+        const allRegistrations = []
+        let offset = 0
+
+        while (true) {
+          const { data, error } = await supabase
+            .from('event_registrations')
+            .select('id, event_slug, full_name, email, phone, answers, created_at')
+            .order('created_at', { ascending: false })
+            .order('id', { ascending: false })
+            .range(offset, offset + REGISTRATION_BATCH_SIZE - 1)
+
+          if (error) throw new Error(error.message)
+          if (!active) return
+
+          allRegistrations.push(...(data || []))
+          if (!data || data.length < REGISTRATION_BATCH_SIZE) break
+          offset += REGISTRATION_BATCH_SIZE
+        }
+
+        if (active) {
+          setRegistrations(allRegistrations)
+          setRegistrationMessage('')
+        }
+      } catch (error) {
+        if (!active) return
+        console.error('Unable to load event registrations:', error)
+        setRegistrationMessage(
+          `Could not load registrations: ${error instanceof Error ? error.message : 'Please try again.'}`
+        )
+      } finally {
+        if (active) setRegistrationsLoading(false)
+      }
+    }
+
+    loadRegistrations()
+    return () => {
+      active = false
+    }
+  }, [reloadVersion])
+
+  const eventTitle = slug => (
+    events.find(event => event.slug === slug)?.title ||
+    LEGACY_EVENT_TITLES[slug] ||
+    slug.replace(/-/g, ' ')
+  )
+  const eventSlugs = [...new Set([
+    ...events.map(event => event.slug),
+    ...registrations.map(registration => registration.event_slug),
+  ])].sort()
+  const search = registrationSearch.trim().toLowerCase()
+  const filteredRegistrations = registrations.filter(registration => {
+    if (registrationEventFilter !== 'all' && registration.event_slug !== registrationEventFilter) return false
+    if (!search) return true
+
+    return [
+      registration.full_name,
+      registration.email,
+      registration.phone,
+      eventTitle(registration.event_slug),
+    ].some(value => String(value || '').toLowerCase().includes(search))
+  })
+  const pageCount = Math.max(1, Math.ceil(filteredRegistrations.length / REGISTRATION_PAGE_SIZE))
+  const currentPage = Math.min(registrationPage, pageCount)
+  const pageStart = (currentPage - 1) * REGISTRATION_PAGE_SIZE
+  const visibleRegistrations = filteredRegistrations.slice(pageStart, pageStart + REGISTRATION_PAGE_SIZE)
+
+  function exportRegistrations() {
+    const header = ['Event', 'Full name', 'Email', 'Phone', 'Registered at', 'Additional responses']
+    const rows = filteredRegistrations.map(registration => [
+      eventTitle(registration.event_slug),
+      registration.full_name,
+      registration.email,
+      registration.phone,
+      registration.created_at,
+      JSON.stringify(registration.answers || {}),
+    ])
+    const csv = [header, ...rows].map(row => row.map(csvCell).join(',')).join('\r\n')
+    const blob = new Blob([`\uFEFF${csv}`], { type: 'text/csv;charset=utf-8' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `jcc-event-registrations-${new Date().toISOString().slice(0, 10)}.csv`
+    link.click()
+    window.setTimeout(() => URL.revokeObjectURL(url), 0)
+  }
+
+  function refreshRegistrations() {
+    setRegistrationsLoading(true)
+    setRegistrationMessage('')
+    setRegistrationPage(1)
+    setReloadVersion(version => version + 1)
+  }
+
+  return (
+    <section aria-labelledby="registration-records-title" className="mt-12 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+      <div className="flex flex-col gap-5 border-b border-gray-100 bg-slate-50 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-jcc-gold-dark">Admin only · Private records</p>
+          <h3 id="registration-records-title" className="mt-2 text-xl font-bold text-jcc-navy sm:text-2xl">Event registrations</h3>
+          <p className="mt-1 text-sm text-gray-500">Attendee contact information and registration history.</p>
+        </div>
+        <div className="flex flex-wrap gap-3">
+          <button type="button" onClick={refreshRegistrations} disabled={registrationsLoading} className="rounded-lg border border-gray-300 px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-jcc-navy hover:bg-white disabled:opacity-60">
+            {registrationsLoading ? 'Loading…' : 'Refresh'}
+          </button>
+          <button type="button" onClick={exportRegistrations} disabled={registrationsLoading || filteredRegistrations.length === 0} className="rounded-lg bg-jcc-navy px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-white hover:bg-jcc-navy-light disabled:cursor-not-allowed disabled:opacity-50">
+            Export filtered CSV
+          </button>
+        </div>
+      </div>
+
+      <div className="grid gap-4 border-b border-gray-100 p-5 sm:grid-cols-2 sm:p-6">
+        <label className="block">
+          <span className="mb-2 block text-xs font-bold uppercase tracking-widest text-gray-500">Search records</span>
+          <input
+            type="search"
+            value={registrationSearch}
+            onChange={event => {
+              setRegistrationSearch(event.target.value)
+              setRegistrationPage(1)
+            }}
+            placeholder="Name, email, phone, or event"
+            className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm text-gray-900 outline-none focus:border-jcc-navy focus:ring-2 focus:ring-jcc-navy/10"
+          />
+        </label>
+        <label className="block">
+          <span className="mb-2 block text-xs font-bold uppercase tracking-widest text-gray-500">Filter by event</span>
+          <select
+            value={registrationEventFilter}
+            onChange={event => {
+              setRegistrationEventFilter(event.target.value)
+              setRegistrationPage(1)
+            }}
+            className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-900 outline-none focus:border-jcc-navy focus:ring-2 focus:ring-jcc-navy/10"
+          >
+            <option value="all">All events</option>
+            {eventSlugs.map(slug => <option key={slug} value={slug}>{eventTitle(slug)}</option>)}
+          </select>
+        </label>
+      </div>
+
+      {registrationMessage && <p role="alert" className="m-5 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-800 sm:m-6">{registrationMessage}</p>}
+
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[900px] text-left text-sm">
+          <thead className="bg-white text-[10px] font-bold uppercase tracking-widest text-gray-500">
+            <tr>
+              <th scope="col" className="px-5 py-4 sm:px-6">Attendee</th>
+              <th scope="col" className="px-5 py-4">Event</th>
+              <th scope="col" className="px-5 py-4">Phone</th>
+              <th scope="col" className="px-5 py-4">Registered</th>
+              <th scope="col" className="px-5 py-4 sm:px-6">Responses</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-100">
+            {registrationsLoading ? (
+              <tr><td colSpan="5" className="px-6 py-12 text-center text-gray-500">Loading registration records…</td></tr>
+            ) : visibleRegistrations.length === 0 ? (
+              <tr><td colSpan="5" className="px-6 py-12 text-center text-gray-500">
+                {registrationMessage
+                  ? 'Registration records could not be displayed.'
+                  : registrations.length === 0
+                    ? 'No event registrations have been received yet.'
+                    : 'No registrations match these filters.'}
+              </td></tr>
+            ) : visibleRegistrations.map(registration => {
+              const answers = Object.entries(registration.answers || {})
+              const registeredAt = new Date(registration.created_at)
+              const event = events.find(item => item.slug === registration.event_slug)
+              return <tr key={registration.id} className="align-top hover:bg-slate-50/70">
+                <td className="px-5 py-4 sm:px-6">
+                  <p className="font-semibold text-gray-900">{registration.full_name}</p>
+                  <a href={`mailto:${registration.email}`} className="mt-1 inline-block text-xs text-jcc-navy underline decoration-jcc-navy/30 underline-offset-2 hover:text-jcc-orange">{registration.email}</a>
+                </td>
+                <td className="px-5 py-4">
+                  <p className="font-medium text-gray-700">{eventTitle(registration.event_slug)}</p>
+                  {event?.event_date && <p className="mt-1 text-xs text-gray-500">{event.event_date}{event.event_time && ` · ${event.event_time}`}</p>}
+                </td>
+                <td className="px-5 py-4">
+                  <a href={`tel:${registration.phone}`} className="text-gray-700 hover:text-jcc-orange">{registration.phone}</a>
+                </td>
+                <td className="whitespace-nowrap px-5 py-4 text-gray-600">
+                  {Number.isNaN(registeredAt.getTime()) ? 'Unknown' : registeredAt.toLocaleString()}
+                </td>
+                <td className="px-5 py-4 sm:px-6">
+                  {answers.length === 0 ? <span className="text-gray-400">—</span> : (
+                    <details className="max-w-xs">
+                      <summary className="cursor-pointer font-semibold text-jcc-navy hover:text-jcc-orange">{answers.length} response{answers.length === 1 ? '' : 's'}</summary>
+                      <dl className="mt-3 space-y-2">
+                        {answers.map(([question, answer]) => <div key={question}>
+                          <dt className="text-xs font-bold text-gray-600">{question}</dt>
+                          <dd className="whitespace-pre-wrap break-words text-xs text-gray-500">{registrationAnswerText(answer)}</dd>
+                        </div>)}
+                      </dl>
+                    </details>
+                  )}
+                </td>
+              </tr>
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="flex flex-col gap-3 border-t border-gray-100 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+        <p className="text-xs text-gray-500">
+          {registrationsLoading ? ' ' : filteredRegistrations.length === 0
+            ? '0 registrations'
+            : `Showing ${pageStart + 1}–${Math.min(pageStart + REGISTRATION_PAGE_SIZE, filteredRegistrations.length)} of ${filteredRegistrations.length} registrations`}
+        </p>
+        <div className="flex items-center gap-3">
+          <button type="button" onClick={() => setRegistrationPage(page => Math.max(1, page - 1))} disabled={currentPage <= 1 || registrationsLoading} className="rounded-lg border border-gray-200 px-3 py-2 text-xs font-bold text-jcc-navy hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40">Previous</button>
+          <span className="text-xs font-semibold text-gray-500">Page {currentPage} of {pageCount}</span>
+          <button type="button" onClick={() => setRegistrationPage(page => Math.min(pageCount, page + 1))} disabled={currentPage >= pageCount || registrationsLoading} className="rounded-lg border border-gray-200 px-3 py-2 text-xs font-bold text-jcc-navy hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40">Next</button>
+        </div>
+      </div>
+    </section>
+  )
 }
 
 function AdminEventsManager() {
@@ -51,6 +310,8 @@ function AdminEventsManager() {
   const [eventMessage, setEventMessage] = useState('')
   const [eventLoading, setEventLoading] = useState(true)
   const [savingEvent, setSavingEvent] = useState(false)
+  const [deletingSlug, setDeletingSlug] = useState(null)
+  const [eventImageFile, setEventImageFile] = useState(null)
 
   const fetchEvents = useCallback(() => (
     supabase
@@ -115,6 +376,7 @@ function AdminEventsManager() {
 
   function editEvent(event) {
     setEditingSlug(event.slug)
+    setEventImageFile(null)
     setEventForm({
       slug: event.slug,
       title: event.title,
@@ -122,6 +384,7 @@ function AdminEventsManager() {
       description: event.description || '',
       event_date: event.event_date || '',
       event_time: event.event_time || '',
+      event_start_at: event.event_start_at ? toLocalDateTimeValue(event.event_start_at) : '',
       location: event.location || '',
       event_type: event.event_type || 'Event',
       image: event.image || '/images/event-hero.jpg',
@@ -134,6 +397,7 @@ function AdminEventsManager() {
   function resetEventForm() {
     setEditingSlug(null)
     setEventForm(EMPTY_EVENT)
+    setEventImageFile(null)
     setEventMessage('')
   }
 
@@ -144,48 +408,111 @@ function AdminEventsManager() {
       return
     }
 
-    setSavingEvent(true)
-    setEventMessage('')
-    const payload = {
-      ...eventForm,
-      title: eventForm.title.trim(),
-      slug: eventForm.slug.trim().toLowerCase(),
-      updated_at: new Date().toISOString(),
+    const startsAt = eventForm.event_start_at ? new Date(eventForm.event_start_at) : null
+    if (eventForm.is_published && (!startsAt || !Number.isFinite(startsAt.getTime()))) {
+      setEventMessage('Set an exact start date and time before publishing this event.')
+      return
     }
-    const result = editingSlug
-      ? await supabase.from('events').update(payload).eq('slug', editingSlug).select().single()
-      : await supabase.from('events').insert(payload).select().single()
-    setSavingEvent(false)
-
-    if (result.error) {
-      console.error('Unable to save event:', result.error)
-      setEventMessage(result.error.code === '23505'
-        ? 'That event URL is already in use.'
-        : `Could not save event: ${result.error.message}`)
+    if (eventForm.is_published && startsAt <= new Date()) {
+      setEventMessage('Published events must have a future start date and time.')
       return
     }
 
-    setEvents(current => [
-      result.data,
-      ...current.filter(item => item.slug !== editingSlug && item.slug !== result.data.slug),
-    ])
-    setEventMessage(payload.is_published ? 'Event saved and published.' : 'Event saved as a draft.')
-    setEditingSlug(result.data.slug)
+    setSavingEvent(true)
+    setEventMessage('')
+    let uploadedImageUrl = null
+    try {
+      if (eventImageFile) uploadedImageUrl = await uploadEventImage(eventImageFile)
+
+      const payload = {
+        ...eventForm,
+        title: eventForm.title.trim(),
+        slug: eventForm.slug.trim().toLowerCase(),
+        image: uploadedImageUrl || eventForm.image.trim() || '/images/event-hero.jpg',
+        event_start_at: startsAt ? startsAt.toISOString() : null,
+        updated_at: new Date().toISOString(),
+      }
+      const previousImage = events.find(item => item.slug === editingSlug)?.image
+      const result = editingSlug
+        ? await supabase.from('events').update(payload).eq('slug', editingSlug).select().single()
+        : await supabase.from('events').insert(payload).select().single()
+
+      if (result.error) {
+        console.error('Unable to save event:', result.error)
+        if (uploadedImageUrl) {
+          try {
+            await deleteEventImage(uploadedImageUrl)
+          } catch (cleanupError) {
+            console.error('Unable to clean up the unused event image:', cleanupError)
+          }
+        }
+        setEventMessage(result.error.code === '23505'
+          ? 'That event URL is already in use.'
+          : `Could not save event: ${result.error.message}`)
+        return
+      }
+
+      setEvents(current => [
+        result.data,
+        ...current.filter(item => item.slug !== editingSlug && item.slug !== result.data.slug),
+      ])
+      setEditingSlug(result.data.slug)
+      setEventImageFile(null)
+
+      let successMessage = payload.is_published ? 'Event saved and published.' : 'Event saved as a draft.'
+      if (uploadedImageUrl && previousImage && previousImage !== uploadedImageUrl) {
+        try {
+          await deleteEventImage(previousImage)
+        } catch (cleanupError) {
+          console.error('Unable to remove the replaced event image:', cleanupError)
+          successMessage += ' The previous image could not be removed from storage.'
+        }
+      }
+      setEventMessage(successMessage)
+    } catch (error) {
+      console.error('Unable to save event:', error)
+      if (uploadedImageUrl) {
+        try {
+          await deleteEventImage(uploadedImageUrl)
+        } catch (cleanupError) {
+          console.error('Unable to clean up the unused event image:', cleanupError)
+        }
+      }
+      setEventMessage(`Could not save event: ${error instanceof Error ? error.message : 'Please try again.'}`)
+    } finally {
+      setSavingEvent(false)
+    }
   }
 
   async function deleteEvent(event) {
     if (!window.confirm(`Delete "${event.title}"? Existing registration records will remain.`)) return
 
-    const { error } = await supabase.from('events').delete().eq('slug', event.slug)
-    if (error) {
-      console.error('Unable to delete event:', error)
-      setEventMessage(`Could not delete event: ${error.message}`)
-      return
-    }
+    setDeletingSlug(event.slug)
+    setEventMessage('')
+    try {
+      const { error } = await supabase.from('events').delete().eq('slug', event.slug)
+      if (error) {
+        console.error('Unable to delete event:', error)
+        setEventMessage(`Could not delete event: ${error.message}`)
+        return
+      }
 
-    setEvents(current => current.filter(item => item.slug !== event.slug))
-    if (editingSlug === event.slug) resetEventForm()
-    setEventMessage(`Deleted "${event.title}".`)
+      setEvents(current => current.filter(item => item.slug !== event.slug))
+      if (editingSlug === event.slug) resetEventForm()
+      try {
+        await deleteEventImage(event.image)
+      } catch (imageError) {
+        console.error('Event deleted, but its image could not be removed:', imageError)
+        setEventMessage(`Deleted "${event.title}", but its image could not be removed from storage.`)
+        return
+      }
+      setEventMessage(`Deleted "${event.title}".`)
+    } catch (error) {
+      console.error('Unable to delete event:', error)
+      setEventMessage(`Could not delete event: ${error instanceof Error ? error.message : 'Please try again.'}`)
+    } finally {
+      setDeletingSlug(null)
+    }
   }
 
   const inputClass = 'w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-gray-900 focus:border-jcc-navy focus:outline-none focus:ring-2 focus:ring-jcc-navy/10'
@@ -232,12 +559,12 @@ function AdminEventsManager() {
           </label>
           <div className="grid gap-4 sm:grid-cols-2">
             <label>
-              <span className={labelClass}>Date</span>
-              <input className={inputClass} value={eventForm.event_date} onChange={e => updateEventField('event_date', e.target.value)} placeholder="e.g. Saturday, December 12" maxLength={120} />
+              <span className={labelClass}>Date shown to visitors</span>
+              <input className={inputClass} value={eventForm.event_date} onChange={e => updateEventField('event_date', e.target.value)} placeholder="e.g. Saturday, December 12" required={eventForm.is_published} maxLength={120} />
             </label>
             <label>
-              <span className={labelClass}>Time</span>
-              <input className={inputClass} value={eventForm.event_time} onChange={e => updateEventField('event_time', e.target.value)} placeholder="e.g. 10:00 AM WAT" maxLength={120} />
+              <span className={labelClass}>Time shown to visitors</span>
+              <input className={inputClass} value={eventForm.event_time} onChange={e => updateEventField('event_time', e.target.value)} placeholder="e.g. 10:00 AM WAT" required={eventForm.is_published} maxLength={120} />
             </label>
             <label>
               <span className={labelClass}>Location</span>
@@ -249,8 +576,34 @@ function AdminEventsManager() {
             </label>
           </div>
           <label className="block">
-            <span className={labelClass}>Image URL</span>
+            <span className={labelClass}>Exact start date and time{eventForm.is_published ? ' *' : ''}</span>
+            <input
+              className={inputClass}
+              type="datetime-local"
+              value={eventForm.event_start_at}
+              onChange={e => updateEventField('event_start_at', e.target.value)}
+              required={eventForm.is_published}
+              aria-describedby="event-start-help"
+            />
+            <span id="event-start-help" className="mt-2 block text-xs leading-relaxed text-gray-500">
+              Used for the live countdown. Enter it in your device&apos;s local time zone, and include the event&apos;s time zone in the visitor-facing time above.
+            </span>
+          </label>
+          <label className="block">
+            <span className={labelClass}>Image URL (optional)</span>
             <input className={inputClass} value={eventForm.image} onChange={e => updateEventField('image', e.target.value)} placeholder="/images/event-hero.jpg or a public image URL" maxLength={1000} />
+          </label>
+          <label className="block">
+            <span className={labelClass}>Or upload an event image</span>
+            <input
+              key={eventImageFile ? eventImageFile.name : 'no-event-image'}
+              className={`${inputClass} file:mr-4 file:rounded-lg file:border-0 file:bg-jcc-navy file:px-4 file:py-2 file:text-xs file:font-bold file:text-white`}
+              type="file"
+              accept="image/jpeg,image/png,image/webp,image/gif"
+              onChange={e => setEventImageFile(e.target.files?.[0] || null)}
+            />
+            <span className="mt-2 block text-xs text-gray-500">JPG, PNG, WebP, or GIF; maximum 5 MB. A new upload replaces the current event image.</span>
+            {eventImageFile && <span className="mt-1 block text-xs font-semibold text-jcc-navy">Selected: {eventImageFile.name}</span>}
           </label>
           <div className="flex flex-wrap gap-6">
             <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
@@ -279,14 +632,20 @@ function AdminEventsManager() {
               <div key={event.slug} className="flex items-start gap-3 border-b border-gray-100 p-4">
                 <button type="button" onClick={() => editEvent(event)} className="min-w-0 flex-1 text-left">
                   <span className="block truncate font-bold text-gray-900">{event.title}</span>
-                  <span className="mt-1 block text-xs text-gray-500">{event.is_published ? 'Published' : 'Draft'} · {event.registration_open ? 'Registration open' : 'Registration closed'}</span>
+                  <span className="mt-1 block text-xs text-gray-500">
+                    {event.is_published ? 'Published' : 'Draft'} · {event.registration_open ? 'Registration open' : 'Registration closed'}
+                    {event.event_start_at && ` · ${new Date(event.event_start_at).toLocaleString()}`}
+                  </span>
                 </button>
-                <button type="button" onClick={() => deleteEvent(event)} className="rounded-lg border border-red-200 px-3 py-2 text-xs font-bold uppercase text-red-700 hover:bg-red-50">Delete</button>
+                <button type="button" onClick={() => deleteEvent(event)} disabled={deletingSlug === event.slug} className="rounded-lg border border-red-200 px-3 py-2 text-xs font-bold uppercase text-red-700 hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-60">
+                  {deletingSlug === event.slug ? 'Deleting…' : 'Delete'}
+                </button>
               </div>
             ))}
           </div>
         </div>
       </div>
+      <AdminEventRegistrations events={events} />
     </section>
   )
 }
@@ -323,6 +682,29 @@ function AdminApp() {
 
     let active = true
     async function restoreAdminSession() {
+      const awaySinceValue = window.sessionStorage.getItem(ADMIN_AWAY_STORAGE_KEY)
+      if (awaySinceValue) {
+        const awayDuration = Date.now() - Number(awaySinceValue)
+        if (Number.isFinite(awayDuration) && awayDuration >= ADMIN_AWAY_TIMEOUT_MS) {
+          try {
+            const { error: signOutError } = await supabase.auth.signOut()
+            if (signOutError) {
+              console.error('Unable to expire the admin session:', signOutError)
+              if (active) setMessage('Your admin session expired, but sign-out could not be completed. Please try again.')
+            } else {
+              window.sessionStorage.removeItem(ADMIN_AWAY_STORAGE_KEY)
+              if (active) setMessage('Your admin session expired after one minute away. Please sign in again.')
+            }
+          } catch (error) {
+            console.error('Unable to expire the admin session:', error)
+            if (active) setMessage('Your admin session expired, but sign-out could not be completed. Please try again.')
+          }
+          if (active) setAuthLoading(false)
+          return
+        }
+        window.sessionStorage.removeItem(ADMIN_AWAY_STORAGE_KEY)
+      }
+
       const { data: { session }, error } = await supabase.auth.getSession()
       if (error) {
         console.error('Unable to restore admin session:', error)
