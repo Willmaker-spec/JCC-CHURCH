@@ -102,10 +102,10 @@ export default function QuickLinksPage() {
           url: "/sermons",
         },
         {
-          title: "Daily Devotionals",
+          title: "Word for Today",
           description:
-            "Start your day with Word-based reflections and spiritual insights.",
-          url: "/sermons#featured",
+            "Start your day with Scripture-based reflections and spiritual encouragement.",
+          url: "/devotionals",
         },
         {
           title: "Bible Study Groups",

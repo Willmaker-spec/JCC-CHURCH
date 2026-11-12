@@ -105,7 +105,7 @@ export default function PublicDevotionalsPage() {
           <div className="mb-8 overflow-hidden">
             <div className="devo-hero-text inline-flex items-center gap-3 bg-white text-jcc-navy px-6 py-2 rounded-full font-bold uppercase tracking-widest text-xs border-2 border-jcc-navy shadow-[4px_4px_0_#EAB308]">
               <BookOpen className="w-4 h-4" />
-              The Word Daily
+              Word for Today
             </div>
           </div>
 
@@ -113,16 +113,16 @@ export default function PublicDevotionalsPage() {
             <div className="absolute -top-10 md:-top-20 right-10 z-20 transform rotate-12 drop-shadow-2xl opacity-80">
               <Sparkles className="w-20 h-20 md:w-40 md:h-40 text-jcc-gold" />
             </div>
-            <div className="overflow-hidden pb-4"><span className="devo-hero-text block relative z-10">Daily</span></div>
+            <div className="overflow-hidden pb-4"><span className="devo-hero-text block relative z-10">Word</span></div>
             <div className="overflow-hidden pb-4"><span className="devo-hero-text block text-transparent relative z-10" style={{
               WebkitTextStroke: '3px white'
-            }}>Manna</span></div>
+            }}>For Today</span></div>
           </h1>
 
           <div className="grid md:grid-cols-2 gap-8 items-end">
             <div className="overflow-hidden">
               <p className="devo-hero-text text-xl md:text-3xl font-medium text-white/80 max-w-xl border-l-4 border-jcc-gold pl-6">
-                Transformed by the renewing of your mind. Explore our library of spiritual nourishment.
+                Scripture for daily strength, encouragement, and spiritual growth.
               </p>
             </div>
           </div>

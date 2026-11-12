@@ -75,64 +75,78 @@ export default function Newsletter() {
         <div className="max-w-5xl mx-auto">
           
           {/* Main Newsletter Box */}
-          <div className="newsletter-box bg-jcc-navy text-white rounded-[2rem] p-8 md:p-16 mb-16 relative overflow-hidden">
-            
-            {/* Subtle internal background pattern/shape */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
-            
-            <div className="relative z-10 grid lg:grid-cols-2 gap-12 items-center">
-              
-              {/* Text Side */}
+          <div className="newsletter-box relative mb-16 overflow-hidden rounded-[2rem] bg-jcc-navy p-6 text-white sm:p-8 md:p-12 lg:p-16">
+            <div className="absolute right-0 top-0 h-52 w-52 translate-x-1/3 -translate-y-1/2 rounded-full bg-white/5 blur-3xl" />
+
+            <div className="relative z-10 grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
               <div>
-                <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full mb-6 border border-white/20">
+                <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2">
                   <Zap className="h-4 w-4 text-jcc-gold" />
-                  <span className="text-jcc-gold font-bold text-xs tracking-widest uppercase">
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-jcc-gold">
                     {newsletter.badge}
                   </span>
                 </div>
-                
-                <h2 className="text-4xl md:text-5xl font-anton uppercase tracking-wide mb-6">
+
+                <h2 className="mb-6 font-anton text-3xl uppercase tracking-wide sm:text-4xl md:text-5xl">
                   {newsletter.headingPrimary} <br />
                   <span className="text-jcc-gold">{newsletter.headingAccent}</span>
                 </h2>
-                
-                <p className="text-lg text-gray-300 leading-relaxed font-light">
+
+                <p className="text-base leading-relaxed text-gray-300 md:text-lg">
                   {newsletter.description}
                 </p>
               </div>
 
-              {/* Form Side */}
               <div className="flex flex-col justify-center">
-                <form onSubmit={handleSubmit} className="relative">
-                  {/* Inline Sleek Form */}
-                  <div className="flex bg-white rounded-full p-2 shadow-lg focus-within:ring-4 focus-within:ring-jcc-gold/30 transition-shadow">
-                    <div className="flex-1 flex items-center pl-4">
-                      <Mail className="h-5 w-5 text-gray-400 flex-shrink-0" />
-                      <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder={newsletter.placeholder} required className="w-full bg-transparent border-none focus:outline-none focus:ring-0 text-jcc-navy font-medium px-4" />
+                <form onSubmit={handleSubmit} className="w-full">
+                  <div className="rounded-[22px] border border-white/10 bg-white/5 p-2 shadow-[0_16px_30px_rgba(0,0,0,0.18)] backdrop-blur-sm sm:p-3">
+                    <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+                      <div className="flex flex-1 items-center gap-3 rounded-[16px] bg-white px-4 py-3 text-jcc-navy shadow-inner">
+                        <Mail className="h-5 w-5 shrink-0 text-slate-400" />
+                        <input
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          placeholder={newsletter.placeholder}
+                          required
+                          className="w-full border-none bg-transparent text-sm text-jcc-navy placeholder:text-slate-400 focus:outline-none focus:ring-0 sm:text-base"
+                        />
+                      </div>
+
+                      <button
+                        type="submit"
+                        disabled={status === 'loading'}
+                        className="inline-flex items-center justify-center gap-2 rounded-[16px] bg-jcc-gold px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-jcc-navy transition-all duration-200 hover:bg-[#f2c76f] disabled:cursor-not-allowed disabled:opacity-60 sm:min-w-[170px]"
+                      >
+                        {status === 'loading' ? (
+                          <span>{newsletter.submitLoading}</span>
+                        ) : (
+                          <>
+                            <span>{newsletter.submitIdle}</span>
+                            <Send className="h-4 w-4" />
+                          </>
+                        )}
+                      </button>
                     </div>
-                    <button type="submit" disabled={status === 'loading'} className="bg-jcc-gold hover:bg-jcc-orange text-jcc-navy font-bold rounded-full px-8 py-4 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2">
-                      {status === 'loading' ? <span>{newsletter.submitLoading}</span> : <>
-                          <span className="hidden sm:inline">{newsletter.submitIdle}</span>
-                          <Send className="h-4 w-4" />
-                        </>}
-                    </button>
                   </div>
 
-                  {/* Status Messages */}
-                  {status === 'success' && <div className="absolute -bottom-16 left-0 w-full p-3 bg-green-500/20 border border-green-500/30 rounded-xl flex items-center justify-center gap-2 text-green-400 font-medium text-sm">
+                  {status === 'success' && (
+                    <div className="mt-3 flex items-center justify-center gap-2 rounded-xl border border-green-500/30 bg-green-500/20 px-3 py-2 text-sm font-medium text-green-400">
                       <CheckCircle className="h-4 w-4" />
                       <span>{newsletter.successMessage}</span>
-                    </div>}
-                  {status === 'error' && <div className="absolute -bottom-16 left-0 w-full p-3 bg-red-500/20 border border-red-500/30 rounded-xl flex items-center justify-center gap-2 text-red-400 font-medium text-sm">
+                    </div>
+                  )}
+                  {status === 'error' && (
+                    <div className="mt-3 flex items-center justify-center gap-2 rounded-xl border border-red-500/30 bg-red-500/20 px-3 py-2 text-sm font-medium text-red-400">
                       <span>✗ {newsletter.errorMessage}</span>
-                    </div>}
+                    </div>
+                  )}
                 </form>
 
-                <p className="text-xs text-gray-400 text-center mt-6">
+                <p className="mt-5 text-center text-xs text-gray-400">
                   {newsletter.privacyNote}
                 </p>
               </div>
-
             </div>
           </div>
 

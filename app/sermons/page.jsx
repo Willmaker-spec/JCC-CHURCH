@@ -315,13 +315,13 @@ export default function SermonsPage() {
             <div className="relative z-10 flex-1 text-center md:text-left">
               <div className="inline-flex items-center gap-2 mb-3">
                 <span className="w-2 h-2 rounded-full bg-jcc-gold animate-pulse"></span>
-                <span className="text-jcc-gold font-bold uppercase text-xs tracking-widest">Daily Reading</span>
+                <span className="text-jcc-gold font-bold uppercase text-xs tracking-widest">Word for Today</span>
               </div>
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">Need daily inspiration?</h3>
-              <p className="text-gray-400 max-w-lg">Build your faith every morning with our curated devotionals. Deep, practical, and powerfully encouraging.</p>
+              <p className="text-gray-400 max-w-lg">Build your faith every morning with the Word for Today. Deep, practical, and powerfully encouraging.</p>
             </div>
             <Link href="/devotionals" className="relative z-10 whitespace-nowrap px-8 py-4 bg-jcc-gold hover:bg-yellow-400 text-[#0a0a0a] font-bold rounded-xl transition-all duration-300 uppercase tracking-widest text-sm shadow-[0_0_20px_rgba(200,160,50,0.2)]">
-              Explore Devotionals
+              Explore Word for Today
             </Link>
           </div>
         </div>

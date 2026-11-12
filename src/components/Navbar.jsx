@@ -263,7 +263,7 @@ export default function Navbar() {
                         onClick={() => setIsOpen(false)}
                         className="text-sm text-white hover:text-jcc-gold transition-colors duration-200"
                       >
-                        Daily Devotionals
+                        Word for Today
                       </Link>
                       <Link
                         href="/about#testimonies"
