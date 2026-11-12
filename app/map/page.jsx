@@ -90,17 +90,14 @@ export default function MapPage() {
 
           <article className="rounded-lg border border-slate-200 bg-white p-7 shadow-sm">
             <Phone className="mb-5 text-jcc-gold" size={30} aria-hidden="true" />
-            <h3 className="font-anton text-2xl uppercase">Need a hand?</h3>
-            <p className="mt-4 leading-relaxed text-slate-600">
-              Need help finding the venue? Contact Sir Onyema for directions.
-            </p>
-            <Link
-              href="/contact"
+            <h3 className="font-anton text-2xl uppercase">Contact Leader</h3>
+            <a
+              href="tel:+2348035083791"
               className="mt-5 inline-flex items-center gap-2 font-bold text-jcc-navy underline decoration-jcc-gold decoration-2 underline-offset-4 hover:text-jcc-gold"
             >
-              Contact Sir Onyema
+              Contact Leader
               <ArrowRight size={16} aria-hidden="true" />
-            </Link>
+            </a>
           </article>
         </div>
 

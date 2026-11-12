@@ -11,25 +11,25 @@ const englishMessages = {
   },
   general: { languageLabel: "Language" },
   hero: {
-    visionBadge: "Our Mission.",
+    visionBadge: "Welcome to Jubilee Christian Centre",
     lines: [
       { prefix: "Jubilee", highlight: "Christian Centre", suffix: "" },
       {
-        prefix: "A place where everyone ",
-        highlight: "is somebody in christ",
+        prefix: "A place where everybody",
+        highlight: "is somebody in Christ",
         suffix: "",
       },
     ],
-    watchLive: "Watch Live",
-    quickLinks: "Quick Links",
+    watchLive: "Plan Your Visit",
+    quickLinks: "Watch Live",
   },
   home: {
     welcome: {
       badgeText: "Join the mission",
       subLabel: "Welcome to The Jubilee Christian Centre",
-      heading: "Souls Saved. Men Trained. Nations Taken.",
+      heading: "Jubilee is a church where everybody is somebody in Christ, a centre where people's dreams are nurtured and destinies are fulfilled.",
       description:
-        "A community of believers growing in faith and serving the world.",
+        "Jubilee is a church where everybody is somebody in Christ, a centre where people's dreams are nurtured and destinies are fulfilled.",
       cards: [
         {
           href: "/about",
@@ -63,7 +63,7 @@ const englishMessages = {
         paragraphs: [
           "We are a community of believers committed to sharing the Gospel and converting souls for GOD.",
         ],
-        quote: "Souls saved. Men trained. Nations taken.",
+        quote: "Acts 1:8 — \"But you will receive power when the Holy Spirit comes on you; and you will be my witnesses in Jerusalem, and in all Judea and Samaria, and to the ends of the earth.\"",
         highlights: [
           { value: "One", label: "Family" },
           { value: "Many", label: "Nations" },
@@ -184,17 +184,17 @@ const englishMessages = {
       subtitle: "Jubilee Christian Centre Church",
       headingLead: "Jubilee Christian",
       headingHighlight: "Centre Church",
-      description: "A place where everyone is somebody in christ.",
+      description: "A place where everybody is somebody in Christ.",
     },
     missionVision: {
       missionLabel: "Our Mission",
       visionLabel: "Our Vision",
-      missionHeading: "Souls Saved",
-      missionStatement: "Souls saved. Men trained. Nations taken.",
+      missionHeading: "Acts 1:8",
+      missionStatement: "Jubilee is a church where everybody is somebody in Christ, and a place where people’s dreams are nurtured and destinies are fulfilled.",
       missionDescription:
         "We share the Gospel, help people grow in faith, and equip believers to serve.",
       visionHeading: "A Place for Everyone",
-      visionStatement: "Everyone is someone in Christ.",
+      visionStatement: "In Jubilee Christian Centre, we are building a kingdom of people who will use God's resources as good stewards to worship Him and fulfil His purpose on earth and care for those who are less privileged. We will provide places of hope around the globe where, through preaching, teaching, and healing, people's spiritual, emotional, and physical needs will be met.",
       visionDescription:
         "We are building a welcoming community where people can know Christ and grow together.",
     },
@@ -332,7 +332,12 @@ const englishMessages = {
     },
     services: {
       heading: "Worship with us",
-      lines: ["Sunday Service", "Bible Study's", "Friday Night Vigil "],
+      lines: [
+        "Friday Vigil — Every Friday",
+        "Wednesday Bible Study — 5:00 PM to 7:00 PM",
+        "Sunday Morning Service — 6:30 AM to 9:00 AM",
+        "Sunday Afternoon Service — 9:30 AM to 12:00 PM",
+      ],
     },
     copyright: "Jubilee Christian Centre Church. All rights reserved.",
   },

@@ -8,10 +8,10 @@ import Give from '@/components/Give';
 import Newsletter from '@/components/Newsletter';
 export const metadata = {
   title: 'Home | Jubilee Christian Centre Church',
-  description: 'Jubilee Christian Centre Church — Souls Saved. Men Trained. Nations Taken. Join us for powerful teaching, worship, and community.',
+  description: 'Jubilee Christian Centre Church — Acts 1:8: "But you will receive power when the Holy Spirit comes on you; and you will be my witnesses in Jerusalem, and in all Judea and Samaria, and to the ends of the earth." Join us for powerful teaching, worship, and community.',
   openGraph: {
     title: 'Jubilee Christian Centre Church',
-    description: 'Jubilee Christian Centre Church — Souls Saved. Men Trained. Nations Taken.',
+    description: 'Jubilee Christian Centre Church — Acts 1:8: "But you will receive power when the Holy Spirit comes on you; and you will be my witnesses in Jerusalem, and in all Judea and Samaria, and to the ends of the earth."',
     images: [{
       url: '/images/jcc-logo.png',
       alt: 'Jubilee Christian Centre Church Logo',

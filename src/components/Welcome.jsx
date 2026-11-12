@@ -15,63 +15,63 @@ export default function Welcome() {
   ];
 
   return (
-    <section className="relative bg-transparent py-16 md:py-20 z-10">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-8 pb-12 bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl">
-        {/* Badge - Centered */}
-        <div className="flex justify-center mb-8">
+    <section className="relative z-10 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.9),_rgba(247,247,244,0.9)_40%,_rgba(247,247,244,1)_100%)] py-16 md:py-20">
+      <div className="mx-auto max-w-7xl rounded-[30px] border border-[#e7dcc5] bg-white/90 px-6 py-8 shadow-[0_24px_80px_rgba(15,23,42,0.08)] ring-1 ring-white/70 backdrop-blur-sm lg:px-8 lg:py-12">
+        <div className="mb-8 flex justify-center">
           <Link
             href="/give"
-            className="inline-block bg-rose-500/90 hover:bg-rose-600 text-white text-xs font-semibold tracking-widest uppercase px-4 py-1 rounded-full transition-colors cursor-pointer"
+            className="inline-flex items-center rounded-full border border-[#d5ac60] bg-[#f7f0e6] px-5 py-2 text-[10px] font-bold uppercase tracking-[0.24em] text-[#1f2b3d] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#f3e6d5]"
           >
             {welcome.badgeText}
           </Link>
         </div>
 
-        {/* Welcome Text Section - Left Aligned */}
-        <div className="mb-10">
-          {/* Sub-label with emoji */}
-          <div className="flex items-center gap-1 mb-3">
-            <span>🏠</span>
-            <p className="text-sm text-gray-500 uppercase tracking-wider">
-              {welcome.subLabel}
-            </p>
+        <div className="mb-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-4xl">
+            <div className="mb-4 flex items-center gap-2">
+              <span className="text-lg" aria-hidden="true">🏠</span>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-slate-500">
+                {welcome.subLabel}
+              </p>
+            </div>
+
+            <h1 className="mb-4 max-w-3xl font-anton text-4xl uppercase leading-none tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
+              {welcome.heading}
+            </h1>
           </div>
 
-          {/* Bold Heading */}
-          <h1 className="font-anton text-4xl sm:text-5xl text-black mb-3 leading-none uppercase">
-            {welcome.heading}
-          </h1>
+          <div className="h-px w-full max-w-[180px] bg-gradient-to-r from-[#d5ac60] via-[#d5ac60] to-transparent lg:w-[180px]" aria-hidden="true" />
+        </div>
 
-          {/* Paragraph */}
-          <p className="max-w-md text-gray-600 text-base leading-relaxed">
+        <div className="mb-10 max-w-3xl">
+          <p className="text-base leading-relaxed text-slate-600 lg:text-lg">
             {welcome.description}
           </p>
         </div>
 
-        {/* Cards Section - 3 Column Grid */}
-        <div className="grid gap-6 mt-10 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {welcome.cards.map((card, index) => (
             <Link
               key={card.href}
               href={card.href}
-              className="relative group overflow-hidden rounded-2xl shadow-lg cursor-pointer h-[450px] transition-shadow hover:shadow-2xl"
+              className="group relative h-[430px] overflow-hidden rounded-[24px] border border-white/20 shadow-[0_18px_40px_rgba(15,23,42,0.18)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(15,23,42,0.22)]"
             >
               <Image
                 src={cardImages[index] ?? "/images/aboutus.JPG"}
                 alt={card.imageAlt}
                 fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
-
-              <div className="absolute bottom-0 p-6 text-white">
-                <p className="uppercase text-xs font-bold tracking-wider text-gray-300 mb-1">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0d1729]/85 via-[#0d1729]/30 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-6 text-white">
+                <div className="mb-3 inline-flex rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/85 backdrop-blur-sm">
                   {card.eyebrow}
-                </p>
-                <h3 className="text-2xl font-semibold mb-4">{card.title}</h3>
-                <button className="text-sm font-semibold flex items-center gap-2 group-hover:underline">
+                </div>
+                <h3 className="mb-4 text-2xl font-semibold text-white">{card.title}</h3>
+                <span className="inline-flex items-center gap-2 text-sm font-semibold text-[#f5d9a0] transition-transform duration-200 group-hover:translate-x-1">
                   {card.cta}
-                </button>
+                  <span aria-hidden="true">→</span>
+                </span>
               </div>
             </Link>
           ))}

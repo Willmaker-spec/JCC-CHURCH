@@ -277,21 +277,21 @@ export default function GivePage() {
               </h3>
               <div className="space-y-12">
                 <div>
-                  <h4 className="text-xl font-medium mb-2">Souls Saved</h4>
+                  <h4 className="text-xl font-medium mb-2">Witnesses Sent</h4>
                   <p className="text-gray-400 font-light">
                     Supporting evangelism and outreach to unreached communities
                     globally.
                   </p>
                 </div>
                 <div>
-                  <h4 className="text-xl font-medium mb-2">Men Trained</h4>
+                  <h4 className="text-xl font-medium mb-2">People Equipped</h4>
                   <p className="text-gray-400 font-light">
                     Equipping and raising the next generation of leaders and
                     ministers.
                   </p>
                 </div>
                 <div>
-                  <h4 className="text-xl font-medium mb-2">Nations Taken</h4>
+                  <h4 className="text-xl font-medium mb-2">Nations Reached</h4>
                   <p className="text-gray-400 font-light">
                     Planting churches and transforming cities with the power of
                     the Gospel.
