@@ -1,7 +1,7 @@
 "use client";
 
 // ...existing code...
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -26,7 +26,6 @@ const desktopNav = [
   "events",
   "sermons",
   "map",
-  "give",
 ];
 const mobileNav = [
   "home",
@@ -40,96 +39,65 @@ const mobileNav = [
 ];
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [visible, setVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
   const { messages } = useLanguage();
-  useEffect(() => {
-    let scrollTimeout;
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      const isMobile = window.innerWidth < 1024;
-      if (isMobile) {
-        // Mobile behavior: show on scroll up OR after stopping, hide on scroll down
-        if (currentScrollY < lastScrollY || currentScrollY < 100) {
-          // Scrolling up or near top - show immediately
-          setVisible(true);
-          clearTimeout(scrollTimeout);
-        } else {
-          // Scrolling down - hide immediately, but show after stopping
-          setVisible(false);
-          clearTimeout(scrollTimeout);
-          scrollTimeout = setTimeout(() => {
-            setVisible(true);
-          }, 200);
-        }
-      } else {
-        // Desktop behavior: show on scroll up, hide on scroll down
-        if (currentScrollY < lastScrollY || currentScrollY < 100) {
-          // Scrolling up or near top
-          setVisible(true);
-        } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
-          // Scrolling down and not near top
-          setVisible(false);
-        }
-      }
-      setLastScrollY(currentScrollY);
-    };
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      clearTimeout(scrollTimeout);
-    };
-  }, [lastScrollY]);
   return (
     <>
       <nav
-        className={`fixed top-0 w-full z-50 transition-all duration-300 bg-white shadow-lg ${isOpen ? "hidden" : ""} ${visible ? "translate-y-0" : "-translate-y-full"} py-0`}
+        className={`fixed inset-x-0 top-0 z-50 border-b border-slate-200/80 bg-white/95 shadow-sm backdrop-blur-md ${isOpen ? "hidden" : ""}`}
       >
-        <div className="max-w-full pl-4 pr-4 md:pl-8 md:pr-8 lg:pl-12 lg:pr-12">
-          <div className="flex items-center h-16 md:h-20 lg:h-24">
-            {/* Logo - Far Left */}
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex h-16 items-center gap-6 md:h-20">
             <Link href="/" className="flex items-center relative z-10">
               <Image
                 src="/images/jcc-logo.png"
                 alt="The Jubilee Christian Centre Church Logo"
                 width={420}
                 height={150}
-                className="h-20 w-auto md:h-24 lg:h-28"
+                className="h-12 w-auto md:h-14"
                 priority
               />
             </Link>
 
-            {/* Desktop Navigation - Centered */}
-            <div className="hidden lg:flex items-center space-x-1 absolute left-1/2 -translate-x-1/2">
+            <nav
+              aria-label="Main navigation"
+              className="hidden flex-1 items-center justify-center gap-1 lg:flex"
+            >
               {desktopNav.map((key) => {
                 const label =
                   key === "devotionals" ? "Devotionals" : messages.nav[key];
+                const isActive = pathname === navRoutes[key];
                 return (
                   <Link
                     key={key}
                     href={navRoutes[key]}
-                    className="px-3 py-1 text-jcc-navy hover:text-jcc-gold transition-colors duration-200 font-medium uppercase text-[10px] tracking-wider"
+                    aria-current={isActive ? "page" : undefined}
+                    className={`relative whitespace-nowrap rounded-lg px-2.5 py-2 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jcc-gold ${isActive ? "text-jcc-navy after:absolute after:inset-x-2.5 after:-bottom-0.5 after:h-0.5 after:bg-jcc-gold" : "text-slate-600 hover:text-jcc-navy"}`}
                   >
                     {label}
                   </Link>
                 );
               })}
-            </div>
+            </nav>
 
-            {/* Language selector + Hamburger button */}
             <div className="ml-auto flex items-center gap-3">
               <div className="hidden md:block">
                 <LanguageSwitcher />
               </div>
+              <Link
+                href="/give"
+                className="hidden items-center justify-center rounded-full bg-jcc-gold px-5 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-jcc-navy transition-colors hover:bg-jcc-navy hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jcc-gold focus-visible:ring-offset-2 lg:inline-flex"
+              >
+                Give
+              </Link>
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-1 rounded-lg hover:bg-jcc-cream transition-colors"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full text-jcc-navy transition-colors hover:bg-jcc-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jcc-gold lg:hidden"
                 aria-label="Toggle menu"
+                aria-controls="site-menu"
+                aria-expanded={isOpen}
               >
-                <Menu className="h-6 w-6 text-jcc-navy" />
+                <Menu className="h-5 w-5" />
               </button>
             </div>
           </div>
@@ -138,34 +106,41 @@ export default function Navbar() {
 
       {/* Full-Screen Mobile Menu - Fixed Version */}
       {isOpen && (
-        <div className="fixed inset-0 bg-black z-[60] overflow-y-auto animate-fade-in">
+        <div
+          id="site-menu"
+          className="fixed inset-0 z-[60] overflow-y-auto bg-jcc-navy text-white animate-fade-in"
+        >
           {/* Logo and Close Button at Top */}
-          <div className="fixed top-0 left-0 right-0 z-[70] bg-black pl-4 pr-4 md:pl-8 md:pr-8 lg:pl-12 lg:pr-12">
-            <div className="flex items-center justify-between h-16 md:h-20 lg:h-24">
+          <div className="fixed inset-x-0 top-0 z-[70] border-b border-white/10 bg-jcc-navy/95 px-4 backdrop-blur-md sm:px-6 lg:px-8">
+            <div className="mx-auto flex h-16 max-w-7xl items-center justify-between md:h-20">
               {/* Logo - Far Left */}
-              <Link href="/" className="flex items-center relative z-10">
+              <Link
+                href="/"
+                onClick={() => setIsOpen(false)}
+                className="relative z-10 flex items-center"
+              >
                 <Image
                   src="/images/jcc-logo.png"
                   alt="Jubilee Christian Centre Church Logo"
                   width={420}
                   height={150}
-                  className="h-20 w-auto md:h-24 lg:h-28"
+                  className="h-12 w-auto md:h-14"
                   priority
                 />
               </Link>
               {/* Close Button - Far Right */}
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 rounded-lg hover:bg-gray-900 transition-colors ml-auto"
+                className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jcc-gold"
                 aria-label="Close menu"
               >
-                <X className="h-6 w-6 text-white" />
+                <X className="h-5 w-5" />
               </button>
             </div>
           </div>
 
-          <div className="min-h-screen flex flex-col pt-28 md:pt-40 lg:pt-48 pb-16 px-8 md:px-16 lg:px-20">
-            <div className="mb-10 block md:hidden text-white">
+          <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-6 pb-12 pt-24 sm:px-8 md:px-12 md:pt-28 lg:px-16">
+            <div className="mb-8 block text-white md:hidden">
               <LanguageSwitcher
                 variant="dark"
                 className="text-white"
@@ -173,10 +148,10 @@ export default function Navbar() {
               />
             </div>
             {/* Main Content Grid */}
-            <div className="flex-1 grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-24 lg:gap-40 xl:gap-56">
+            <div className="grid flex-1 grid-cols-1 gap-12 lg:grid-cols-[300px_1fr] lg:gap-16">
               {/* Left Column - Main Navigation */}
               <div className="flex flex-col justify-start">
-                <nav className="flex flex-col space-y-1 pl-[10px]">
+                <nav aria-label="Mobile navigation" className="flex flex-col space-y-2">
                   {mobileNav.map((key) => {
                     const href = navRoutes[key];
                     const isActive = pathname === href;
@@ -188,7 +163,8 @@ export default function Navbar() {
                         key={key}
                         href={href}
                         onClick={() => setIsOpen(false)}
-                        className={`font-anton text-5xl md:text-6xl lg:text-7xl ${isActive ? "text-jcc-gold" : "text-white hover:text-jcc-gold"} transition-colors duration-200 leading-none uppercase`}
+                        aria-current={isActive ? "page" : undefined}
+                        className={`font-anton text-4xl leading-none uppercase transition-colors duration-200 sm:text-5xl md:text-6xl lg:text-7xl ${isActive ? "text-jcc-gold" : "text-white hover:text-jcc-gold"}`}
                       >
                         {label}
                       </Link>
@@ -198,12 +174,12 @@ export default function Navbar() {
               </div>
 
               {/* Right Section - Column Grid with Media on New Line */}
-              <div className="flex flex-col gap-y-12 ml-4 md:ml-32 lg:ml-40">
+              <div className="flex flex-col gap-y-10">
                 {/* Top Row - Three Columns */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 lg:gap-x-12">
                   {/* Ministries Column */}
                   <div>
-                    <h3 className="text-xs font-semibold text-gray-500 mb-6 uppercase tracking-wider">
+                    <h3 className="mb-5 text-xs font-semibold uppercase tracking-wider text-jcc-gold">
                       Ministries
                     </h3>
                     <nav className="flex flex-col space-y-3">
@@ -254,7 +230,7 @@ export default function Navbar() {
 
                   {/* Resources Column */}
                   <div>
-                    <h3 className="text-xs font-semibold text-gray-500 mb-6 uppercase tracking-wider">
+                    <h3 className="mb-5 text-xs font-semibold uppercase tracking-wider text-jcc-gold">
                       Resources
                     </h3>
                     <nav className="flex flex-col space-y-3">
@@ -291,7 +267,7 @@ export default function Navbar() {
 
                   {/* Connect Column */}
                   <div>
-                    <h3 className="text-xs font-semibold text-gray-500 mb-6 uppercase tracking-wider">
+                    <h3 className="mb-5 text-xs font-semibold uppercase tracking-wider text-jcc-gold">
                       Connect
                     </h3>
                     <nav className="flex flex-col space-y-3">
@@ -322,7 +298,7 @@ export default function Navbar() {
 
                 {/* Bottom Row - Media Column */}
                 <div>
-                  <h3 className="text-xs font-semibold text-gray-500 mb-6 uppercase tracking-wider">
+                  <h3 className="mb-5 text-xs font-semibold uppercase tracking-wider text-jcc-gold">
                     Media
                   </h3>
                   <nav className="flex flex-col space-y-3">
@@ -338,21 +314,21 @@ export default function Navbar() {
                 </div>
 
                 {/* Copyright and Social Icons */}
-                <div className="mt-12 pt-8 border-t border-gray-800">
-                  <div className="flex items-center justify-between">
+                <div className="mt-4 border-t border-white/10 pt-6">
+                  <div className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
                     {/* Copyright - Left */}
-                    <p className="text-sm text-gray-600">
+                    <p className="text-xs leading-5 text-gray-400 sm:text-sm">
                       © Copyright {new Date().getFullYear()} The Jubilee
                       Christian Centre Church. All Rights Reserved.
                     </p>
 
                     {/* Social Icons - Right */}
-                    <div className="flex items-center space-x-3">
+                    <div className="flex items-center gap-2">
                       <a
                         href="https://youtube.com/@jccchurch"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-10 h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition-colors duration-200"
+                        className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors duration-200 hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jcc-gold"
                       >
                         <span className="sr-only">YouTube</span>
                         <svg
@@ -367,7 +343,7 @@ export default function Navbar() {
                         href="https://instagram.com/thejubilee_church"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-10 h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition-colors duration-200"
+                        className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors duration-200 hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jcc-gold"
                       >
                         <span className="sr-only">Instagram</span>
                         <svg
@@ -383,7 +359,7 @@ export default function Navbar() {
                         href="https://chat.whatsapp.com/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-10 h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition-colors duration-200"
+                        className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors duration-200 hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jcc-gold"
                       >
                         <span className="sr-only">WhatsApp</span>
                         <svg
@@ -398,7 +374,7 @@ export default function Navbar() {
                         href="https://tiktok.com/@thejubilee_church"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-10 h-10 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition-colors duration-200"
+                        className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors duration-200 hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jcc-gold"
                       >
                         <span className="sr-only">TikTok</span>
                         <svg

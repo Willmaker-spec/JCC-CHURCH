@@ -134,7 +134,7 @@ export default function App() {
       <LanguageProvider>
         <AudioPlayerProvider>
           <Navbar />
-          <main className="pt-20 md:pt-24 lg:pt-28">
+          <main className="pt-16 md:pt-20">
             <AppRoutes />
           </main>
           <AudioPlayerRoot />

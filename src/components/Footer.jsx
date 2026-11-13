@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Youtube, Instagram, MessageCircle } from "lucide-react";
+import { ArrowUpRight, Youtube, Instagram, MessageCircle } from "lucide-react";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 
 // TikTok SVG Icon Component
@@ -21,6 +21,11 @@ export default function Footer() {
   const { messages } = useLanguage();
   const footer = messages.footer;
   const sections = footer.sections;
+  const connectLinks = [
+    ...sections.connect.links,
+    { label: messages.nav.events, href: "/events" },
+    { label: messages.nav.map, href: "/map" },
+  ];
   const socialLinks = [
     {
       label: footer.social.youtube,
@@ -49,7 +54,7 @@ export default function Footer() {
       <div aria-hidden="true" className="pointer-events-none absolute -right-40 -top-48 h-96 w-96 rounded-full bg-jcc-gold/[0.06] blur-3xl" />
       <div className="container-custom relative py-12 md:py-16">
         {/* Main Footer Content */}
-        <div className="mb-12 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-6 lg:gap-8">
+        <div className="mb-12 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-10">
           {/* Logo and Description */}
           <div className="lg:col-span-2">
             <Image
@@ -62,6 +67,13 @@ export default function Footer() {
             <p className="mb-5 max-w-sm text-sm leading-6 text-slate-300">
               {footer.tagline}
             </p>
+            <Link
+              href="/give"
+              className="mb-5 inline-flex items-center gap-2 rounded-full bg-jcc-gold px-4 py-2.5 text-xs font-bold uppercase tracking-[0.12em] text-jcc-navy transition-colors hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jcc-gold focus-visible:ring-offset-2 focus-visible:ring-offset-jcc-navy"
+            >
+              {messages.nav.give}
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
             <div className="flex gap-2.5">
               {socialLinks.map((social) => (
                 <a
@@ -78,84 +90,84 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Connect */}
-          <div>
-            <h3 className="mb-5 text-xs font-bold uppercase tracking-[0.16em] text-jcc-gold">
-              {sections.connect.heading}
-            </h3>
-            <ul className="space-y-3">
-              {sections.connect.links.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-slate-300 transition-colors duration-200 hover:text-jcc-gold focus-visible:text-jcc-gold focus-visible:outline-none"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          {/* Church Links */}
+          <div className="space-y-8">
+            <div>
+              <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.16em] text-jcc-gold">
+                {sections.connect.heading}
+              </h3>
+              <ul className="space-y-3">
+                {connectLinks.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-slate-300 transition-colors duration-200 hover:text-jcc-gold focus-visible:text-jcc-gold focus-visible:outline-none"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.16em] text-jcc-gold">
+                {sections.ministries.heading}
+              </h3>
+              <ul className="space-y-3">
+                {sections.ministries.links.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-slate-300 transition-colors duration-200 hover:text-jcc-gold focus-visible:text-jcc-gold focus-visible:outline-none"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
-          {/* Ministries */}
-          <div>
-            <h3 className="mb-5 text-xs font-bold uppercase tracking-[0.16em] text-jcc-gold">
-              {sections.ministries.heading}
-            </h3>
-            <ul className="space-y-3">
-              {sections.ministries.links.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-slate-300 transition-colors duration-200 hover:text-jcc-gold focus-visible:text-jcc-gold focus-visible:outline-none"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Resources */}
-          <div>
-            <h3 className="mb-5 text-xs font-bold uppercase tracking-[0.16em] text-jcc-gold">
-              {sections.resources.heading}
-            </h3>
-            <ul className="space-y-3">
-              {sections.resources.links.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-slate-300 transition-colors duration-200 hover:text-jcc-gold focus-visible:text-jcc-gold focus-visible:outline-none"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Media */}
-          <div>
-            <h3 className="mb-5 text-xs font-bold uppercase tracking-[0.16em] text-jcc-gold">
-              {sections.media.heading}
-            </h3>
-            <ul className="space-y-3">
-              {sections.media.links.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-slate-300 transition-colors duration-200 hover:text-jcc-gold focus-visible:text-jcc-gold focus-visible:outline-none"
-                    {...(link.external && {
-                      target: "_blank",
-                      rel: "noopener noreferrer",
-                    })}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          {/* Resources and Media */}
+          <div className="space-y-8">
+            <div>
+              <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.16em] text-jcc-gold">
+                {sections.resources.heading}
+              </h3>
+              <ul className="space-y-3">
+                {sections.resources.links.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-slate-300 transition-colors duration-200 hover:text-jcc-gold focus-visible:text-jcc-gold focus-visible:outline-none"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.16em] text-jcc-gold">
+                {sections.media.heading}
+              </h3>
+              <ul className="space-y-3">
+                {sections.media.links.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-slate-300 transition-colors duration-200 hover:text-jcc-gold focus-visible:text-jcc-gold focus-visible:outline-none"
+                      {...(link.external && {
+                        target: "_blank",
+                        rel: "noopener noreferrer",
+                      })}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
 
