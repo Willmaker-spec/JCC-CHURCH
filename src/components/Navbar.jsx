@@ -356,26 +356,15 @@ export default function Navbar() {
                           <path d="M12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                         </svg>
                       </a>
-                      {FACEBOOK_PAGE_URL ? (
-                        <a
-                          href={FACEBOOK_PAGE_URL}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label="Facebook"
-                          className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors duration-200 hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jcc-gold"
-                        >
-                          <Facebook className="h-5 w-5 text-white" aria-hidden="true" />
-                        </a>
-                      ) : (
-                        <span
-                          role="img"
-                          aria-label="Facebook page link coming soon"
-                          title="Facebook page link coming soon"
-                          className="flex h-10 w-10 cursor-not-allowed items-center justify-center rounded-full bg-white/5 text-white/50"
-                        >
-                          <Facebook className="h-5 w-5" aria-hidden="true" />
-                        </span>
-                      )}
+                      <a
+                        href={FACEBOOK_PAGE_URL || "https://www.facebook.com/"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Facebook"
+                        className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors duration-200 hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jcc-gold"
+                      >
+                        <Facebook className="h-5 w-5 text-white" aria-hidden="true" />
+                      </a>
                       <a
                         href="https://chat.whatsapp.com/"
                         target="_blank"
