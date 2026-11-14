@@ -5,7 +5,7 @@ export const metadata = {
   openGraph: {
     title: 'The Unlearning Conference | The Light Community',
     description: 'Ten days to lay down what religion taught us and pick up what God actually said. June 29 to July 10, 2026.',
-    images: ['/images/hero.jpg']
+    images: ['/images/event-hero.jpg']
   }
 };
 export default function UnlearningConferencePage() {

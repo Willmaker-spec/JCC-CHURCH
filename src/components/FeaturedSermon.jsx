@@ -112,7 +112,7 @@ export default function FeaturedSermon() {
               
               {/* Thumbnail Section */}
               <Link href={video?.url || "https://youtube.com/@TheLightCommunity"} target="_blank" rel="noopener noreferrer" className="block relative h-64 md:h-[500px] w-full border-4 border-black overflow-hidden group-hover:border-jcc-gold transition-colors">
-                <Image src={video?.thumbnail || "/images/sermon-placeholder.jpg"} alt={video?.title || "Latest Sermon"} fill className="object-cover filter grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" unoptimized />
+                <Image src={video?.thumbnail || "/images/sermon-gathering.jpg"} alt={video?.title || "Church congregation gathered for worship"} fill className="object-cover filter grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" unoptimized />
                 
                 {/* Massive Brutalist Play Button */}
                 <div className="absolute inset-0 flex items-center justify-center bg-jcc-navy/20 group-hover:bg-transparent transition-colors">

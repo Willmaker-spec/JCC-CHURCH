@@ -66,7 +66,7 @@ export default function GivePage() {
         {/* Full Bleed Parallax Background */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/give.jpg"
+            src="/images/worship-prayer.jpg"
             alt="Give"
             fill
             className="give-parallax-bg object-cover object-center opacity-60 scale-110"
@@ -253,7 +253,7 @@ export default function GivePage() {
           {/* Half Image */}
           <div className="relative h-[40vh] min-h-[18rem] md:h-auto">
             <Image
-              src="/images/reach.jpg"
+              src="/images/worship-singing.jpg"
               alt="Worship"
               fill
               className="object-cover opacity-80"

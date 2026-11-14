@@ -163,10 +163,8 @@ export default function SalvationClient() {
                 <div className="group rounded-[3rem] bg-white border border-slate-200 p-8 shadow-xl overflow-hidden relative flex flex-col md:flex-row gap-8 items-center">
                   <div className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-jcc-navy via-jcc-gold to-jcc-orange z-20" />
                   
-                  {/* Pastor Image with brutalist cutout styling */}
-                  <div className="relative w-48 h-48 md:w-56 md:h-56 shrink-0 rounded-3xl overflow-hidden bg-jcc-navy transform -rotate-3 group-hover:rotate-0 transition-transform duration-500 shadow-2xl border-4 border-jcc-gold">
-                    <Image src="/images/pastor.JPG" alt="Apostle Isaiah Peter Nelson" fill className="object-cover scale-110 group-hover:scale-100 transition-transform duration-700" unoptimized />
-                    <div className="absolute inset-0 bg-jcc-navy/10 mix-blend-multiply" />
+                  <div aria-hidden="true" className="flex h-40 w-40 shrink-0 items-center justify-center rounded-3xl border-4 border-jcc-gold bg-gradient-to-br from-jcc-navy to-slate-800 text-4xl font-black tracking-[0.2em] text-jcc-gold shadow-2xl transition-transform duration-500 group-hover:-rotate-3 md:h-48 md:w-48">
+                   JCC
                   </div>
 
                   <div>

@@ -9,9 +9,9 @@ export default function Welcome() {
   const welcome = messages.home.welcome;
 
   const cardImages = [
-    "/images/aboutus.JPG",
-    "/images/connect.JPG",
-    "/images/celebration.jpg",
+    "/images/congregation-welcome.jpg",
+    "/images/congregational-worship.jpg",
+    "/images/church-celebration.jpg",
   ];
 
   return (
@@ -57,7 +57,7 @@ export default function Welcome() {
               className="group relative h-[430px] overflow-hidden rounded-[24px] border border-white/20 shadow-[0_18px_40px_rgba(15,23,42,0.18)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(15,23,42,0.22)]"
             >
               <Image
-                src={cardImages[index] ?? "/images/aboutus.JPG"}
+                src={cardImages[index] ?? "/images/congregation-welcome.jpg"}
                 alt={card.imageAlt}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"

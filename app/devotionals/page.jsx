@@ -94,7 +94,7 @@ export default function PublicDevotionalsPage() {
       <section className="relative min-h-[80vh] flex flex-col justify-end pb-20 bg-jcc-navy px-4 md:px-8 border-b-8 border-jcc-gold">
         {/* Background Image */}
         <div className="absolute inset-0 overflow-hidden">
-          <Image src="/images/reach.jpg" alt="Devotionals Hero Background" fill className="object-cover object-top opacity-50 scale-105" unoptimized priority />
+          <Image src="/images/worship-singing.jpg" alt="Jubilee worship team singing together" fill className="object-cover object-top opacity-50 scale-105" unoptimized priority />
           <div className="absolute inset-0 bg-gradient-to-t from-jcc-navy via-jcc-navy/40 to-transparent" />
         </div>
 

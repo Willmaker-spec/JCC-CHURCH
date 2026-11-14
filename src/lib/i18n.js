@@ -292,6 +292,7 @@ const englishMessages = {
     social: {
       youtube: "YouTube",
       instagram: "Instagram",
+      facebook: "Facebook",
       whatsapp: "WhatsApp",
       tiktok: "TikTok",
     },

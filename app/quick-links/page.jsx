@@ -211,7 +211,7 @@ export default function QuickLinksPage() {
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/quick-link.jpg"
+            src="/images/community-worship.jpg"
             alt="Quick Links"
             fill
             className="object-cover"

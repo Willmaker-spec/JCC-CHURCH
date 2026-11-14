@@ -176,7 +176,7 @@ export default function GlobalFamily() {
 
               <div className="relative w-full aspect-video border-4 border-jcc-navy filter grayscale contrast-125">
                 <Image
-                  src="/images/reachh.jpg"
+                  src="/images/sermon-gathering.jpg"
                   alt={global.map.imageAlt}
                   fill
                   className="object-cover"

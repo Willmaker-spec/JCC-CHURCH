@@ -11,7 +11,7 @@ export const metadata = {
     title: 'Find Us | Jubilee Christian Centre Church',
     description: 'Plan your visit to Jubilee Christian Centre Church at The Light House.',
     images: [{
-      url: '/images/hero.jpg',
+      url: '/images/sermon-gathering.jpg',
       alt: 'Jubilee Christian Centre Church',
       width: 1200,
       height: 630
@@ -19,7 +19,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['/images/hero.jpg']
+    images: ['/images/sermon-gathering.jpg']
   }
 };
 
@@ -28,7 +28,7 @@ export default function MapPage() {
     <main className="min-h-screen bg-[#f7f7f4] text-jcc-navy">
       <section className="relative flex min-h-[55vh] items-end overflow-hidden bg-jcc-navy px-5 pb-14 pt-28 sm:px-8 md:min-h-[62vh] md:pb-16">
         <Image
-          src="/images/rooted2.JPG"
+          src="/images/rooted-worship-gathering.jpg"
           alt=""
           fill
           priority

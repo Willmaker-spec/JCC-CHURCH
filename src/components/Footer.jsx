@@ -2,8 +2,15 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, Youtube, Instagram, MessageCircle } from "lucide-react";
+import {
+  ArrowUpRight,
+  Facebook,
+  Youtube,
+  Instagram,
+  MessageCircle,
+} from "lucide-react";
 import { useLanguage } from "@/components/providers/LanguageProvider";
+import { FACEBOOK_PAGE_URL } from "@/lib/socialLinks";
 
 // TikTok SVG Icon Component
 const TikTokIcon = () => (
@@ -36,6 +43,11 @@ export default function Footer() {
       label: footer.social.instagram,
       href: "https://instagram.com/jcc",
       icon: Instagram,
+    },
+    {
+      label: footer.social.facebook,
+      href: FACEBOOK_PAGE_URL,
+      icon: Facebook,
     },
     {
       label: footer.social.whatsapp,
@@ -75,18 +87,30 @@ export default function Footer() {
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <div className="flex gap-2.5">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-full border border-white/15 bg-white/[0.06] p-2.5 text-slate-200 transition-colors duration-200 hover:border-jcc-gold hover:bg-jcc-gold hover:text-jcc-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-jcc-gold"
-                  aria-label={social.label}
-                >
-                  <social.icon className="h-5 w-5" />
-                </a>
-              ))}
+              {socialLinks.map((social) =>
+                social.href ? (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-full border border-white/15 bg-white/[0.06] p-2.5 text-slate-200 transition-colors duration-200 hover:border-jcc-gold hover:bg-jcc-gold hover:text-jcc-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-jcc-gold"
+                    aria-label={social.label}
+                  >
+                    <social.icon className="h-5 w-5" aria-hidden="true" />
+                  </a>
+                ) : (
+                  <span
+                    key={social.label}
+                    role="img"
+                    aria-label={`${social.label} page link coming soon`}
+                    title={`${social.label} page link coming soon`}
+                    className="cursor-not-allowed rounded-full border border-white/10 bg-white/[0.03] p-2.5 text-slate-500"
+                  >
+                    <social.icon className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                ),
+              )}
             </div>
           </div>
 

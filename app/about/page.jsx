@@ -57,8 +57,8 @@ export default function AboutPage() {
       <section className="relative flex min-h-[82vh] items-end overflow-hidden bg-jcc-navy px-4 pb-16 pt-32 md:px-8">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/about.JPG"
-            alt="About Us"
+            src="/images/congregation-welcome.jpg"
+            alt="Jubilee church congregation gathered together"
             fill
             className="scale-105 object-cover object-top opacity-30 grayscale"
             priority
@@ -171,7 +171,7 @@ export default function AboutPage() {
       <section className="relative overflow-hidden border-y border-jcc-gold/30 bg-white px-4 py-24 md:py-32">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/hero-fallback.jpg"
+            src="/images/church-gathering.jpg"
             alt="Mission and Vision"
             fill
             className="scale-105 object-cover opacity-60 grayscale"
@@ -281,8 +281,8 @@ export default function AboutPage() {
             {/* Pastor Photo */}
             <div className="grid-item md:col-span-5 relative h-[60vh] md:h-[80vh] w-full -mt-20 md:mt-0 md:-ml-20 z-10 border-8 border-white">
               <Image
-                src="/images/pastor.jpg"
-                alt="Rev. Pastor Udoka O. Ukah"
+                src="/images/rooted-worship-gathering.jpg"
+                alt="Jubilee worship team gathered in prayer"
                 fill
                 className="object-cover object-top"
                 unoptimized
@@ -290,7 +290,7 @@ export default function AboutPage() {
               {/* Aggressive overlay block */}
               <div className="absolute bottom-0 left-0 bg-jcc-gold w-full p-6 border-t-8 border-white">
                 <p className="font-anton text-4xl text-jcc-navy uppercase text-center">
-                  Visionary
+                  A shared vision
                 </p>
               </div>
             </div>
@@ -378,7 +378,7 @@ export default function AboutPage() {
       >
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/join.JPG"
+            src="/images/choir-worship.jpg"
             alt="Join Us"
             fill
             className="object-cover opacity-30 grayscale mix-blend-luminosity scale-105"

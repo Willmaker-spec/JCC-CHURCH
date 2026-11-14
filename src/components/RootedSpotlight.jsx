@@ -31,8 +31,8 @@ export default function RootedSpotlight() {
     secondaryCta: "See Events",
   };
   const scheduleIcons = [Calendar, Clock, MapPin];
-  const mainImage = "/images/Brand.jpg";
-  const hangoutImage = "/images/Brand.jpg";
+  const mainImage = "/images/rooted-ministry-art.jpg";
+  const hangoutImage = "/images/rooted-ministry-art.jpg";
   return (
     <section className="relative bg-gradient-to-b from-white via-jcc-cream to-white py-20">
       <div className="container-custom grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">

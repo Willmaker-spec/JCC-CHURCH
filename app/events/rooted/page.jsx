@@ -9,7 +9,7 @@ export default function RootedPage() {
     <main className="min-h-screen bg-[#f7f7f4] text-jcc-navy">
       <section className="relative flex min-h-[62vh] items-end overflow-hidden bg-jcc-navy px-5 pb-16 pt-28 sm:px-8 md:min-h-[70vh] md:pb-20">
         <Image
-          src="/images/rooted2.JPG"
+          src="/images/rooted-worship-gathering.jpg"
           alt=""
           fill
           priority

@@ -90,7 +90,7 @@ export default function NationTakersClient() {
       <section className="relative min-h-[90vh] flex flex-col justify-center bg-[#0a0f1c] text-white pt-32 pb-20 px-4 md:px-8">
         {/* Image Background */}
         <div className="absolute inset-0 overflow-hidden">
-          <Image src="/images/celebration.jpg" alt="Hero Background" fill className="object-cover opacity-30 object-center mix-blend-screen scale-105" unoptimized />
+          <Image src="/images/church-celebration.jpg" alt="Church members celebrating together" fill className="object-cover opacity-30 object-center mix-blend-screen scale-105" unoptimized />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1c] via-[#0a0f1c]/80 to-transparent" />
         </div>
 
@@ -217,10 +217,8 @@ export default function NationTakersClient() {
                 <h3 className="text-sm font-black uppercase tracking-[0.2em] text-blue-400 mb-6 relative z-10">Hosted By</h3>
                 <div className="flex flex-col sm:flex-row gap-8 items-center sm:items-start relative z-10">
                   
-                  {/* Pastor Image */}
-                  <div className="relative w-32 h-32 md:w-40 md:h-40 shrink-0 rounded-[2rem] overflow-hidden bg-jcc-navy transform group-hover:rotate-3 transition-transform duration-500 shadow-2xl border-2 border-blue-500/30">
-                    <Image src="/images/pastor.JPG" alt="Peter Nelson-Isaiah" fill className="object-cover scale-110 group-hover:scale-100 transition-transform duration-700" unoptimized />
-                    <div className="absolute inset-0 bg-blue-600/10 mix-blend-overlay" />
+                  <div aria-hidden="true" className="flex h-32 w-32 shrink-0 items-center justify-center rounded-[2rem] border-2 border-blue-500/30 bg-gradient-to-br from-blue-950 to-jcc-navy text-3xl font-black tracking-[0.2em] text-blue-200 shadow-2xl transition-transform duration-500 group-hover:rotate-3 md:h-40 md:w-40">
+                    JCC
                   </div>
 
                   <div>

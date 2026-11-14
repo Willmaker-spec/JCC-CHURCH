@@ -53,7 +53,7 @@ export default function Give() {
       {/* MASSIVE FULL-BLEED IMAGE */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <Image
-          src="/images/give.jpg"
+          src="/images/worship-prayer.jpg"
           alt="Give Background"
           fill
           className="give-parallax-bg object-cover object-center opacity-60 scale-110"

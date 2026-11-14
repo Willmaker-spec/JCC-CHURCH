@@ -171,7 +171,7 @@ export default function EventsPage() {
 
         <div className="relative min-h-[320px] overflow-hidden rounded-2xl sm:min-h-[420px]">
           <Image
-            src="/images/events.JPG"
+            src="/images/church-gathering.jpg"
             alt="People gathering at Jubilee Christian Centre"
             fill
             priority

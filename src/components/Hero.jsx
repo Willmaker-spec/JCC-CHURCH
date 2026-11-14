@@ -31,8 +31,8 @@ export default function Hero() {
       <div className="fixed inset-0 z-0">
         <div className="absolute inset-0">
           <Image
-            src="/images/hero.jpg"
-            alt="Hero Background"
+            src="/images/church-celebration.jpg"
+            alt="Church members celebrating together"
             fill
             className={`object-cover transition-opacity duration-[2500ms] ${showVideo ? "opacity-0" : "opacity-100"}`}
             priority

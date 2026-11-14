@@ -182,7 +182,7 @@ export default function MinistriesPage() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/rooted.jpg"
+            src="/images/ministry-worship-team.jpg"
             alt="Ministries"
             fill
             className="object-cover object-top"

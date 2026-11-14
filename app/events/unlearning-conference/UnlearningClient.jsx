@@ -82,7 +82,7 @@ export default function UnlearningClient() {
       <section className="relative min-h-screen flex flex-col justify-center bg-[#0a0f1c] text-white pt-32 pb-20 px-4 md:px-8">
         {/* Image Background */}
         <div className="absolute inset-0 overflow-hidden">
-          <Image src="/images/hero.jpg" alt="Hero Background" fill className="object-cover opacity-20 object-top mix-blend-screen scale-105" unoptimized />
+          <Image src="/images/event-hero.jpg" alt="Conference gathering" fill className="object-cover opacity-20 object-top mix-blend-screen scale-105" unoptimized />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1c] via-[#0a0f1c]/80 to-transparent" />
         </div>
 
@@ -149,7 +149,7 @@ export default function UnlearningClient() {
       <div className="w-full h-32 md:h-64 bg-jcc-navy relative">
         <div className="absolute inset-x-0 bottom-0 top-1/2 rounded-t-[4rem] bg-slate-50 border-t-8 border-jcc-gold" />
         <div className="absolute left-1/2 -translate-x-1/2 top-0 w-11/12 max-w-5xl h-[300px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl z-10 hero-badge">
-          <Image src="/images/hero.jpg" alt="Unlearning Event" fill className="object-cover object-top scale-105 hover:scale-100 transition-transform duration-1000" unoptimized />
+          <Image src="/images/event-hero.jpg" alt="People gathered at a church event" fill className="object-cover object-top scale-105 hover:scale-100 transition-transform duration-1000" unoptimized />
           <div className="absolute inset-0 bg-jcc-navy/20 mix-blend-multiply" />
         </div>
       </div>
