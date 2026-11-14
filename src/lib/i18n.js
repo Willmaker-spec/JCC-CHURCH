@@ -27,7 +27,7 @@ const englishMessages = {
     welcome: {
       badgeText: "Join the mission",
       subLabel: "Welcome to The Jubilee Christian Centre",
-      heading: "Jubilee is a church where everybody is somebody in Christ, a centre where people's dreams are nurtured and destinies are fulfilled.",
+      heading: " a church where everybody is somebody in Christ",
       description:
         "Jubilee is a church where everybody is somebody in Christ, a centre where people's dreams are nurtured and destinies are fulfilled.",
       cards: [
@@ -63,7 +63,8 @@ const englishMessages = {
         paragraphs: [
           "We are a community of believers committed to sharing the Gospel and converting souls for GOD.",
         ],
-        quote: "Acts 1:8 — \"But you will receive power when the Holy Spirit comes on you; and you will be my witnesses in Jerusalem, and in all Judea and Samaria, and to the ends of the earth.\"",
+        quote:
+          'Acts 1:8 — "But you will receive power when the Holy Spirit comes on you; and you will be my witnesses in Jerusalem, and in all Judea and Samaria, and to the ends of the earth."',
         highlights: [
           { value: "One", label: "Family" },
           { value: "Many", label: "Nations" },
@@ -174,7 +175,8 @@ const englishMessages = {
       cardBody: "Find encouragement and grow in your walk with God.",
       cta: "Read today’s word",
       introTitle: "A daily moment with God",
-      introBody: "A space for spiritual reflection, encouragement, and personal growth through the Word of God.",
+      introBody:
+        "A space for spiritual reflection, encouragement, and personal growth through the Word of God.",
       benefits: [],
       primaryCta: "Browse devotionals",
     },
@@ -190,11 +192,13 @@ const englishMessages = {
       missionLabel: "Our Mission",
       visionLabel: "Our Vision",
       missionHeading: "Acts 1:8",
-      missionStatement: "Jubilee is a church where everybody is somebody in Christ, and a place where people’s dreams are nurtured and destinies are fulfilled.",
+      missionStatement:
+        "Jubilee is a church where everybody is somebody in Christ, and a place where people’s dreams are nurtured and destinies are fulfilled.",
       missionDescription:
         "We share the Gospel, help people grow in faith, and equip believers to serve.",
       visionHeading: "A Place for Everyone",
-      visionStatement: "In Jubilee Christian Centre, we are building a kingdom of people who will use God's resources as good stewards to worship Him and fulfil His purpose on earth and care for those who are less privileged. We will provide places of hope around the globe where, through preaching, teaching, and healing, people's spiritual, emotional, and physical needs will be met.",
+      visionStatement:
+        "In Jubilee Christian Centre, we are building a kingdom of people who will use God's resources as good stewards to worship Him and fulfil His purpose on earth and care for those who are less privileged. We will provide places of hope around the globe where, through preaching, teaching, and healing, people's spiritual, emotional, and physical needs will be met.",
       visionDescription:
         "We are building a welcoming community where people can know Christ and grow together.",
     },
