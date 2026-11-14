@@ -4,13 +4,8 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, ArrowUpRight, CalendarDays, Clock3, MapPin } from 'lucide-react';
+import { fetchPublishedUpcomingEvents, getLegacyEventStart } from '@/lib/events';
 import { supabase } from '@/lib/supabase';
-
-function getLegacyEventStart(event) {
-  if (!event.event_date || !event.event_time) return null;
-  const timestamp = Date.parse(`${event.event_date} ${event.event_time}`);
-  return Number.isNaN(timestamp) ? null : new Date(timestamp).toISOString();
-}
 
 function EventCountdown({ startsAt }) {
   const timestamp = startsAt ? Date.parse(startsAt) : Number.NaN;
@@ -63,24 +58,6 @@ function EventCountdown({ startsAt }) {
   </div>;
 }
 
-const isUpcomingEvent = event => {
-  const startsAt = Date.parse(event.event_start_at);
-  if (Number.isFinite(startsAt)) return startsAt > Date.now();
-
-  const date = event.event_date?.trim();
-  if (!date) return true;
-  if (/\b(ended|past|finished|concluded|archived|cancelled|canceled)\b/i.test(date)) return false;
-
-  const timestamp = Date.parse(date);
-  if (Number.isNaN(timestamp)) return true;
-
-  const eventDay = new Date(timestamp);
-  eventDay.setHours(0, 0, 0, 0);
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  return eventDay >= today;
-};
-
 export default function EventsPage() {
   const [dynamicEvents, setDynamicEvents] = useState([]);
   const displayedEvents = dynamicEvents;
@@ -90,28 +67,9 @@ export default function EventsPage() {
 
     let active = true;
     async function loadPublishedEvents() {
-      let result = await supabase
-        .from('events')
-        .select('slug, title, tagline, description, event_date, event_time, event_start_at, location, event_type, image')
-        .eq('is_published', true)
-        .order('created_at', { ascending: false });
-
-      if (result.error?.code === '42703' && result.error.message.includes('event_start_at')) {
-        console.warn('Event countdown migration is not applied; using legacy event dates until it is run.');
-        result = await supabase
-          .from('events')
-          .select('slug, title, tagline, description, event_date, event_time, location, event_type, image')
-          .eq('is_published', true)
-          .order('created_at', { ascending: false });
-      }
-
+      const events = await fetchPublishedUpcomingEvents();
       if (!active) return;
-      if (result.error) {
-        console.error('Unable to load published events:', result.error);
-        return;
-      }
-
-      setDynamicEvents((result.data || []).filter(isUpcomingEvent).map(event => ({
+      setDynamicEvents(events.map(event => ({
           id: event.slug,
           title: event.title,
           tagline: event.tagline,
