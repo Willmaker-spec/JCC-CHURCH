@@ -11,7 +11,7 @@ const englishMessages = {
   },
   general: { languageLabel: "Language" },
   hero: {
-    visionBadge: "Welcome to Jubilee Christian Centre",
+    visionBadge: "Welcome to JCC",
     lines: [
       { prefix: "Jubilee", highlight: "Christian Centre", suffix: "" },
       {
@@ -56,7 +56,7 @@ const englishMessages = {
     },
     globalFamily: {
       badge: "One global family",
-      headline: { line1: "The Jubilee", line2: "Christian Centre" },
+      headline: { line1: " Jubilee", line2: "Christian Centre" },
       description: {
         titleLine1: "A Church Without",
         titleLine2: "Borders",

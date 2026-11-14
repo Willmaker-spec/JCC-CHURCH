@@ -75,7 +75,9 @@ export default function AboutPage() {
           </div>
 
           <h1 className="mb-8 flex flex-col font-anton text-[15vw] uppercase leading-[0.8] tracking-tighter text-white md:text-[11rem]">
-            <span className="hero-chunk block text-jcc-gold">{about.hero.headingLead}</span>
+            <span className="hero-chunk block text-jcc-gold">
+              {about.hero.headingLead}
+            </span>
             <span
               className="hero-chunk block text-transparent"
               style={{ WebkitTextStroke: "2px rgba(255,255,255,0.8)" }}
@@ -281,8 +283,8 @@ export default function AboutPage() {
             {/* Pastor Photo */}
             <div className="grid-item md:col-span-5 relative h-[60vh] md:h-[80vh] w-full -mt-20 md:mt-0 md:-ml-20 z-10 border-8 border-white">
               <Image
-                src="/images/rooted-worship-gathering.jpg"
-                alt="Jubilee worship team gathered in prayer"
+                src="public/images/pastor.jpg"
+                alt="Jubilee Pastors image"
                 fill
                 className="object-cover object-top"
                 unoptimized
