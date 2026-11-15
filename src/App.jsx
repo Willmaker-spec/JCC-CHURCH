@@ -38,7 +38,7 @@ function RoutePage({ component: Component }) {
 }
 
 function AppRoutes() {
-  const { pathname } = useLocation()
+  const { pathname, hash } = useLocation()
   const previousPathname = useRef(pathname)
   const adminLogoutTimer = useRef(null)
 
@@ -106,7 +106,7 @@ function AppRoutes() {
     <Routes>
       <Route path="/" element={<RoutePage component={Home} />} />
       <Route path="/about" element={<RoutePage component={About} />} />
-      <Route path="/contact" element={<RoutePage component={Contact} />} />
+      <Route path="/contact" element={<RoutePage key={hash} component={Contact} />} />
       <Route path="/admin" element={<RoutePage component={Admin} />} />
       <Route path="/devotionals" element={<RoutePage component={Devotionals} />} />
       <Route path="/devotionals/:slug" element={<RoutePage component={DevotionalPage} />} />

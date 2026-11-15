@@ -305,12 +305,17 @@ const englishMessages = {
         heading: "Connect",
         links: [
           { label: "About Us", href: "/about" },
-          { label: "Contact", href: "/contact" },
+          { label: "Contact Us", href: "/contact" },
+          { label: "Become a Member", href: "/contact#become-member" },
+          { label: "Prayer Requests", href: "/contact#prayer-request" },
         ],
       },
       ministries: {
         heading: "Ministries",
-        links: [{ label: "Our Ministries", href: "/ministries" }],
+        links: [
+          { label: "Our Ministries", href: "/ministries" },
+          { label: "Join a Ministry", href: "/contact#join-ministry" },
+        ],
       },
       resources: {
         heading: "Resources",
@@ -332,16 +337,16 @@ const englishMessages = {
       },
     },
     contact: {
-      heading: "Contact",
-      people: [{ name: "Church Office", phone: "+234 70 309 665 45" }],
+      heading: "Call Us",
+      phones: ["07030966545", "08039478745", "07033049333", "08037503627"],
     },
     services: {
       heading: "Worship with us",
       lines: [
-        "Friday Vigil — Every Friday",
-        "Wednesday Bible Study — 5:00 PM to 7:00 PM",
-        "Sunday Morning Service — 6:30 AM to 9:00 AM",
-        "Sunday Afternoon Service — 9:30 AM to 12:00 PM",
+        { name: "Wednesday Bible Study", time: "5:00 PM to 7:00 PM" },
+        { name: "Friday Vigil", time: "Every Friday" },
+        { name: "Sunday Morning Service", time: "6:30 AM to 9:00 AM" },
+        { name: "Sunday Afternoon Service", time: "9:30 AM to 12:00 PM" },
       ],
     },
     copyright: "Jubilee Christian Centre Church. All rights reserved.",

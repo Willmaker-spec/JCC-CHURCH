@@ -8,6 +8,7 @@ import {
   Youtube,
   Instagram,
   MessageCircle,
+  Phone,
 } from "lucide-react";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { FACEBOOK_PAGE_URL } from "@/lib/socialLinks";
@@ -199,30 +200,48 @@ export default function Footer() {
         <div className="mb-8 rounded-2xl border border-white/10 bg-white/[0.035] p-6 sm:p-7">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
             <div>
-              <h4 className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-jcc-gold">
+              <h4 className="mb-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-jcc-gold">
+                <span className="rounded-full bg-jcc-gold/10 p-2">
+                  <Phone className="h-4 w-4" aria-hidden="true" />
+                </span>
                 {footer.contact.heading}
               </h4>
-              {footer.contact.people.map((person) => (
-                <p key={person.phone} className="text-sm leading-6 text-slate-300">
-                  {person.name}:{" "}
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                {footer.contact.phones.map((phone) => (
                   <a
-                    href={`tel:${person.phone}`}
-                    className="transition-colors hover:text-jcc-gold focus-visible:text-jcc-gold focus-visible:outline-none"
+                    key={phone}
+                    href={`tel:${phone}`}
+                    aria-label={`Call ${phone}`}
+                    className="group flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5 text-sm font-medium text-slate-200 transition-colors hover:border-jcc-gold/50 hover:bg-jcc-gold/10 hover:text-jcc-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-jcc-gold"
                   >
-                    {person.phone}
+                    <Phone
+                      className="h-4 w-4 shrink-0 text-jcc-gold transition-transform group-hover:rotate-12"
+                      aria-hidden="true"
+                    />
+                    <span>{phone}</span>
                   </a>
-                </p>
-              ))}
+                ))}
+              </div>
             </div>
             <div>
               <h4 className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-jcc-gold">
                 {footer.services.heading}
               </h4>
-              {footer.services.lines.map((line) => (
-                <p key={line} className="text-sm leading-6 text-slate-300">
-                  {line}
-                </p>
-              ))}
+              <ul className="space-y-3">
+                {footer.services.lines.map((service) => (
+                  <li
+                    key={service.name}
+                    className="border-l-2 border-jcc-gold/50 pl-3"
+                  >
+                    <span className="block text-sm font-medium leading-5 text-slate-200">
+                      {service.name}
+                    </span>
+                    <span className="block text-xs leading-5 text-slate-400">
+                      {service.time}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>

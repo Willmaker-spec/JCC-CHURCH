@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { MessageCircle, Send, ChevronDown } from 'lucide-react'
+import { useLanguage } from '@/components/providers/LanguageProvider'
 
 // Contact reasons with their corresponding WhatsApp templates
 const contactReasons = [
@@ -139,6 +140,7 @@ function getInitialContact() {
 }
 
 export default function ContactPage() {
+  const { messages } = useLanguage()
   const [initialContact] = useState(getInitialContact)
   const [selectedReason, setSelectedReason] = useState(initialContact.reason)
   const [name, setName] = useState('')
@@ -281,19 +283,12 @@ export default function ContactPage() {
           <div className="bg-white rounded-lg shadow-md p-6">
             <h3 className="text-xl font-bold text-jcc-navy mb-4 uppercase">Service Times</h3>
             <div className="space-y-3 text-gray-700">
-              <div>
-                <p className="font-semibold text-jcc-gold">Online Services</p>
-                <p>Tuesday & Saturday | 9:00 PM</p>
-              </div>
-              <div>
-                <p className="font-semibold text-jcc-gold">Rooted (Physical Gathering)</p>
-                <p>First Saturday of the Month | 10:00 AM</p>
-              </div>
-              <div>
-                <p className="font-semibold text-jcc-gold">Prayer Meetings</p>
-                <p>Mon-Wed: Rooted Prayers (9:00 PM)</p>
-                <p>Watch Hour Prayers: 9:00 PM (fortnightly — every two weeks)</p>
-              </div>
+              {messages.footer.services.lines.map((service) => (
+                <div key={service.name} className="border-l-2 border-jcc-gold pl-3">
+                  <p className="font-semibold text-jcc-navy">{service.name}</p>
+                  <p className="text-sm text-gray-600">{service.time}</p>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -302,16 +297,15 @@ export default function ContactPage() {
             <h3 className="text-xl font-bold text-jcc-navy mb-4 uppercase">Physical Location</h3>
             <div className="space-y-3 text-gray-700">
               <div>
-                <p className="font-semibold text-jcc-gold">The Light House</p>
-                <p>43b Babaponmile Street</p>
-                <p>After Winners Chapel</p>
-                <p>Mangoro, Ikeja, Lagos</p>
+                <p className="font-semibold text-jcc-gold">Jubilee Christian Center</p>
+                <p>Amakohia New Road</p>
+                <p>Along Umuodu Mbieri Road</p>
+                <p>Owerri 460102, Imo State, Nigeria</p>
               </div>
               <div className="mt-4">
-                <p className="font-semibold text-jcc-gold">For Directions:</p>
-                <p>Contact Isaac</p>
-                <a href="tel:+2349058885465" className="text-jcc-navy hover:text-jcc-gold transition-colors">
-                  0905 888 5465
+                <p className="font-semibold text-jcc-gold">Need directions?</p>
+                <a href="tel:+2348035083791" className="text-jcc-navy hover:text-jcc-gold transition-colors">
+                  Call our leader
                 </a>
               </div>
             </div>
