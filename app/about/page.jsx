@@ -283,7 +283,7 @@ export default function AboutPage() {
             {/* Pastor Photo */}
             <div className="grid-item md:col-span-5 relative h-[60vh] md:h-[80vh] w-full -mt-20 md:mt-0 md:-ml-20 z-10 border-8 border-white">
               <Image
-                src="/images/pastor.jpg"
+                src="/images/head-pastor.jpg"
                 alt="Jubilee Pastors image"
                 fill
                 className="object-cover object-top"
