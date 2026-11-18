@@ -16,6 +16,8 @@ npm run build
 npm run preview
 ```
 
+The site is installable as a PWA. The service worker precaches the built app shell and static assets; forms and Supabase-backed content still require an internet connection. Deploy over HTTPS and configure your host to serve `index.html` for app routes. The install icons are generated from `public/images/jcc-logo.png` in `public/icons/`.
+
 ## Routes
 
 - `/` — Home
