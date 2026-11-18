@@ -292,7 +292,7 @@ const englishMessages = {
     },
   },
   footer: {
-    tagline: "A Place where Everyone is Somebody in Christ.",
+    tagline: "A Place where Everybody is Somebody in Christ.",
     social: {
       youtube: "YouTube",
       instagram: "Instagram",
