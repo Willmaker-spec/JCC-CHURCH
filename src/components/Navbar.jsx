@@ -49,13 +49,13 @@ export default function Navbar() {
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center gap-6 md:h-20">
-            <Link href="/" className="flex items-center relative z-10">
+            <Link href="/" className="relative z-10 flex items-center rounded-full ring-1 ring-slate-200/80 shadow-sm">
               <Image
-                src="/images/jcc-logo.png"
+                src="/icons/jcc-pwa-512.png"
                 alt="The Jubilee Christian Centre Church Logo"
-                width={420}
-                height={150}
-                className="h-12 w-auto md:h-14"
+                width={512}
+                height={512}
+                className="h-14 w-14 object-contain select-none contrast-105 md:h-16 md:w-16"
                 priority
               />
             </Link>
@@ -118,14 +118,14 @@ export default function Navbar() {
               <Link
                 href="/"
                 onClick={() => setIsOpen(false)}
-                className="relative z-10 flex items-center"
+                className="relative z-10 flex items-center rounded-full ring-1 ring-white/20 shadow-lg"
               >
                 <Image
-                  src="/images/jcc-logo.png"
+                  src="/icons/jcc-pwa-512.png"
                   alt="Jubilee Christian Centre Church Logo"
-                  width={420}
-                  height={150}
-                  className="h-12 w-auto md:h-14"
+                  width={512}
+                  height={512}
+                  className="h-14 w-14 object-contain select-none contrast-105 md:h-16 md:w-16"
                   priority
                 />
               </Link>

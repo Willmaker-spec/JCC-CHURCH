@@ -71,11 +71,11 @@ export default function Footer() {
           {/* Logo and Description */}
           <div className="lg:col-span-2">
             <Image
-              src="/images/jcc-logo.png"
+              src="/icons/jcc-pwa-512.png"
               alt="Jubilee Christian Centre Church"
-              width={160}
-              height={160}
-              className="mb-4 h-14 w-14 rounded-full"
+              width={512}
+              height={512}
+              className="mb-4 h-16 w-16 rounded-full object-contain ring-2 ring-jcc-gold/70 shadow-[0_8px_30px_rgba(234,179,8,0.18)] contrast-105 md:h-20 md:w-20"
             />
             <p className="mb-5 max-w-sm text-sm leading-6 text-slate-300">
               {footer.tagline}
